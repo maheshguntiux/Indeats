@@ -905,6 +905,75 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   }
 }
 
+
+/* Events grid redesign */
+.events-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:20px;
+}
+
+.event-card{
+  background:linear-gradient(135deg,#3d1172,#b1166a);
+  border-radius:22px;
+  padding:24px;
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+}
+
+.event-card.featured{
+  min-height:180px;
+}
+
+.event-card-body{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.event-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:34px;
+  margin:0;
+}
+
+.event-title.small{
+  font-size:22px;
+}
+
+.event-sub{
+  font-size:14px;
+  opacity:.9;
+}
+
+.event-pill{
+  font-size:12px;
+  background:rgba(255,255,255,.18);
+  padding:6px 10px;
+  border-radius:999px;
+  display:inline-block;
+  width:max-content;
+}
+
+.event-cta{
+  margin-top:8px;
+  background:#fff;
+  color:#5b2bc5;
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+@media (max-width:900px){
+  .events-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -972,23 +1041,36 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
       <a href="#" class="events-link" onclick="goEvents();return false;">Explore all events →</a>
     </div>
 
-    <article class="event-hero-card" onclick="goEvents()">
-      <div class="event-hero-copy">
-        <div class="event-pill">🎨 Mar 13 · Limited seats</div>
-        <h3 class="event-hero-title">Holi Special Dining</h3>
-        <p class="event-hero-sub">A curated dining experience across 5 Indian restaurants with festive menus, special offers, and celebration-first ambience.</p>
+    
+<div class="events-grid">
 
-        <div class="event-hero-meta">
-          <span class="event-mini">📍 Fremont</span>
-          <span class="event-mini">📍 Sunnyvale</span>
-          <span class="event-mini">📍 San Jose</span>
-        </div>
-      </div>
+  <article class="event-card featured" onclick="goEvents()">
+    <div class="event-card-body">
+      <div class="event-pill">🎨 Mar 13 · Limited seats</div>
+      <h3 class="event-title">Holi Special Dining</h3>
+      <p class="event-sub">Festive menus across 5 restaurants celebrating Holi.</p>
+      <button class="event-cta">View Event</button>
+    </div>
+  </article>
 
-      <div class="event-hero-side">
-        <button class="event-cta">View Event</button>
-      </div>
-    </article>
+  <article class="event-card" onclick="goEvents()">
+    <div class="event-card-body">
+      <div class="event-pill">🍽 Weekend</div>
+      <h3 class="event-title small">South Indian Buffet Night</h3>
+      <p class="event-sub">Unlimited dosa, idli, and specials.</p>
+    </div>
+  </article>
+
+  <article class="event-card" onclick="goEvents()">
+    <div class="event-card-body">
+      <div class="event-pill">👨‍🍳 Chef Special</div>
+      <h3 class="event-title small">Chef Tasting Menu</h3>
+      <p class="event-sub">Limited curated dishes by guest chefs.</p>
+    </div>
+  </article>
+
+</div>
+
   </div>
 </section>
 
