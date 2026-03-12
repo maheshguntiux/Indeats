@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indeats — Halal, Veg, Jain. Your kind of Indian food.</title>
+<title>Indeats — Discover Indian food, deals, and dining events near you.</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* ── TOKENS ── */
@@ -673,6 +673,101 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   .ev-featured-card{padding:18px;}
 }
 
+
+/* === Indeats consolidated V2 overrides === */
+html,body{max-width:100%;overflow-x:hidden}
+.home-hero{padding-top:92px;padding-bottom:84px;overflow:visible}
+.h-title{max-width:1040px;margin-left:auto;margin-right:auto}
+.h-tagline{max-width:760px;margin-left:auto;margin-right:auto}
+.search-wrap{overflow:visible}
+.search-box{position:relative}
+.hero-suggest-wrap{position:relative;width:min(100%,760px);margin:14px auto 0}
+.hero-suggest-card{
+  display:none;position:absolute;top:0;left:0;right:0;z-index:25;
+  background:rgba(15,23,42,.96);border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 18px 48px rgba(0,0,0,.28);border-radius:20px;padding:14px;
+  backdrop-filter:blur(10px)
+}
+.hero-suggest-card.open{display:block}
+.hero-suggest-group + .hero-suggest-group{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.hero-suggest-label{color:rgba(255,255,255,.72);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.hero-suggest-items{display:flex;flex-wrap:wrap;gap:10px}
+.hero-suggest-chip{
+  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.05);color:#fff;
+  border-radius:999px;padding:10px 14px;font-size:14px;font-weight:600;cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease,background .15s ease
+}
+.hero-suggest-chip:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.09)}
+
+.r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.rc.rc-v2{
+  background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;
+  box-shadow:0 2px 12px rgba(11,21,32,0.06);cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  display:flex;flex-direction:column
+}
+.rc.rc-v2:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(11,21,32,0.10);border-color:rgba(232,66,10,0.18)}
+.rc-media{position:relative;height:188px;overflow:hidden}
+.rc-media-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.rc-media-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,21,32,0.08) 0%,rgba(11,21,32,0.18) 45%,rgba(11,21,32,0.52) 100%)
+}
+.rc-media-top,.rc-media-bottom{
+  position:absolute;left:14px;right:14px;z-index:2;display:flex;align-items:center;justify-content:space-between
+}
+.rc-media-top{top:14px}.rc-media-bottom{bottom:14px}
+.rc-featured-badge{
+  font-size:10px;font-weight:800;background:rgba(11,21,32,0.72);color:#fff;
+  border:1px solid rgba(255,255,255,0.10);padding:5px 9px;border-radius:999px;letter-spacing:.02em
+}
+.rc-save-btn{
+  width:34px;height:34px;border:none;border-radius:50%;background:rgba(255,255,255,0.92);
+  display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:transform .14s ease
+}
+.rc-save-btn:hover{transform:scale(1.08)} .rc-save-btn.saved{color:var(--flame)}
+.rc-deal-pill{
+  display:inline-flex;align-items:center;max-width:100%;min-height:30px;padding:0 10px;border-radius:999px;
+  background:rgba(232,66,10,0.94);color:#fff;font-size:11px;font-weight:800;line-height:1;white-space:nowrap
+}
+.rc-deal-pill.green{background:rgba(21,128,61,0.92)} .rc-deal-pill.gold{background:rgba(180,120,0,0.92)}
+.rc-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+.rc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.rc-title-wrap{min-width:0}
+.rc-name{
+  font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1;font-weight:700;color:var(--text);margin:0 0 4px 0
+}
+.rc-submeta{font-size:12px;color:var(--muted);line-height:1.4}
+.rc-rating{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:4px;background:var(--warm);border:1px solid var(--border);
+  border-radius:999px;padding:6px 10px
+}
+.rc-rating-star{color:var(--turmeric);font-size:11px}
+.rc-rating-n{font-size:12px;font-weight:800;color:var(--text)}
+.rc-rating-cnt,.rc-about,.rc-top,.rc-meta{display:none !important}
+.rc-meta-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.rc-price{font-weight:700;color:var(--text)}
+.rc-dot{color:var(--border2)}
+.rc-status-text{font-weight:700}
+.rc-status-text.open{color:var(--green)} .rc-status-text.closed{color:#DC2626}
+.rc-tags{display:flex;flex-wrap:wrap;gap:6px;min-height:24px}
+.rc-actions{margin-top:4px}
+.btn-book.btn-book-full{width:100%;padding:12px 14px;border:none;border-radius:12px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;font-size:13px;font-weight:800;cursor:pointer}
+.btn-menu{display:none !important}
+
+@media (max-width:768px){
+  .home-hero{padding-top:72px;padding-bottom:48px}
+  .h-title{font-size:52px !important;line-height:1.02 !important}
+  .h-tagline{font-size:16px !important;line-height:1.55}
+  .hero-suggest-wrap{width:100%;margin-top:12px}
+  .hero-suggest-card{position:static;border-radius:16px;padding:12px}
+  .hero-suggest-items{gap:8px}
+  .hero-suggest-chip{width:calc(50% - 4px);text-align:center;padding:10px 12px;font-size:13px}
+  .search-box{grid-template-columns:1fr !important}
+  .search-city-btn,.search-input,.search-btn{width:100%}
+  .r-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -705,7 +800,7 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   <div class="search-wrap">
     <div class="search-box">
       <div class="search-city-btn"><span>📍</span> Fremont ▾</div>
-      <input class="search-input" id="hero-search" placeholder="Biryani, Halal, Dosa, Kongunadu…" oninput="filterAndRender()">
+      <input class="search-input" id="hero-search" placeholder="Search dishes, cuisines, dietary needs, or deals" oninput="filterAndRender()" onfocus="openHeroSuggestions()">
       <button class="search-btn">🔍 Search</button>
     </div>
   </div>
@@ -717,6 +812,30 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
     <span class="hpill" onclick="qfSet('open')">🟢 Open Now</span>
     <span class="hpill" onclick="goDeals()">🏷️ All Deals →</span>
   </div>
+
+  <div class="hero-suggest-wrap" id="heroSuggestWrap">
+    <div class="hero-suggest-card" id="heroSuggestCard" aria-hidden="true">
+      <div class="hero-suggest-group">
+        <div class="hero-suggest-label">Popular searches</div>
+        <div class="hero-suggest-items">
+          <button class="hero-suggest-chip" type="button" onclick="applyHeroSuggestion('Biryani')">🍛 Biryani</button>
+          <button class="hero-suggest-chip" type="button" onclick="applyHeroSuggestion('Dosa')">🥞 Dosa</button>
+          <button class="hero-suggest-chip" type="button" onclick="applyHeroSuggestion('Thali')">🍱 Thali</button>
+          <button class="hero-suggest-chip" type="button" onclick="applyHeroSuggestion('Chaat')">🥙 Chaat</button>
+        </div>
+      </div>
+      <div class="hero-suggest-group">
+        <div class="hero-suggest-label">Helpful filters</div>
+        <div class="hero-suggest-items">
+          <button class="hero-suggest-chip" type="button" onclick="setDiet('Halal');closeHeroSuggestions()">🕌 Halal</button>
+          <button class="hero-suggest-chip" type="button" onclick="setDiet('Pure Veg');closeHeroSuggestions()">🌿 Pure Veg</button>
+          <button class="hero-suggest-chip" type="button" onclick="setDiet('Jain OK');closeHeroSuggestions()">🪷 Jain OK</button>
+          <button class="hero-suggest-chip" type="button" onclick="qfSet('open');closeHeroSuggestions()">🟢 Open now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="ticker"><div class="ticker-inner" id="h-ticker"></div></div>
@@ -1109,37 +1228,45 @@ function filterAndRender(){
 
 function renderGrid(r){
   const dc={red:"rc-deal-pill",green:"rc-deal-pill green",gold:"rc-deal-pill gold"};
-  return `<div class="rc" onclick="goDetail(${r.id})">
-    <div class="rc-img ${r.bg}">
-      <div style="position:absolute;inset:0;background-image:${cardBg(r)};"></div>
+  return `<article class="rc rc-v2" onclick="goDetail(${r.id})">
+    <div class="rc-media ${r.bg}">
+      <div class="rc-media-bg" style="background-image:${cardBg(r)};"></div>
       <div class="food-pattern"></div>
       <div class="food-emoji-large">${r.emoji}</div>
-      <div class="rc-img-overlay"></div>
-      <div class="rc-img-content">
-        <div class="rc-img-top">
-          ${r.featured?'<div class="rc-featured-badge">✦ FEATURED</div>':'<div></div>'}
-          <button class="rc-save-btn ${homeSaved[r.id]?'saved':''}" onclick="event.stopPropagation();toggleHomeSave(${r.id},this)">${homeSaved[r.id]?'♥':'♡'}</button>
-        </div>
-        <div class="rc-img-bottom">
-          <div class="${dc[r.dealColor]||'rc-deal-pill'}">🏷️ ${r.deal}</div>
-          <div class="rc-status-pill ${r.isOpen?'rc-open':'rc-closed'}">${r.isOpen?'● Open':'● Closed'}</div>
-        </div>
+      <div class="rc-media-overlay"></div>
+
+      <div class="rc-media-top">
+        ${r.featured?'<div class="rc-featured-badge">Featured</div>':'<div></div>'}
+        <button class="rc-save-btn ${homeSaved[r.id]?'saved':''}" onclick="event.stopPropagation();toggleHomeSave(${r.id},this)" aria-label="Save restaurant">${homeSaved[r.id]?'♥':'♡'}</button>
+      </div>
+
+      <div class="rc-media-bottom">
+        <div class="${dc[r.dealColor]||'rc-deal-pill'}">${r.deal}</div>
       </div>
     </div>
+
     <div class="rc-body">
-      <div class="rc-top">
-        <div class="rc-name">${r.name}</div>
-        <div class="rc-rating"><span class="rc-rating-star">★</span><span class="rc-rating-n">${r.rating}</span><span class="rc-rating-cnt">(${r.reviews.toLocaleString()})</span></div>
+      <div class="rc-header">
+        <div class="rc-title-wrap">
+          <div class="rc-name">${r.name}</div>
+          <div class="rc-submeta">${r.cuisine} · ${r.location}</div>
+        </div>
+        <div class="rc-rating"><span class="rc-rating-star">★</span><span class="rc-rating-n">${r.rating}</span></div>
       </div>
-      <div class="rc-meta">📍 ${r.location} <span class="rc-meta-sep">·</span> ${r.time} <span class="rc-meta-sep">·</span> ${r.price}</div>
+
+      <div class="rc-meta-row">
+        <span class="rc-price">${r.price}</span>
+        <span class="rc-dot">•</span>
+        <span class="rc-status-text ${r.isOpen?'open':'closed'}">${r.isOpen?'Open now':'Closed'}</span>
+      </div>
+
       <div class="rc-tags">${r.tags.map(tagHtml).join('')}</div>
-      <div class="rc-about">${r.about}</div>
+
       <div class="rc-actions">
-        <button class="btn-book" onclick="event.stopPropagation();goDetail(${r.id})">Reserve Table →</button>
-        <button class="btn-menu" onclick="event.stopPropagation();goDetail(${r.id})">Menu</button>
+        <button class="btn-book btn-book-full" onclick="event.stopPropagation();goDetail(${r.id})">View Restaurant</button>
       </div>
     </div>
-  </div>`;
+  </article>`;
 }
 
 function renderList(r){
@@ -1715,6 +1842,54 @@ function goEvents(){ renderEvents(); showPage('events'); }
 // BOOT
 // ════════════════════════════════════════════════
 goHome();
+
+function getHeroSearchInput(){
+  return document.getElementById('hero-search') || null;
+}
+function getHeroSuggestCard(){
+  return document.getElementById('heroSuggestCard');
+}
+function openHeroSuggestions(){
+  const card = getHeroSuggestCard();
+  if(card){
+    card.classList.add('open');
+    card.setAttribute('aria-hidden','false');
+  }
+}
+function closeHeroSuggestions(){
+  const card = getHeroSuggestCard();
+  if(card){
+    card.classList.remove('open');
+    card.setAttribute('aria-hidden','true');
+  }
+}
+function applyHeroSuggestion(value){
+  const input = getHeroSearchInput();
+  if(input){
+    input.value = value;
+    filterAndRender();
+  }
+  closeHeroSuggestions();
+}
+document.addEventListener('DOMContentLoaded', function(){
+  const input = getHeroSearchInput();
+  const wrap = document.getElementById('heroSuggestWrap');
+  if(!input || !wrap) return;
+
+  input.addEventListener('focus', openHeroSuggestions);
+  input.addEventListener('click', openHeroSuggestions);
+
+  document.addEventListener('click', function(e){
+    if(!wrap.contains(e.target) && e.target !== input){
+      closeHeroSuggestions();
+    }
+  });
+
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeHeroSuggestions();
+  });
+});
+
 </script>
 
 <!-- ════════════════════════════════════════════
