@@ -768,6 +768,163 @@ html,body{max-width:100%;overflow-x:hidden}
   .r-grid{grid-template-columns:1fr}
 }
 
+
+/* === V3 Apple-inspired minimal refinements === */
+.home-hero{
+  padding-top:108px !important;
+  padding-bottom:120px !important;
+}
+.h-title{
+  max-width:1180px;
+  margin-bottom:18px !important;
+}
+.h-tagline{
+  margin-top:0 !important;
+  margin-bottom:30px !important;
+}
+.home-hero + *{
+  margin-top:0 !important;
+}
+.quick-pills,.hero-pills,.h-pills{
+  gap:14px !important;
+}
+.quick-pills .pill,.hero-pills .pill,.h-pills .pill{
+  border-color:rgba(255,255,255,.08) !important;
+  background:rgba(255,255,255,.04) !important;
+  padding:12px 18px !important;
+  box-shadow:none !important;
+}
+.quick-pills .pill:hover,.hero-pills .pill:hover,.h-pills .pill:hover{
+  border-color:rgba(255,255,255,.14) !important;
+  background:rgba(255,255,255,.06) !important;
+}
+
+.events-intro,
+.featured-deals-intro{
+  padding:56px 0 20px;
+  background:var(--bg,#f7f3ee);
+}
+.events-intro .wrap,
+.featured-deals-intro .wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
+}
+.section-eyebrow{
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#8d7b66;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:56px;
+  line-height:.98;
+  color:#171717;
+  margin:0 0 10px 0;
+}
+.section-copy{
+  max-width:720px;
+  color:#716657;
+  font-size:18px;
+  line-height:1.6;
+  margin:0;
+}
+
+.promo{
+  margin-top:0 !important;
+  padding-top:0 !important;
+}
+.promo .wrap{
+  max-width:1200px;
+}
+.promo-card,.promo-banner,.promo > .wrap > *:first-child{
+  min-height:148px !important;
+  border-radius:28px !important;
+  box-shadow:0 18px 44px rgba(71,35,138,.14) !important;
+}
+
+.live-now{
+  padding-top:8px !important;
+}
+.live-now .wrap{
+  max-width:1200px;
+}
+.live-now .hdr{
+  margin-bottom:22px !important;
+}
+.live-now .cards,
+.live-now .deal-row{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+}
+.live-now .cards > *:nth-child(n+4),
+.live-now .deal-row > *:nth-child(n+4){
+  display:none !important;
+}
+
+.results,.restaurants,.discover-grid,.listing-section{
+  padding-top:64px !important;
+}
+.results .wrap,.restaurants .wrap,.discover-grid .wrap,.listing-section .wrap{
+  max-width:1200px;
+}
+.filters-panel,.sidebar,.side-filters{
+  display:none !important;
+}
+.results-layout,.discover-layout,.listing-layout{
+  grid-template-columns:1fr !important;
+}
+.quick-filters{
+  margin:18px 0 28px 0 !important;
+}
+.r-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:24px !important;
+}
+.r-grid > *:nth-child(n+7){
+  display:none !important;
+}
+.explore-all-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:24px;
+}
+.explore-all-link{
+  color:var(--flame,#E8420A);
+  text-decoration:none;
+  font-weight:800;
+  font-size:15px;
+}
+
+@media (max-width:1024px){
+  .section-title{font-size:46px}
+  .live-now .cards,.live-now .deal-row,.r-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media (max-width:768px){
+  .home-hero{
+    padding-top:78px !important;
+    padding-bottom:72px !important;
+  }
+  .section-title{
+    font-size:38px;
+    line-height:1.02;
+  }
+  .section-copy{
+    font-size:16px;
+  }
+  .events-intro,
+  .featured-deals-intro{
+    padding:40px 0 16px;
+  }
+  .live-now .cards,.live-now .deal-row,.r-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -899,7 +1056,7 @@ html,body{max-width:100%;overflow-x:hidden}
     </aside>
     <div class="content">
       <div class="content-top">
-        <div><div class="ct-title" id="ct-title">Restaurants in All Cities</div><div class="ct-count" id="ct-count">5 restaurants</div></div>
+        <div><div class="ct-title" id="ct-title">Top Indian Restaurants</div><div class="ct-count" id="ct-count">5 restaurants</div></div>
         <div style="display:flex;gap:8px;align-items:center;">
           <div class="view-btns">
             <button class="vb on" id="vb-grid" onclick="setView('grid')">⊞</button>
@@ -1888,6 +2045,19 @@ document.addEventListener('DOMContentLoaded', function(){
   input.addEventListener('keydown', function(e){
     if(e.key === 'Escape') closeHeroSuggestions();
   });
+});
+
+
+/* V3 curated homepage layout */
+document.addEventListener('DOMContentLoaded', function(){
+  const stats = document.querySelector('.stats');
+  if(stats) stats.remove();
+
+  const liveCards = document.querySelectorAll('.live-now .cards > *, .live-now .deal-row > *');
+  liveCards.forEach((el, i) => { if(i > 2) el.style.display = 'none'; });
+
+  const restaurantCards = document.querySelectorAll('.r-grid > *');
+  restaurantCards.forEach((el, i) => { if(i > 5) el.style.display = 'none'; });
 });
 
 </script>
