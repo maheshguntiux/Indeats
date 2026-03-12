@@ -740,6 +740,171 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
 .rc-tags{display:flex;flex-wrap:wrap;gap:6px;min-height:24px}
 .btn-book.btn-book-full{width:100%;padding:12px 14px;border:none;border-radius:12px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;font-size:13px;font-weight:800;cursor:pointer}
 
+
+/* V5 editorial events section */
+.home-hero{
+  padding-bottom: 132px !important;
+}
+.events-feature{
+  background: var(--bg, #f7f3ee);
+  padding: 72px 0 28px;
+}
+.events-feature .wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.events-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:28px;
+}
+.section-eyebrow{
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#8d7b66;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:56px;
+  line-height:.98;
+  color:#171717;
+  margin:0 0 10px 0;
+}
+.section-copy{
+  max-width:720px;
+  color:#716657;
+  font-size:18px;
+  line-height:1.6;
+  margin:0;
+}
+.events-link{
+  color:var(--flame,#E8420A);
+  text-decoration:none;
+  font-weight:800;
+  white-space:nowrap;
+  margin-bottom:8px;
+}
+.event-hero-card{
+  display:grid;
+  grid-template-columns:1.5fr .7fr;
+  gap:24px;
+  align-items:center;
+  background:linear-gradient(135deg,#3d1172 0%, #6f2cff 38%, #b1166a 100%);
+  border-radius:28px;
+  padding:34px 34px;
+  box-shadow:0 18px 44px rgba(71,35,138,.14);
+  cursor:pointer;
+}
+.event-hero-copy{
+  color:#fff;
+}
+.event-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:32px;
+  padding:0 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.02em;
+  margin-bottom:16px;
+}
+.event-hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:46px;
+  line-height:1;
+  margin:0 0 12px 0;
+  color:#fff;
+}
+.event-hero-sub{
+  max-width:760px;
+  margin:0;
+  color:rgba(255,255,255,.82);
+  font-size:18px;
+  line-height:1.6;
+}
+.event-hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.event-mini{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+}
+.event-hero-side{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+.event-cta{
+  border:none;
+  background:#fff;
+  color:#5b2bc5;
+  font-weight:800;
+  border-radius:16px;
+  min-height:52px;
+  padding:0 18px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+@media (max-width: 900px){
+  .events-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .event-hero-card{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .event-hero-side{
+    justify-content:flex-start;
+  }
+}
+@media (max-width: 768px){
+  .home-hero{
+    padding-bottom:88px !important;
+  }
+  .events-feature{
+    padding:46px 0 18px;
+  }
+  .section-title{
+    font-size:38px;
+    line-height:1.02;
+  }
+  .section-copy{
+    font-size:16px;
+  }
+  .event-hero-card{
+    padding:24px 22px;
+    border-radius:24px;
+  }
+  .event-hero-title{
+    font-size:34px;
+  }
+  .event-hero-sub{
+    font-size:16px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -786,7 +951,6 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   </div>
 </div>
 
-<div class="ticker"><div class="ticker-inner" id="h-ticker"></div></div>
 
 <div class="stats-bar">
   <div class="stat"><div class="stat-n">34</div><div class="stat-l">Partner Restaurants</div></div>
@@ -796,14 +960,38 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   <div class="stat"><div class="stat-n">4.7★</div><div class="stat-l">Avg Partner Rating</div></div>
 </div>
 
-<div class="fest" onclick="goDeals()">
-  <div class="fest-l">
-    <div class="fest-ico">🎨</div>
-    <div>
-      <div class="fest-badge">🪔 UPCOMING · MAR 13 2026</div>
-      <div class="fest-title">Upcoming Indian Dining Experiences</div>
-      <div class="fest-sub">Seasonal celebrations, special menus, and cultural dining moments</div>
+
+<section class="events-feature">
+  <div class="wrap">
+    <div class="events-head">
+      <div>
+        <div class="section-eyebrow">Upcoming experiences</div>
+        <h2 class="section-title">Upcoming Indian Dining Experiences</h2>
+        <p class="section-copy">Seasonal celebrations, special menus, and cultural dining moments curated for your city.</p>
+      </div>
+      <a href="#" class="events-link" onclick="goEvents();return false;">Explore all events →</a>
     </div>
+
+    <article class="event-hero-card" onclick="goEvents()">
+      <div class="event-hero-copy">
+        <div class="event-pill">🎨 Mar 13 · Limited seats</div>
+        <h3 class="event-hero-title">Holi Special Dining</h3>
+        <p class="event-hero-sub">A curated dining experience across 5 Indian restaurants with festive menus, special offers, and celebration-first ambience.</p>
+
+        <div class="event-hero-meta">
+          <span class="event-mini">📍 Fremont</span>
+          <span class="event-mini">📍 Sunnyvale</span>
+          <span class="event-mini">📍 San Jose</span>
+        </div>
+      </div>
+
+      <div class="event-hero-side">
+        <button class="event-cta">View Event</button>
+      </div>
+    </article>
+  </div>
+</section>
+
   </div>
   <button class="fest-btn">View Events →</button>
 </div>
@@ -903,7 +1091,6 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   </div>
 </div>
 
-<div class="ticker"><div class="ticker-inner" id="d-ticker"></div></div>
 
 <div class="deals-filter-bar">
   <button class="fb on" onclick="dSetFilter('all',this)">All Deals</button>
