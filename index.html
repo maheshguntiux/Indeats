@@ -674,94 +674,52 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
 }
 
 
-/* V4 clean minimal pass */
-.stats-bar{display:none !important}
+/* === Stable minimal UI pass === */
+.ticker,.stats-bar{display:none !important}
+
 .home-hero{
-  padding:104px 40px 118px !important;
+  padding-top:104px !important;
+  padding-bottom:88px !important;
 }
 .h-title{
-  max-width:1180px;
-  margin:0 auto 18px;
+  max-width:1120px;
+  margin:0 auto 16px;
 }
 .h-tagline{
   max-width:760px;
   margin:0 auto 34px;
 }
-.hero-pills,.pills,.quick-pills{
+.h-pills{
   gap:14px !important;
 }
-.hero-pills .pill,.pills .pill,.quick-pills .pill{
+.hpill{
   border-color:rgba(255,255,255,.08) !important;
   background:rgba(255,255,255,.04) !important;
-  box-shadow:none !important;
   padding:12px 18px !important;
+  box-shadow:none !important;
 }
-.hero-pills .pill:hover,.pills .pill:hover,.quick-pills .pill:hover{
+.hpill:hover{
   border-color:rgba(255,255,255,.14) !important;
   background:rgba(255,255,255,.06) !important;
 }
-.fest{
-  margin:0 40px 0 !important;
-  border-radius:28px !important;
-  min-height:144px;
-  box-shadow:0 18px 44px rgba(71,35,138,.14) !important;
-}
-@media (max-width:768px){
-  .home-hero{padding:78px 16px 72px !important}
-  .fest{margin:0 16px 0 !important}
-}
 
-
-/* cleaner cards */
-.r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-.rc.rc-v2{background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 2px 12px rgba(11,21,32,.06);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;display:flex;flex-direction:column}
-.rc.rc-v2:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(11,21,32,.10);border-color:rgba(232,66,10,.18)}
-.rc-media{position:relative;height:188px;overflow:hidden}
-.rc-media-bg{position:absolute;inset:0;background-size:cover;background-position:center}
-.rc-media-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,21,32,.08) 0%,rgba(11,21,32,.18) 45%,rgba(11,21,32,.52) 100%)}
-.rc-media-top,.rc-media-bottom{position:absolute;left:14px;right:14px;z-index:2;display:flex;align-items:center;justify-content:space-between}
-.rc-media-top{top:14px}.rc-media-bottom{bottom:14px}
-.rc-featured-badge{font-size:10px;font-weight:800;background:rgba(11,21,32,.72);color:#fff;border:1px solid rgba(255,255,255,.10);padding:5px 9px;border-radius:999px;letter-spacing:.02em}
-.rc-save-btn{width:34px;height:34px;border:none;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer}
-.rc-save-btn.saved{color:var(--flame)}
-.rc-deal-pill{display:inline-flex;align-items:center;min-height:30px;padding:0 10px;border-radius:999px;background:rgba(232,66,10,.94);color:#fff;font-size:11px;font-weight:800;white-space:nowrap}
-.rc-deal-pill.green{background:rgba(21,128,61,.92)} .rc-deal-pill.gold{background:rgba(180,120,0,.92)}
-.rc-body{padding:16px;display:flex;flex-direction:column;gap:10px}
-.rc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.rc-name{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1;font-weight:700;color:var(--text);margin:0 0 4px 0}
-.rc-submeta{font-size:12px;color:var(--muted);line-height:1.4}
-.rc-rating{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;background:var(--warm);border:1px solid var(--border);border-radius:999px;padding:6px 10px}
-.rc-rating-star{color:var(--turmeric);font-size:11px}
-.rc-rating-n{font-size:12px;font-weight:800;color:var(--text)}
-.rc-about,.rc-top,.rc-meta,.btn-menu{display:none !important}
-.rc-meta-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.rc-price{font-weight:700;color:var(--text)}
-.rc-status-text{font-weight:700}.rc-status-text.open{color:var(--green)}.rc-status-text.closed{color:#DC2626}
-.rc-tags{display:flex;flex-wrap:wrap;gap:6px;min-height:24px}
-.btn-book.btn-book-full{width:100%;padding:12px 14px;border:none;border-radius:12px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;font-size:13px;font-weight:800;cursor:pointer}
-
-
-/* V5 editorial events section */
-.home-hero{
-  padding-bottom: 132px !important;
-}
 .events-feature{
-  background: var(--bg, #f7f3ee);
-  padding: 72px 0 28px;
+  background:var(--bg);
+  padding:56px 0 22px;
 }
-.events-feature .wrap{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+.events-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
 }
 .events-head{
   display:flex;
-  align-items:flex-end;
   justify-content:space-between;
+  align-items:flex-end;
   gap:24px;
   margin-bottom:28px;
 }
-.section-eyebrow{
+.events-eyebrow{
   font-size:12px;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -769,46 +727,55 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   font-weight:800;
   margin-bottom:10px;
 }
-.section-title{
+.events-title{
   font-family:'Cormorant Garamond',serif;
   font-size:56px;
   line-height:.98;
   color:#171717;
   margin:0 0 10px 0;
 }
-.section-copy{
-  max-width:720px;
+.events-copy{
+  max-width:760px;
   color:#716657;
   font-size:18px;
   line-height:1.6;
   margin:0;
 }
 .events-link{
-  color:var(--flame,#E8420A);
-  text-decoration:none;
+  border:none;
+  background:transparent;
+  color:var(--flame);
+  font-size:16px;
   font-weight:800;
+  cursor:pointer;
   white-space:nowrap;
+  padding:0;
   margin-bottom:8px;
 }
-.event-hero-card{
+.events-grid{
   display:grid;
-  grid-template-columns:1.5fr .7fr;
-  gap:24px;
-  align-items:center;
-  background:linear-gradient(135deg,#3d1172 0%, #6f2cff 38%, #b1166a 100%);
-  border-radius:28px;
-  padding:34px 34px;
-  box-shadow:0 18px 44px rgba(71,35,138,.14);
-  cursor:pointer;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+  align-items:stretch;
 }
-.event-hero-copy{
+.event-card{
+  min-height:280px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:14px;
+  padding:28px;
+  border-radius:24px;
+  background:linear-gradient(135deg,#4d167e 0%, #7b2df5 42%, #b1166a 100%);
   color:#fff;
+  cursor:pointer;
+  box-shadow:0 16px 36px rgba(71,35,138,.14);
 }
 .event-pill{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  min-height:32px;
+  width:max-content;
+  min-height:34px;
   padding:0 12px;
   border-radius:999px;
   background:rgba(255,255,255,.16);
@@ -816,162 +783,96 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   font-size:12px;
   font-weight:800;
   letter-spacing:.02em;
-  margin-bottom:16px;
 }
-.event-hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:46px;
-  line-height:1;
-  margin:0 0 12px 0;
-  color:#fff;
-}
-.event-hero-sub{
-  max-width:760px;
-  margin:0;
-  color:rgba(255,255,255,.82);
-  font-size:18px;
-  line-height:1.6;
-}
-.event-hero-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:18px;
-}
-.event-mini{
-  display:inline-flex;
-  align-items:center;
-  min-height:34px;
-  padding:0 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  color:#fff;
-  font-size:13px;
-  font-weight:700;
-}
-.event-hero-side{
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-}
-.event-cta{
-  border:none;
-  background:#fff;
-  color:#5b2bc5;
-  font-weight:800;
-  border-radius:16px;
-  min-height:52px;
-  padding:0 18px;
-  font-size:15px;
-  cursor:pointer;
-}
-
-@media (max-width: 900px){
-  .events-head{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-  .event-hero-card{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-  .event-hero-side{
-    justify-content:flex-start;
-  }
-}
-@media (max-width: 768px){
-  .home-hero{
-    padding-bottom:88px !important;
-  }
-  .events-feature{
-    padding:46px 0 18px;
-  }
-  .section-title{
-    font-size:38px;
-    line-height:1.02;
-  }
-  .section-copy{
-    font-size:16px;
-  }
-  .event-hero-card{
-    padding:24px 22px;
-    border-radius:24px;
-  }
-  .event-hero-title{
-    font-size:34px;
-  }
-  .event-hero-sub{
-    font-size:16px;
-  }
-}
-
-
-/* Events grid redesign */
-.events-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:20px;
-}
-
-.event-card{
-  background:linear-gradient(135deg,#3d1172,#b1166a);
-  border-radius:22px;
-  padding:24px;
-  color:#fff;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-}
-
-.event-card.featured{
-  min-height:180px;
-}
-
-.event-card-body{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
 .event-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:34px;
+  font-size:32px;
+  line-height:1.05;
   margin:0;
+  color:#fff;
 }
-
-.event-title.small{
-  font-size:22px;
-}
-
 .event-sub{
-  font-size:14px;
-  opacity:.9;
+  margin:0;
+  color:rgba(255,255,255,.86);
+  font-size:16px;
+  line-height:1.55;
+  flex:1;
 }
-
-.event-pill{
-  font-size:12px;
-  background:rgba(255,255,255,.18);
-  padding:6px 10px;
-  border-radius:999px;
-  display:inline-block;
-  width:max-content;
-}
-
 .event-cta{
-  margin-top:8px;
+  align-self:flex-start;
+  min-height:48px;
+  padding:0 18px;
+  border:none;
+  border-radius:14px;
   background:#fff;
   color:#5b2bc5;
-  border:none;
-  border-radius:10px;
-  padding:10px 14px;
-  font-weight:700;
+  font-size:15px;
+  font-weight:800;
   cursor:pointer;
 }
+.event-cta.secondary{
+  background:rgba(255,255,255,.14);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.16);
+}
 
-@media (max-width:900px){
-  .events-grid{
-    grid-template-columns:1fr;
-  }
+/* discover page alignment */
+.main{
+  padding:28px 40px 56px;
+}
+.main-grid{
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  gap:26px;
+  align-items:start;
+}
+.sidebar{
+  padding:20px;
+  border-radius:22px;
+  min-height:462px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 8px 28px rgba(17,24,39,.06);
+}
+.sb-sec{margin-bottom:20px;padding-bottom:20px}
+.city-pill{min-height:42px;border-radius:12px;padding:0 14px;margin-bottom:8px;font-size:14px}
+.diet-pills{gap:8px}
+.dp{min-height:34px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-size:12px}
+.open-row{min-height:48px;border-radius:14px}
+.more-toggle{min-height:44px;border-radius:14px;margin-top:10px}
+
+.content-top{margin-bottom:16px}
+.ct-title{font-size:24px}
+.ct-count{font-size:13px;margin-top:4px}
+.qf-row{gap:10px;margin-bottom:18px}
+.qf{min-height:38px;display:inline-flex;align-items:center;border-radius:999px;padding:0 14px;font-size:13px}
+
+.r-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.rc{min-height:462px;border-radius:22px}
+.rc-body{flex:1}
+.rc-actions{margin-top:auto;padding-top:8px}
+
+@media (max-width:1024px){
+  .events-title{font-size:46px}
+  .events-grid{grid-template-columns:1fr 1fr}
+  .events-grid article:last-child{grid-column:1 / -1}
+  .main-grid{grid-template-columns:250px minmax(0,1fr)}
+  .r-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:768px){
+  .home-hero{padding-top:80px !important;padding-bottom:72px !important}
+  .events-feature{padding:46px 0 16px}
+  .events-wrap{padding:0 16px}
+  .events-head{flex-direction:column;align-items:flex-start;margin-bottom:20px}
+  .events-title{font-size:38px;line-height:1.02}
+  .events-copy{font-size:16px}
+  .events-grid{grid-template-columns:1fr}
+  .event-card{min-height:unset;padding:22px}
+  .main{padding:22px 16px 44px}
+  .main-grid{grid-template-columns:1fr}
+  .sidebar{min-height:unset;position:static}
+  .r-grid{grid-template-columns:1fr}
+  .rc{min-height:unset}
 }
 
 </style>
@@ -984,8 +885,8 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   <div class="nav-links">
     <span class="nav-link" id="nl-home" onclick="goHome()">Discover</span>
     <span class="nav-link" id="nl-deals" onclick="goDeals()">Deals</span>
-    <span class="nav-link" id="nl-bk" onclick="goMyBookings()">My Bookings</span>
     <span class="nav-link" id="nl-ev" onclick="goEvents()">Events</span>
+    <span class="nav-link" id="nl-bk" onclick="goMyBookings()">My Bookings</span>
   </div>
   <div class="nav-spacer"></div>
   <div class="nav-city">📍 Fremont ▾</div>
@@ -1020,6 +921,7 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   </div>
 </div>
 
+<div class="ticker"><div class="ticker-inner" id="h-ticker"></div></div>
 
 <div class="stats-bar">
   <div class="stat"><div class="stat-n">34</div><div class="stat-l">Partner Restaurants</div></div>
@@ -1031,51 +933,48 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
 
 
 <section class="events-feature">
-  <div class="wrap">
+  <div class="events-wrap">
     <div class="events-head">
       <div>
-        <div class="section-eyebrow">Upcoming experiences</div>
-        <h2 class="section-title">Upcoming Indian Dining Experiences</h2>
-        <p class="section-copy">Seasonal celebrations, special menus, and cultural dining moments curated for your city.</p>
+        <div class="events-eyebrow">Upcoming experiences</div>
+        <h2 class="events-title">Upcoming Indian Dining Experiences</h2>
+        <p class="events-copy">Seasonal celebrations, special menus, and cultural dining moments curated for your city.</p>
       </div>
-      <a href="#" class="events-link" onclick="goEvents();return false;">Explore all events →</a>
+      <button class="events-link" onclick="goEvents()">Explore all events →</button>
     </div>
 
-    
-<div class="events-grid">
+    <div class="events-grid">
+      <article class="event-card" onclick="goEvents()">
+        <div class="event-pill">🎨 Mar 13 · Limited seats</div>
+        <h3 class="event-title">Holi Special Dining</h3>
+        <p class="event-sub">Festive menus across 5 Indian restaurants celebrating Holi.</p>
+        <button class="event-cta">View Event</button>
+      </article>
 
-  <article class="event-card featured" onclick="goEvents()">
-    <div class="event-card-body">
-      <div class="event-pill">🎨 Mar 13 · Limited seats</div>
-      <h3 class="event-title">Holi Special Dining</h3>
-      <p class="event-sub">Festive menus across 5 restaurants celebrating Holi.</p>
-      <button class="event-cta">View Event</button>
+      <article class="event-card" onclick="goEvents()">
+        <div class="event-pill">🍽 Weekend</div>
+        <h3 class="event-title">South Indian Buffet Night</h3>
+        <p class="event-sub">Unlimited dosa, idli, and specials in a more casual gathering format.</p>
+        <button class="event-cta secondary">See Details</button>
+      </article>
+
+      <article class="event-card" onclick="goEvents()">
+        <div class="event-pill">👨‍🍳 Chef Special</div>
+        <h3 class="event-title">Chef Tasting Menu</h3>
+        <p class="event-sub">Limited curated dishes by guest chefs, designed as a premium dining experience.</p>
+        <button class="event-cta secondary">See Details</button>
+      </article>
     </div>
-  </article>
-
-  <article class="event-card" onclick="goEvents()">
-    <div class="event-card-body">
-      <div class="event-pill">🍽 Weekend</div>
-      <h3 class="event-title small">South Indian Buffet Night</h3>
-      <p class="event-sub">Unlimited dosa, idli, and specials.</p>
-    </div>
-  </article>
-
-  <article class="event-card" onclick="goEvents()">
-    <div class="event-card-body">
-      <div class="event-pill">👨‍🍳 Chef Special</div>
-      <h3 class="event-title small">Chef Tasting Menu</h3>
-      <p class="event-sub">Limited curated dishes by guest chefs.</p>
-    </div>
-  </article>
-
-</div>
-
   </div>
 </section>
 
+    <div>
+      <div class="fest-badge">🪔 UPCOMING · MAR 13 2026</div>
+      <div class="fest-title">Holi Special Dining — All 5 Restaurants</div>
+      <div class="fest-sub">Exclusive menus · Limited seats · Deals auto-applied</div>
+    </div>
   </div>
-  <button class="fest-btn">View Events →</button>
+  <button class="fest-btn">See Deals →</button>
 </div>
 
 <div class="section">
@@ -1173,6 +1072,7 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   </div>
 </div>
 
+<div class="ticker"><div class="ticker-inner" id="d-ticker"></div></div>
 
 <div class="deals-filter-bar">
   <button class="fb on" onclick="dSetFilter('all',this)">All Deals</button>
@@ -1445,39 +1345,37 @@ function filterAndRender(){
 
 function renderGrid(r){
   const dc={red:"rc-deal-pill",green:"rc-deal-pill green",gold:"rc-deal-pill gold"};
-  return `<article class="rc rc-v2" onclick="goDetail(${r.id})">
-    <div class="rc-media ${r.bg}">
-      <div class="rc-media-bg" style="background-image:${cardBg(r)};"></div>
+  return `<div class="rc" onclick="goDetail(${r.id})">
+    <div class="rc-img ${r.bg}">
+      <div style="position:absolute;inset:0;background-image:${cardBg(r)};"></div>
       <div class="food-pattern"></div>
       <div class="food-emoji-large">${r.emoji}</div>
-      <div class="rc-media-overlay"></div>
-      <div class="rc-media-top">
-        ${r.featured?'<div class="rc-featured-badge">Featured</div>':'<div></div>'}
-        <button class="rc-save-btn ${homeSaved[r.id]?'saved':''}" onclick="event.stopPropagation();toggleHomeSave(${r.id},this)" aria-label="Save restaurant">${homeSaved[r.id]?'♥':'♡'}</button>
-      </div>
-      <div class="rc-media-bottom">
-        <div class="${dc[r.dealColor]||'rc-deal-pill'}">${r.deal}</div>
+      <div class="rc-img-overlay"></div>
+      <div class="rc-img-content">
+        <div class="rc-img-top">
+          ${r.featured?'<div class="rc-featured-badge">✦ FEATURED</div>':'<div></div>'}
+          <button class="rc-save-btn ${homeSaved[r.id]?'saved':''}" onclick="event.stopPropagation();toggleHomeSave(${r.id},this)">${homeSaved[r.id]?'♥':'♡'}</button>
+        </div>
+        <div class="rc-img-bottom">
+          <div class="${dc[r.dealColor]||'rc-deal-pill'}">🏷️ ${r.deal}</div>
+          <div class="rc-status-pill ${r.isOpen?'rc-open':'rc-closed'}">${r.isOpen?'● Open':'● Closed'}</div>
+        </div>
       </div>
     </div>
     <div class="rc-body">
-      <div class="rc-header">
-        <div class="rc-title-wrap">
-          <div class="rc-name">${r.name}</div>
-          <div class="rc-submeta">${r.cuisine} · ${r.location}</div>
-        </div>
-        <div class="rc-rating"><span class="rc-rating-star">★</span><span class="rc-rating-n">${r.rating}</span></div>
+      <div class="rc-top">
+        <div class="rc-name">${r.name}</div>
+        <div class="rc-rating"><span class="rc-rating-star">★</span><span class="rc-rating-n">${r.rating}</span><span class="rc-rating-cnt">(${r.reviews.toLocaleString()})</span></div>
       </div>
-      <div class="rc-meta-row">
-        <span class="rc-price">${r.price}</span>
-        <span class="rc-dot">•</span>
-        <span class="rc-status-text ${r.isOpen?'open':'closed'}">${r.isOpen?'Open now':'Closed'}</span>
-      </div>
+      <div class="rc-meta">📍 ${r.location} <span class="rc-meta-sep">·</span> ${r.time} <span class="rc-meta-sep">·</span> ${r.price}</div>
       <div class="rc-tags">${r.tags.map(tagHtml).join('')}</div>
+      <div class="rc-about">${r.about}</div>
       <div class="rc-actions">
-        <button class="btn-book btn-book-full" onclick="event.stopPropagation();goDetail(${r.id})">View Restaurant</button>
+        <button class="btn-book" onclick="event.stopPropagation();goDetail(${r.id})">Reserve Table →</button>
+        <button class="btn-menu" onclick="event.stopPropagation();goDetail(${r.id})">Menu</button>
       </div>
     </div>
-  </article>`;
+  </div>`;
 }
 
 function renderList(r){
