@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indeats — Halal, Veg, Jain. Your kind of Indian food.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root{
+  --flame:#E8420A;--flame2:#FF6340;
+  --turmeric:#F5A623;
+  --midnight:#0B1520;--charcoal:#1C2B3A;
+  --cream:#FFFBF6;--warm:#FFF8F0;--parchment:#FFF0DC;
+  --border:#EDE4D8;--border2:#E0D4C4;
+  --text:#110D06;--muted:#7A6E5F;--faint:#B0A090;
+  --green:#15803D;
+  --shadow-sm:0 1px 8px rgba(11,21,32,0.06);
+  --shadow:0 4px 20px rgba(11,21,32,0.09);
+  --shadow-lg:0 12px 48px rgba(11,21,32,0.13);
+  --r:14px;--r-lg:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+button,input,select{font-family:'DM Sans',sans-serif;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+.page{display:none;min-height:100vh;animation:pgIn 0.28s ease;}
+.page.active{display:block;}
+@keyframes pgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;}
+.tv{background:#DCFCE7;color:#15803D;}.th{background:#DBEAFE;color:#1D4ED8;}.tj{background:#FEF9C3;color:#92400E;}.tn{background:#FEE2E2;color:#B91C1C;}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:300;background:rgba(11,21,32,0.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(232,66,10,0.2);height:62px;display:flex;align-items:center;padding:0 40px;gap:16px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:700;color:var(--flame);cursor:pointer;display:flex;align-items:center;gap:6px;flex-shrink:0;letter-spacing:-0.3px;}
+.nav-pulse{width:5px;height:5px;border-radius:50%;background:var(--turmeric);animation:pulse 2.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
+.nav-links{display:flex;gap:24px;margin-left:28px;}
+.nav-link{font-size:12px;font-weight:600;color:rgba(255,255,255,0.45);cursor:pointer;transition:color 0.18s;padding:3px 0;position:relative;}
+.nav-link::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1.5px;background:var(--flame);transform:scaleX(0);transition:transform 0.18s;transform-origin:left;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1);}
+.nav-spacer{flex:1;}
+.nav-city{display:flex;align-items:center;gap:5px;color:var(--turmeric);font-size:11px;font-weight:700;cursor:pointer;padding:5px 11px;background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.18);border-radius:7px;}
+.nbtn{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;white-space:nowrap;}
+.nbtn-ghost{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.1);}
+.nbtn-primary{background:linear-gradient(135deg,var(--flame),var(--flame2));color:#fff;box-shadow:0 3px 12px rgba(232,66,10,0.3);}
+.nbtn-primary:hover{transform:translateY(-1px);}
+
+/* ── SHARED: TICKER ── */
+.ticker{background:linear-gradient(90deg,#B83300,var(--flame),#B83300);padding:8px 0;overflow:hidden;}
+.ticker-inner{display:flex;white-space:nowrap;animation:tickscroll 34s linear infinite;}
+.ticker-inner:hover{animation-play-state:paused;}
+.tick-item{padding:0 36px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.84);display:inline-flex;align-items:center;gap:7px;border-right:1px solid rgba(255,255,255,0.15);}
+.tick-gem{color:var(--turmeric);}
+@keyframes tickscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--midnight);color:#fff;padding:9px 18px;border-radius:9px;font-size:12px;font-weight:700;z-index:600;opacity:0;pointer-events:none;transition:all 0.22s;box-shadow:0 5px 24px rgba(11,21,32,0.3);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ═══════════════════════════════════════════════
+   HOME PAGE STYLES
+═══════════════════════════════════════════════ */
+.home-hero{background:var(--midnight);padding:80px 40px 72px;text-align:center;position:relative;overflow:hidden;}
+.home-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,66,10,0.08) 0%,transparent 65%);pointer-events:none;}
+.h-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.2);border-radius:20px;padding:5px 14px;margin-bottom:28px;}
+.h-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--turmeric);}
+.h-eyebrow-txt{font-size:10px;font-weight:800;color:var(--turmeric);letter-spacing:0.14em;text-transform:uppercase;}
+.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,68px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-1px;margin-bottom:14px;position:relative;z-index:1;}
+.h-title em{color:var(--flame);font-style:italic;}
+.h-tagline{font-size:15px;color:rgba(255,255,255,0.42);margin-bottom:40px;font-weight:500;position:relative;z-index:1;}
+.h-tagline strong{color:rgba(255,255,255,0.7);font-weight:700;}
+.search-wrap{position:relative;z-index:1;max-width:640px;margin:0 auto 28px;}
+.search-box{display:flex;background:#fff;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 16px 56px rgba(0,0,0,0.36);}
+.search-city-btn{padding:0 20px;border-right:1px solid var(--border);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;min-width:130px;flex-shrink:0;}
+.search-input{flex:1;padding:18px 16px;border:none;outline:none;font-size:15px;color:var(--text);background:transparent;min-width:0;}
+.search-input::placeholder{color:var(--faint);}
+.search-btn{padding:14px 28px;background:linear-gradient(135deg,var(--flame),var(--flame2));border:none;cursor:pointer;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;display:flex;align-items:center;gap:6px;}
+.h-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.hpill{padding:6px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;font-size:11px;color:rgba(255,255,255,0.55);cursor:pointer;font-weight:600;transition:all 0.16s;}
+.hpill:hover{background:rgba(232,66,10,0.12);border-color:rgba(232,66,10,0.35);color:#fff;}
+
+.stats-bar{background:var(--charcoal);display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.04);}
+.stat{padding:18px 44px;text-align:center;border-right:1px solid rgba(255,255,255,0.04);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--flame);}
+.stat-l{font-size:9px;color:rgba(255,255,255,0.3);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+
+.fest{margin:24px 40px 0;background:linear-gradient(130deg,#3B0764,#6D28D9,#9D174D);border-radius:var(--r-lg);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(109,40,217,0.25);}
+.fest::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.05);pointer-events:none;}
+.fest-l{display:flex;align-items:center;gap:14px;position:relative;z-index:1;}
+.fest-ico{font-size:26px;animation:sway 3.5s ease-in-out infinite;}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.fest-badge{font-size:9px;font-weight:800;background:rgba(255,255,255,0.15);color:#fff;padding:2px 7px;border-radius:4px;letter-spacing:0.08em;margin-bottom:3px;display:inline-block;}
+.fest-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:#fff;}
+.fest-sub{font-size:11px;color:rgba(255,255,255,0.55);margin-top:1px;}
+.fest-btn{padding:9px 18px;background:#fff;color:#6D28D9;border:none;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;position:relative;z-index:1;transition:transform 0.15s;}
+.fest-btn:hover{transform:scale(1.04);}
+
+.section{padding:24px 40px 0;}
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;}
+.sec-label{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:3px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);}
+.sec-more{font-size:12px;font-weight:700;color:var(--flame);cursor:pointer;display:flex;align-items:center;gap:3px;transition:gap 0.14s;}
+.sec-more:hover{gap:7px;}
+.deal-strip{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;}
+.deal-strip::-webkit-scrollbar{height:0;}
+.dcard{flex-shrink:0;width:195px;background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;box-shadow:var(--shadow-sm);}
+.dcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.dcard-img{height:104px;position:relative;display:flex;align-items:center;justify-content:center;}
+.dcard-badge{position:absolute;top:7px;left:7px;font-size:9px;font-weight:800;color:#fff;padding:2px 8px;border-radius:5px;}
+.dcard-heart{position:absolute;top:7px;right:7px;width:25px;height:25px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border:none;}
+.dcard-body{padding:10px 12px;}
+.dcard-name{font-size:12px;font-weight:800;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dcard-cuisine{font-size:10px;color:var(--muted);margin-bottom:6px;}
+
+.main{padding:24px 40px 48px;}
+.main-grid{display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start;}
+
+.sidebar{background:#fff;border-radius:var(--r-lg);padding:18px;border:1px solid var(--border);box-shadow:var(--shadow-sm);position:sticky;top:74px;}
+.sb-sec{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+.sb-sec:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.sb-head{font-size:9px;font-weight:800;color:var(--faint);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;}
+.city-pill{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:8px;border:1.5px solid var(--border);margin-bottom:4px;cursor:pointer;transition:all 0.13s;font-size:12px;font-weight:600;color:var(--text);}
+.city-pill:hover{border-color:var(--flame);color:var(--flame);}
+.city-pill.on{background:var(--midnight);border-color:var(--midnight);color:#fff;}
+.city-cnt{font-size:10px;opacity:0.45;}
+.diet-pills{display:flex;flex-wrap:wrap;gap:5px;}
+.dp{padding:4px 10px;border-radius:16px;border:1.5px solid var(--border);font-size:10px;font-weight:700;cursor:pointer;transition:all 0.13s;color:var(--muted);}
+.dp.on{background:var(--flame);border-color:var(--flame);color:#fff;}
+.dp:not(.on):hover{border-color:var(--flame);color:var(--flame);}
+.more-filters{display:none;margin-top:14px;}
+.more-filters.open{display:block;}
+.price-row{display:flex;gap:4px;margin-bottom:12px;}
+.pbtn{flex:1;padding:7px 0;border-radius:7px;border:1.5px solid var(--border);background:#fff;font-size:11px;font-weight:800;cursor:pointer;transition:all 0.13s;text-align:center;color:var(--muted);}
+.pbtn.on{background:var(--midnight);border-color:var(--midnight);color:#fff;}
+.open-row{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;background:var(--warm);border-radius:8px;cursor:pointer;border:1.5px solid var(--border);}
+.open-lbl{font-size:12px;font-weight:700;}
+.toggle{width:34px;height:19px;background:var(--border2);border-radius:10px;position:relative;transition:background 0.18s;}
+.toggle.on{background:var(--green);}
+.toggle-k{position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#fff;transition:left 0.18s;box-shadow:0 1px 4px rgba(0,0,0,0.15);}
+.toggle.on .toggle-k{left:17px;}
+.more-toggle{width:100%;padding:7px;border:1.5px dashed var(--border);border-radius:8px;background:none;cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);transition:all 0.13s;margin-top:8px;}
+.more-toggle:hover{border-color:var(--flame);color:var(--flame);}
+
+.content-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.ct-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;}
+.ct-count{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;}
+.view-btns{display:flex;background:var(--warm);border-radius:7px;padding:2px;border:1px solid var(--border);}
+.vb{padding:4px 9px;border-radius:5px;border:none;background:none;cursor:pointer;font-size:13px;transition:background 0.13s;}
+.vb.on{background:#fff;box-shadow:var(--shadow-sm);}
+.sort-sel{padding:6px 10px;border-radius:7px;border:1.5px solid var(--border);background:#fff;font-size:11px;font-weight:600;color:var(--text);cursor:pointer;outline:none;}
+.qf-row{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:1px;}
+.qf-row::-webkit-scrollbar{height:0;}
+.qf{padding:5px 12px;border-radius:16px;border:1.5px solid var(--border);background:#fff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;color:var(--muted);transition:all 0.13s;flex-shrink:0;}
+.qf.on,.qf:hover{background:var(--flame);border-color:var(--flame);color:#fff;}
+
+/* Restaurant Cards */
+.food-pattern{position:absolute;inset:0;opacity:0.12;background-image:radial-gradient(circle,rgba(255,255,255,0.6) 1px,transparent 1px);background-size:18px 18px;}
+.food-bg-1{background:linear-gradient(145deg,#1a0800,#5c2000,#8B3A0F);}
+.food-bg-2{background:linear-gradient(145deg,#0a1a08,#1e5c16,#166534);}
+.food-bg-3{background:linear-gradient(145deg,#1a1200,#5c4500,#78350F);}
+.food-bg-4{background:linear-gradient(145deg,#1a0a00,#5c3200,#92400E);}
+.food-bg-5{background:linear-gradient(145deg,#08081a,#1a1a5c,#1E1B4B);}
+.food-emoji-large{position:absolute;font-size:80px;opacity:0.22;top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(1px);}
+
+.r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.rc{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 2px 12px rgba(11,21,32,0.06);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;display:flex;flex-direction:column;}
+.rc:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(11,21,32,0.10);border-color:rgba(232,66,10,0.18);}
+.rc-img{height:188px;position:relative;overflow:hidden;flex-shrink:0;}
+.rc-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,21,32,0.08) 0%,rgba(11,21,32,0.18) 45%,rgba(11,21,32,0.52) 100%);}
+.rc-img-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:12px 13px;}
+.rc-img-top{display:flex;align-items:flex-start;justify-content:space-between;}
+.rc-featured-badge{font-size:10px;font-weight:800;background:rgba(11,21,32,0.72);color:#fff;padding:5px 9px;border-radius:999px;border:1px solid rgba(255,255,255,0.10);letter-spacing:0.02em;backdrop-filter:blur(4px);}
+.rc-save-btn{width:34px;height:34px;background:rgba(255,255,255,0.92);border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:transform 0.14s ease;}
+.rc-save-btn:hover{transform:scale(1.08);}
+.rc-save-btn.saved{color:var(--flame);}
+.rc-img-bottom{display:flex;align-items:flex-end;justify-content:space-between;}
+.rc-deal-pill{display:inline-flex;align-items:center;max-width:100%;min-height:30px;padding:0 10px;background:rgba(232,66,10,0.94);border-radius:999px;font-size:11px;font-weight:800;color:#fff;line-height:1;white-space:nowrap;}
+.rc-deal-pill.green{background:rgba(21,128,61,0.92);}
+.rc-deal-pill.gold{background:rgba(180,120,0,0.92);}
+.rc-status-pill{font-size:9px;font-weight:800;padding:3px 8px;border-radius:5px;backdrop-filter:blur(4px);}
+.rc-open{background:rgba(220,252,231,0.92);color:#15803D;}
+.rc-closed{background:rgba(254,226,226,0.92);color:#DC2626;}
+.rc-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:10px;}
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.rc-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--text);line-height:1;margin:0 0 4px 0;}
+.rc-rating{display:inline-flex;align-items:center;gap:4px;background:var(--warm);border:1px solid var(--border);border-radius:999px;padding:6px 10px;flex-shrink:0;white-space:nowrap;}
+.rc-rating-star{color:var(--turmeric);font-size:11px;}
+.rc-rating-n{font-size:12px;font-weight:800;color:var(--text);}
+.rc-rating-cnt{font-size:9px;color:var(--muted);}
+.rc-meta{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.rc-meta-sep{color:var(--border2);}
+.rc-title-wrap{min-width:0;}
+.rc-submeta{font-size:12px;color:var(--muted);line-height:1.4;}
+.rc-meta-v2{margin-top:-2px;}
+.rc-price{font-weight:700;color:var(--text);}
+.rc-status-text{font-weight:700;}
+.rc-status-text.open{color:var(--green);}
+.rc-status-text.closed{color:#DC2626;}
+.btn-book-full{width:100%;}
+.rc-tags{display:flex;gap:6px;flex-wrap:wrap;min-height:24px;}
+.rc-actions{display:flex;gap:7px;margin-top:4px;}
+.btn-book{flex:1;padding:12px 14px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;border:none;border-radius:12px;font-weight:800;font-size:13px;cursor:pointer;}
+
+.r-list{display:flex;flex-direction:column;gap:10px;}
+.rl{background:#fff;border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s;display:flex;overflow:hidden;height:120px;}
+.rl:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(232,66,10,0.16);}
+.rl-img{width:130px;position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.rl-body{padding:13px 16px;display:flex;flex-direction:column;justify-content:space-between;flex:1;min-width:0;}
+.rl-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.rl-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;}
+.rl-meta{font-size:11px;color:var(--muted);}
+.rl-foot{display:flex;align-items:center;justify-content:space-between;}
+.rl-deal{font-size:10px;font-weight:800;color:var(--flame);background:rgba(232,66,10,0.07);padding:2px 8px;border-radius:5px;}
+.rl-rating{display:flex;align-items:center;gap:3px;background:var(--warm);border:1px solid var(--border);border-radius:5px;padding:2px 7px;flex-shrink:0;}
+
+.empty-state{text-align:center;padding:72px 20px;color:var(--muted);}
+.empty-icon{font-size:44px;margin-bottom:12px;}
+.empty-title{font-size:17px;font-weight:700;margin-bottom:6px;color:var(--text);}
+
+/* Detail */
+.det-hero{background:var(--midnight);padding:36px 40px 0;display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:end;position:relative;overflow:hidden;}
+.det-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 50%,rgba(232,66,10,0.08) 0%,transparent 55%);pointer-events:none;}
+.det-back{display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,0.4);font-size:12px;font-weight:600;cursor:pointer;margin-bottom:20px;transition:color 0.15s;position:relative;z-index:1;}
+.det-back:hover{color:#fff;}
+.det-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;position:relative;z-index:1;}
+.det-name{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,52px);font-weight:700;color:#fff;line-height:1.04;margin-bottom:6px;letter-spacing:-0.5px;position:relative;z-index:1;}
+.det-tagline{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:16px;position:relative;z-index:1;}
+.det-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding-bottom:20px;position:relative;z-index:1;}
+.det-chip{display:flex;align-items:center;gap:5px;border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;}
+.det-chip-rating{background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.22);color:var(--turmeric);}
+.det-chip-open{background:rgba(21,128,61,0.1);border:1px solid rgba(21,128,61,0.18);color:#4ADE80;}
+.det-chip-closed{background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.18);color:#F87171;}
+.det-chip-info{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.45);}
+.det-photo-col{padding-bottom:20px;position:relative;z-index:1;}
+.det-photo-main{height:190px;border-radius:var(--r) var(--r) 0 0;overflow:hidden;position:relative;}
+.det-thumbs{display:flex;gap:6px;margin-top:6px;}
+.det-thumb{flex:1;height:54px;border-radius:8px;overflow:hidden;position:relative;cursor:pointer;}
+.det-body{display:grid;grid-template-columns:1fr 340px;gap:28px;padding:28px 40px;align-items:start;}
+.deal-box{background:linear-gradient(130deg,var(--midnight),var(--charcoal));border-radius:var(--r);padding:18px 20px;margin-bottom:20px;border:1.5px solid rgba(232,66,10,0.25);position:relative;overflow:hidden;}
+.deal-box::after{content:'';position:absolute;top:-30px;right:-30px;width:110px;height:110px;border-radius:50%;background:rgba(232,66,10,0.07);pointer-events:none;}
+.deal-box-eye{font-size:8px;color:var(--turmeric);font-weight:800;letter-spacing:0.12em;margin-bottom:5px;}
+.deal-box-main{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;}
+.deal-box-foot{display:flex;justify-content:space-between;align-items:center;}
+.deal-box-exp{font-size:11px;color:rgba(255,255,255,0.38);}
+.deal-box-auto{font-size:11px;color:var(--turmeric);font-weight:700;}
+.dtabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:18px;}
+.dtab{padding:9px 16px;border:none;background:none;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.13s;}
+.dtab.active{color:var(--flame);border-bottom-color:var(--flame);}
+.menu-cat{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--border);}
+.menu-sec{margin-bottom:18px;}
+.mi{display:flex;justify-content:space-between;align-items:flex-start;padding:11px 13px;border-radius:9px;margin-bottom:5px;border:1px solid var(--border);background:#fff;}
+.mi.hot{background:var(--parchment);border-color:rgba(232,66,10,0.15);}
+.mi-name{font-size:13px;font-weight:700;margin-bottom:2px;}
+.mi-note{font-size:11px;color:var(--muted);}
+.mi-badge{font-size:8px;background:var(--flame);color:#fff;padding:1px 5px;border-radius:4px;font-weight:800;margin-left:5px;vertical-align:middle;}
+.mi-price{font-size:14px;font-weight:800;padding-left:10px;white-space:nowrap;}
+.about-p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:18px;}
+.about-acts{display:flex;gap:8px;flex-wrap:wrap;}
+.about-btn{padding:10px 18px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.13s;}
+.about-btn:hover{border-color:var(--flame);color:var(--flame);}
+.rev-card{background:#fff;border-radius:var(--r);padding:15px;margin-bottom:10px;border:1px solid var(--border);}
+.rev-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.rev-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--flame),var(--turmeric));display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:800;flex-shrink:0;}
+.rev-name{font-size:13px;font-weight:700;}
+.rev-time{font-size:10px;color:var(--muted);}
+.rev-stars{color:var(--turmeric);font-size:12px;}
+.rev-src{font-size:9px;color:var(--muted);font-weight:700;background:var(--warm);border-radius:4px;padding:1px 6px;}
+.rev-text{font-size:12px;color:var(--muted);line-height:1.65;}
+
+/* Booking widget */
+.bk-wrap{position:sticky;top:80px;}
+.bk-widget{background:#fff;border-radius:var(--r-lg);padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-lg);}
+.bk-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;margin-bottom:2px;}
+.bk-sub{font-size:11px;color:var(--muted);margin-bottom:16px;}
+.bk-lbl{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px;}
+.date-strip{display:flex;gap:4px;overflow-x:auto;padding-bottom:3px;margin-bottom:12px;}
+.date-strip::-webkit-scrollbar{height:0;}
+.dsl{min-width:48px;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);background:#fff;text-align:center;cursor:pointer;transition:all 0.13s;flex-shrink:0;}
+.dsl:hover{border-color:var(--flame);}
+.dsl.on{background:var(--midnight);border-color:var(--midnight);}
+.dsl.on .d-day,.dsl.on .d-mo{color:rgba(255,255,255,0.4);}
+.dsl.on .d-n{color:#fff;}
+.d-day{font-size:8px;font-weight:700;color:var(--muted);}
+.d-n{font-size:15px;font-weight:800;color:var(--text);font-family:'Cormorant Garamond',serif;line-height:1.2;}
+.d-mo{font-size:8px;color:var(--muted);}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:12px;}
+.ts{padding:7px 0;border-radius:7px;border:1.5px solid var(--border);text-align:center;cursor:pointer;font-size:11px;font-weight:700;color:var(--text);transition:all 0.13s;}
+.ts:hover:not(.ua){border-color:var(--flame);color:var(--flame);}
+.ts.on{background:var(--flame);border-color:var(--flame);color:#fff;}
+.ts.ua{background:#F8F5F2;color:#D1C5BC;cursor:not-allowed;text-decoration:line-through;font-size:10px;}
+.guest-row{display:flex;align-items:center;justify-content:space-between;background:var(--warm);border-radius:9px;padding:10px 13px;margin-bottom:12px;border:1px solid var(--border);}
+.guest-lbl{font-size:12px;font-weight:700;}
+.guest-ctrl{display:flex;align-items:center;gap:11px;}
+.gbtn{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border);background:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.13s;font-weight:700;}
+.gbtn:hover{background:var(--flame);color:#fff;border-color:var(--flame);}
+.g-n{font-size:18px;font-weight:700;font-family:'Cormorant Garamond',serif;min-width:24px;text-align:center;}
+.bk-summary{background:var(--midnight);border-radius:9px;padding:12px 14px;margin-bottom:12px;}
+.bks-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.bks-row:last-child{margin-bottom:0;}
+.bks-k{font-size:10px;color:rgba(255,255,255,0.35);}
+.bks-v{font-size:11px;color:#fff;font-weight:700;}
+.bks-deal{font-size:11px;color:var(--turmeric);font-weight:800;}
+.bks-div{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:6px 0;}
+.bk-btn{width:100%;padding:13px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;border:none;border-radius:10px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 5px 20px rgba(232,66,10,0.28);transition:all 0.15s;}
+.bk-btn:disabled{background:#D8CEC4;box-shadow:none;cursor:not-allowed;}
+.bk-btn:not(:disabled):hover{transform:translateY(-1px);}
+
+/* Confirmed */
+.conf-wrap{max-width:580px;margin:56px auto;padding:0 24px;}
+.conf-center{text-align:center;margin-bottom:28px;}
+.conf-icon{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--flame),var(--turmeric));display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;box-shadow:0 10px 36px rgba(232,66,10,0.3);animation:pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275);}
+@keyframes pop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+.conf-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;margin-bottom:5px;}
+.conf-sub{font-size:14px;color:var(--muted);}
+.conf-card{background:#fff;border-radius:var(--r-lg);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:12px;}
+.conf-rest-row{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px;}
+.conf-img{width:56px;height:56px;border-radius:12px;overflow:hidden;position:relative;flex-shrink:0;}
+.conf-rest-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;}
+.conf-rest-cuisine{font-size:12px;color:var(--muted);margin-top:2px;}
+.conf-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.conf-detail{background:var(--warm);border-radius:9px;padding:11px 13px;}
+.conf-detail-k{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px;}
+.conf-detail-v{font-size:13px;font-weight:800;}
+.conf-deal-bar{background:linear-gradient(90deg,#DCFCE7,#BBF7D0);border-radius:9px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;}
+.conf-deal-txt{font-size:13px;font-weight:800;color:var(--green);}
+.conf-id{font-size:11px;color:var(--muted);text-align:center;margin:12px 0;font-family:'DM Mono',monospace;}
+.conf-acts{display:flex;gap:10px;}
+.conf-btn-p{flex:1;padding:12px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;border:none;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer;}
+.conf-btn-s{flex:1;padding:12px;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;color:var(--text);transition:all 0.13s;}
+.conf-btn-s:hover{border-color:var(--flame);color:var(--flame);}
+
+/* My Bookings */
+.mb-wrap{max-width:780px;margin:0 auto;padding:40px 24px;}
+.mb-hd{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+.mb-back{padding:7px 14px;border:1.5px solid var(--border);border-radius:7px;background:#fff;cursor:pointer;font-size:12px;font-weight:700;transition:all 0.13s;}
+.mb-back:hover{border-color:var(--flame);color:var(--flame);}
+.mb-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;}
+.mb-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px;}
+.mb-card{background:#fff;border-radius:var(--r-lg);padding:18px;border:1px solid var(--border);margin-bottom:10px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow-sm);border-left:4px solid transparent;transition:box-shadow 0.18s;}
+.mb-card.upcoming{border-left-color:var(--flame);}
+.mb-card.past{border-left-color:var(--border2);}
+.mb-card:hover{box-shadow:var(--shadow);}
+.mb-img{width:60px;height:60px;border-radius:12px;overflow:hidden;position:relative;flex-shrink:0;}
+.mb-body{flex:1;}
+.mb-name-row{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+.mb-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;}
+.mb-badge{font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;letter-spacing:0.05em;}
+.mb-s-up{background:#DCFCE7;color:#15803D;}
+.mb-s-past{background:#F3F4F6;color:#6B7280;}
+.mb-cuisine{font-size:11px;color:var(--muted);margin-bottom:5px;}
+.mb-meta{display:flex;gap:12px;font-size:11px;color:var(--muted);margin-bottom:5px;flex-wrap:wrap;}
+.mb-deal{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:rgba(232,66,10,0.06);border:1px solid rgba(232,66,10,0.1);border-radius:5px;font-size:10px;font-weight:700;color:var(--flame);}
+.mb-acts{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.mb-btn-p{padding:8px 15px;background:linear-gradient(90deg,var(--flame),var(--flame2));color:#fff;border:none;border-radius:7px;font-weight:800;font-size:11px;cursor:pointer;white-space:nowrap;}
+.mb-btn-c{padding:8px 15px;background:#FEE2E2;color:#B91C1C;border:1px solid #FECACA;border-radius:7px;font-weight:700;font-size:11px;cursor:pointer;}
+
+footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-top:48px;}
+.foot-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--flame);margin-bottom:8px;}
+.foot-tagline{font-size:12px;color:rgba(255,255,255,0.28);line-height:1.75;max-width:230px;}
+.foot-col-title{font-size:9px;font-weight:800;color:rgba(255,255,255,0.28);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;}
+.foot-link{display:block;font-size:12px;color:rgba(255,255,255,0.44);margin-bottom:7px;cursor:pointer;transition:color 0.13s;}
+.foot-link:hover{color:#fff;}
+.foot-bottom{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.05);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
+.foot-bottom-txt{font-size:11px;color:rgba(255,255,255,0.18);}
+
+/* ═══════════════════════════════════════════════
+   DEALS PAGE STYLES
+═══════════════════════════════════════════════ */
+.deals-hero{background:var(--midnight);padding:44px 40px 40px;position:relative;overflow:hidden;}
+.dh-orb-1{position:absolute;top:-80px;right:-60px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(232,66,10,0.09) 0%,transparent 65%);pointer-events:none;}
+.dh-orb-2{position:absolute;bottom:-60px;left:30%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,0.06) 0%,transparent 65%);pointer-events:none;}
+.dh-inner{position:relative;z-index:1;max-width:720px;}
+.dh-eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(232,66,10,0.12);border:1px solid rgba(232,66,10,0.22);border-radius:18px;padding:4px 12px;margin-bottom:18px;}
+.dh-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--flame);animation:pulse 1.8s infinite;}
+.dh-eyebrow-txt{font-size:10px;font-weight:800;color:var(--flame);letter-spacing:0.12em;text-transform:uppercase;}
+.dh-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,56px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.5px;margin-bottom:10px;}
+.dh-title em{color:var(--turmeric);font-style:italic;}
+.dh-sub{font-size:14px;color:rgba(255,255,255,0.38);max-width:460px;line-height:1.75;margin-bottom:24px;}
+.dh-live{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.dlb-item{display:flex;align-items:center;gap:7px;}
+.dlb-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;animation:pulse 1.6s infinite;}
+.dlb-txt{font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;}
+.dlb-n{color:#fff;font-weight:800;}
+.dlb-sep{width:1px;height:16px;background:rgba(255,255,255,0.08);}
+
+.deals-filter-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 40px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:54px;position:sticky;top:62px;z-index:100;}
+.deals-filter-bar::-webkit-scrollbar{height:0;}
+.fb{padding:5px 14px;border-radius:18px;border:1.5px solid var(--border);background:transparent;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;color:var(--muted);transition:all 0.14s;flex-shrink:0;}
+.fb.on,.fb:hover{background:var(--flame);border-color:var(--flame);color:#fff;}
+.fb-sep{width:1px;height:22px;background:var(--border);flex-shrink:0;margin:0 4px;}
+.fb-sort{padding:5px 12px;border-radius:18px;border:1.5px solid var(--border);background:#fff;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;outline:none;margin-left:auto;flex-shrink:0;}
+
+.deals-body{max-width:940px;margin:0 auto;padding:28px 40px 72px;}
+.section-hd{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:8px;}
+.section-hd-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text);white-space:nowrap;}
+.section-hd-line{flex:1;height:1px;background:var(--border);}
+.section-hd-count{font-size:10px;font-weight:800;color:var(--muted);white-space:nowrap;}
+.deals-list{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;}
+
+.deal-row{background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);box-shadow:var(--shadow-sm);overflow:hidden;cursor:pointer;transition:all 0.22s;display:flex;position:relative;}
+.deal-row:hover{box-shadow:0 12px 40px rgba(232,66,10,0.1);border-color:rgba(232,66,10,0.2);transform:translateY(-2px);}
+.deal-row.featured{border-color:rgba(232,66,10,0.28);background:linear-gradient(135deg,#fff 0%,rgba(255,248,240,0.7) 100%);}
+.dr-accent{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;}
+.acc-red{background:linear-gradient(180deg,var(--flame),var(--flame2));}
+.acc-green{background:linear-gradient(180deg,#16A34A,#4ADE80);}
+.acc-gold{background:linear-gradient(180deg,#B45309,var(--turmeric));}
+.acc-purple{background:linear-gradient(180deg,#7C3AED,#A78BFA);}
+.acc-teal{background:linear-gradient(180deg,#0D9488,#2DD4BF);}
+.dr-img{width:118px;flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-left:4px;}
+.dr-img-bg{position:absolute;inset:0;}
+.dr-img-pattern{position:absolute;inset:0;opacity:0.1;background-image:radial-gradient(circle,rgba(255,255,255,0.6) 1px,transparent 1px);background-size:14px 14px;}
+.dr-img-emoji-bg{position:absolute;font-size:64px;opacity:0.18;filter:blur(1px);top:50%;left:50%;transform:translate(-50%,-50%);}
+.dr-img-emoji{position:relative;z-index:1;font-size:40px;}
+.dr-body{flex:1;padding:15px 16px;min-width:0;}
+.dr-type-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:7px;}
+.dtb-red{background:rgba(232,66,10,0.1);color:var(--flame);}
+.dtb-green{background:rgba(22,163,74,0.1);color:#16A34A;}
+.dtb-gold{background:rgba(180,83,9,0.1);color:#B45309;}
+.dtb-purple{background:rgba(124,58,237,0.1);color:#7C3AED;}
+.dtb-teal{background:rgba(13,148,136,0.1);color:#0D9488;}
+.dr-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--text);line-height:1.15;margin-bottom:4px;}
+.dr-rest{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:9px;}
+.dr-rest-name{font-weight:700;color:var(--text);}
+.dr-rest-sep{color:var(--border2);}
+.dr-urgency{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.ub{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:800;white-space:nowrap;}
+.ub-timer{background:rgba(11,21,32,0.06);color:var(--text);font-family:'DM Mono',monospace;}
+.ub-timer.hot{background:rgba(232,66,10,0.1);color:var(--flame);}
+.ub-trending{background:rgba(245,166,35,0.13);color:#B45309;}
+.ub-seats{background:rgba(220,38,38,0.09);color:#DC2626;}
+.ub-tag{background:var(--warm);color:var(--muted);border:1px solid var(--border);}
+.dr-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;padding:15px 16px 15px 8px;flex-shrink:0;min-width:130px;}
+.dr-price-block{text-align:right;}
+.dr-discount{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--flame);line-height:1;}
+.dr-discount-label{font-size:9px;color:var(--muted);font-weight:600;margin-top:1px;}
+.dr-price-old{font-size:11px;color:var(--faint);text-decoration:line-through;text-align:right;}
+.dr-price-new{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--green);line-height:1.1;}
+.dr-free{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#16A34A;}
+.dr-combo-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#0D9488;}
+.dr-cta-area{display:flex;flex-direction:column;gap:6px;align-items:flex-end;}
+.dr-book-btn{padding:9px 16px;background:linear-gradient(135deg,var(--flame),var(--flame2));color:#fff;border:none;border-radius:9px;font-weight:800;font-size:11px;cursor:pointer;white-space:nowrap;box-shadow:0 3px 10px rgba(232,66,10,0.22);transition:all 0.15s;}
+.dr-book-btn:hover{box-shadow:0 5px 18px rgba(232,66,10,0.35);transform:translateY(-1px);}
+.dr-save{padding:7px 10px;background:var(--warm);border:1.5px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;transition:all 0.13s;}
+.dr-save:hover,.dr-save.saved{border-color:rgba(232,66,10,0.3);color:var(--flame);}
+
+.fest-strip{background:linear-gradient(130deg,#1E0A3C,#3B0764,#6D28D9,#9D174D);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(109,40,217,0.2);}
+.fest-strip::after{content:'';position:absolute;right:-50px;top:-50px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;}
+.fs-left{display:flex;align-items:center;gap:16px;position:relative;z-index:1;}
+.fs-emoji{font-size:32px;animation:sway 3.5s ease-in-out infinite;}
+.fs-badge{font-size:8px;font-weight:800;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;letter-spacing:0.1em;margin-bottom:4px;display:inline-block;}
+.fs-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;line-height:1.2;}
+.fs-sub{font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px;}
+.fs-btn{padding:10px 20px;background:#fff;color:#6D28D9;border:none;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;position:relative;z-index:1;white-space:nowrap;transition:transform 0.14s;}
+.fs-btn:hover{transform:scale(1.04);}
+.deals-empty{text-align:center;padding:60px 20px;color:var(--muted);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1050px){
+  .main-grid{grid-template-columns:220px 1fr;}
+  .det-hero{grid-template-columns:1fr;}
+  .det-photo-col{display:none;}
+  .det-body{grid-template-columns:1fr 310px;padding:22px 28px;}
+  footer{grid-template-columns:1fr 1fr;gap:24px;padding:36px 28px 0;}
+  .foot-bottom{padding:12px 28px;}
+}
+@media(max-width:860px){
+  .nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .home-hero,.deals-hero{padding:36px 20px 32px;}
+  .fest{margin:18px 20px 0;}
+  .section,.main{padding-left:20px;padding-right:20px;}
+  .main-grid{grid-template-columns:1fr;}
+  .sidebar{position:static;}
+  .stats-bar{flex-wrap:wrap;}
+  .stat{flex:1 1 44%;border-right:none;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .deals-filter-bar{padding:0 20px;}
+  .deals-body{padding:20px 20px 56px;}
+  .dr-img{width:90px;}
+  .dr-right{min-width:110px;}
+  footer{padding:28px 20px 0;}
+  .foot-bottom{padding:12px 20px;}
+  .det-body{grid-template-columns:1fr;padding:16px 20px;}
+}
+@media(max-width:600px){
+  .nav{padding:0 12px;height:56px;gap:10px;}
+  .nav-logo{font-size:24px;}
+  .nav-cta{gap:8px;margin-left:auto;}
+  .nav-loc,.nbtn{height:40px;border-radius:14px;padding:0 14px;font-size:14px;}
+  .nbtn-ghost{display:none;}
+  .nbtn-primary{padding:0 16px;}
+  .home-hero{padding:34px 14px 40px;}
+  .hh-badge{font-size:11px;padding:8px 14px;}
+  .hh-title{font-size:48px;line-height:.95;}
+  .hh-sub{font-size:18px;line-height:1.45;padding:0 8px;}
+  .search-box{flex-wrap:wrap;border-radius:18px;overflow:hidden;}
+  .search-city-btn{border-right:none;border-bottom:1px solid var(--border);width:100%;min-width:unset;justify-content:flex-start;padding:0 16px;height:54px;}
+  .search-input{height:54px;padding:0 16px;font-size:16px;}
+  .search-btn{width:100%;justify-content:center;height:56px;font-size:16px;}
+  .chip-row{gap:8px;justify-content:flex-start;overflow-x:auto;padding-bottom:4px;}
+  .chip{flex-shrink:0;}
+  .stats-bar{display:grid;grid-template-columns:1fr 1fr;}
+  .stat{padding:18px 10px;}
+  .fest{flex-direction:column;align-items:flex-start;gap:12px;padding:16px;margin:18px 14px 0;}
+  .section,.main{padding-left:14px;padding-right:14px;}
+  .sec-hd{align-items:flex-end;gap:12px;}
+  .sec-title{font-size:18px;}
+  .sec-more{font-size:14px;white-space:nowrap;}
+  .deal-strip{gap:10px;margin-right:-14px;padding-right:14px;scroll-snap-type:x proximity;}
+  .dcard{width:78vw;max-width:280px;scroll-snap-align:start;}
+  .main{padding-top:18px;}
+  .main-grid{gap:16px;}
+  .sidebar{padding:16px;border-radius:16px;}
+  .city-pill{padding:12px 12px;font-size:14px;}
+  .diet-pills{gap:8px;}
+  .dp{padding:8px 12px;font-size:13px;border-radius:999px;}
+  .open-row{padding:12px 14px;}
+  .open-lbl{font-size:14px;}
+  .more-toggle{padding:12px;font-size:14px;}
+  .content-top{flex-direction:column;align-items:flex-start;gap:12px;}
+  .view-sort{width:100%;justify-content:space-between;}
+  .sort-sel{min-width:150px;height:40px;font-size:13px;}
+  .qf-row{margin-right:-14px;padding-right:14px;}
+  .qf{padding:8px 12px;font-size:13px;}
+  .r-grid{grid-template-columns:1fr;}
+  .rc-media{height:170px;}
+  .rc-name{font-size:22px;}
+  .rc-body{padding:14px;}
+  .btn-book.btn-book-full{padding:13px 14px;font-size:14px;}
+  .deals-filter-bar{padding:0 14px;top:56px;}
+  .deals-body{padding:16px 14px 48px;}
+  .deal-row{flex-wrap:wrap;}
+  .dr-img{width:100%;height:80px;margin-left:0;}
+  .dr-right{flex-direction:row;align-items:center;width:100%;padding:0 14px 14px;}
+  .dr-price-block{display:flex;align-items:baseline;gap:8px;}
+  .dr-cta-area{flex-direction:row;}
+  .fest-strip{flex-direction:column;gap:14px;padding:18px;}
+  .conf-acts{flex-direction:column;}
+  .mb-card{flex-direction:column;align-items:flex-start;}
+  .mb-acts{flex-direction:row;width:100%;}
+  footer{grid-template-columns:1fr;gap:18px;padding:22px 14px 0;}
+  .foot-bottom{flex-direction:column;gap:5px;text-align:center;}
+  .bk-wrap{position:static;}
+}
+
+
+@media(max-width:380px){
+  .nav-logo{font-size:20px;}
+  .nav-loc,.nbtn{padding:0 12px;font-size:13px;}
+  .hh-title{font-size:42px;}
+  .dcard{width:84vw;}
+  .sec-more{font-size:13px;}
+}
+
+/* ═══════════════════════════════════════════════
+   EVENTS PAGE STYLES
+═══════════════════════════════════════════════ */
+.ev-hero{background:var(--midnight);padding:0;position:relative;overflow:hidden;min-height:320px;display:flex;flex-direction:column;}
+.ev-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0B1520 0%,#1a0a30 35%,#2d0a1a 65%,#0B1520 100%);}
+.ev-hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.6) 1px,transparent 1px);background-size:44px 44px;}
+.ev-hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(232,66,10,0.12) 0%,rgba(124,58,237,0.08) 40%,transparent 70%);pointer-events:none;}
+.ev-countdown-bar{background:rgba(232,66,10,0.12);border-bottom:1px solid rgba(232,66,10,0.2);padding:10px 40px;display:flex;align-items:center;gap:16px;position:relative;z-index:1;}
+.ev-cd-label{font-size:10px;font-weight:800;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;}
+.ev-cd-units{display:flex;align-items:center;gap:8px;}
+.ev-cd-unit{text-align:center;}
+.ev-cd-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;line-height:1;display:block;}
+.ev-cd-l{font-size:8px;color:rgba(255,255,255,0.3);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;}
+.ev-cd-sep{font-size:18px;color:rgba(255,255,255,0.2);font-weight:300;margin-top:-4px;}
+.ev-cd-spacer{flex:1;}
+.ev-cd-next{display:flex;align-items:center;gap:8px;}
+.ev-cd-dot{width:6px;height:6px;border-radius:50%;background:var(--flame);animation:pulse 1.6s infinite;}
+.ev-cd-next-txt{font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;}
+.ev-cd-next-name{color:#fff;font-weight:800;}
+
+.ev-hero-content{padding:32px 40px 36px;position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:flex-end;}
+.ev-hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.25);border-radius:18px;padding:4px 12px;margin-bottom:14px;width:fit-content;}
+.ev-hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#A78BFA;animation:pulse 2s infinite;}
+.ev-hero-eyebrow-txt{font-size:10px;font-weight:800;color:#A78BFA;letter-spacing:0.12em;text-transform:uppercase;}
+.ev-hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:700;color:#fff;line-height:1.04;letter-spacing:-0.5px;margin-bottom:8px;}
+.ev-hero-title em{color:var(--turmeric);font-style:italic;}
+.ev-hero-sub{font-size:14px;color:rgba(255,255,255,0.38);max-width:480px;line-height:1.75;}
+.ev-hero-stats{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap;}
+.ev-hstat{display:flex;align-items:center;gap:7px;}
+.ev-hstat-n{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;}
+.ev-hstat-l{font-size:11px;color:rgba(255,255,255,0.32);font-weight:600;}
+.ev-hstat-sep{width:1px;height:22px;background:rgba(255,255,255,0.07);}
+
+/* filter bar */
+.ev-filter-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 40px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:52px;position:sticky;top:62px;z-index:100;}
+.ev-filter-bar::-webkit-scrollbar{height:0;}
+.efb{padding:5px 14px;border-radius:18px;border:1.5px solid var(--border);background:transparent;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;color:var(--muted);transition:all 0.14s;flex-shrink:0;font-family:'DM Sans',sans-serif;}
+.efb.on,.efb:hover{background:var(--flame);border-color:var(--flame);color:#fff;}
+
+/* timeline body */
+.ev-body{max-width:860px;margin:0 auto;padding:32px 40px 72px;}
+.ev-date-divider{display:flex;align-items:center;gap:14px;margin-bottom:16px;margin-top:4px;}
+.ev-date-badge{background:var(--midnight);color:#fff;font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;padding:5px 14px;border-radius:8px;white-space:nowrap;display:flex;align-items:center;gap:7px;flex-shrink:0;}
+.ev-date-badge.today{background:var(--flame);}
+.ev-date-badge.soon{background:linear-gradient(90deg,#7C3AED,#9D174D);}
+.ev-date-line{flex:1;height:1px;background:var(--border);}
+.ev-date-dow{font-size:10px;font-weight:800;color:var(--muted);white-space:nowrap;}
+
+/* event card — horizontal, editorial */
+.ev-card{background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:12px;display:flex;cursor:pointer;transition:all 0.22s;position:relative;}
+.ev-card:hover{box-shadow:0 12px 40px rgba(11,21,32,0.1);border-color:rgba(232,66,10,0.18);transform:translateY(-2px);}
+.ev-card.featured{border-color:rgba(124,58,237,0.28);background:linear-gradient(135deg,#fff 0%,rgba(245,240,255,0.6) 100%);}
+.ev-card.sold-out{opacity:0.62;}
+
+/* left color slab */
+.ev-card-slab{width:6px;flex-shrink:0;}
+.evs-fest{background:linear-gradient(180deg,#7C3AED,#9D174D);}
+.evs-music{background:linear-gradient(180deg,var(--flame),var(--turmeric));}
+.evs-cultural{background:linear-gradient(180deg,#0D9488,#2DD4BF);}
+.evs-meetup{background:linear-gradient(180deg,#16A34A,#4ADE80);}
+
+/* date stamp column */
+.ev-card-date{width:72px;flex-shrink:0;padding:18px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--border);background:var(--warm);}
+.ev-card-month{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+.ev-card-day{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--text);line-height:1;}
+.ev-card-dow{font-size:9px;font-weight:700;color:var(--muted);}
+
+/* emoji visual */
+.ev-card-img{width:100px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.ev-card-img-bg{position:absolute;inset:0;}
+.ev-card-img-pattern{position:absolute;inset:0;opacity:0.08;background-image:radial-gradient(circle,rgba(255,255,255,0.7) 1px,transparent 1px);background-size:12px 12px;}
+.ev-card-emoji-bg{position:absolute;font-size:56px;opacity:0.15;filter:blur(1px);top:50%;left:50%;transform:translate(-50%,-50%);}
+.ev-card-emoji{position:relative;z-index:1;font-size:36px;}
+
+/* body */
+.ev-card-body{flex:1;padding:16px 18px;min-width:0;}
+.ev-card-type-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px;}
+.evtb-fest{background:rgba(124,58,237,0.1);color:#7C3AED;}
+.evtb-music{background:rgba(232,66,10,0.1);color:var(--flame);}
+.evtb-cultural{background:rgba(13,148,136,0.1);color:#0D9488;}
+.evtb-meetup{background:rgba(22,163,74,0.1);color:#16A34A;}
+.ev-card-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--text);line-height:1.15;margin-bottom:3px;}
+.ev-card-host{font-size:11px;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:5px;}
+.ev-card-host-name{font-weight:700;color:var(--text);}
+.ev-card-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.ev-card-meta-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);font-weight:600;}
+.ev-card-attending{display:flex;align-items:center;gap:6px;margin-bottom:0;}
+.ev-avatars{display:flex;}
+.ev-av{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--flame),var(--turmeric));border:1.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:800;margin-left:-5px;flex-shrink:0;}
+.ev-av:first-child{margin-left:0;}
+.ev-av-1{background:linear-gradient(135deg,#7C3AED,#A78BFA);}
+.ev-av-2{background:linear-gradient(135deg,var(--flame),var(--flame2));}
+.ev-av-3{background:linear-gradient(135deg,#0D9488,#2DD4BF);}
+.ev-av-4{background:linear-gradient(135deg,#16A34A,#4ADE80);}
+.ev-av-5{background:linear-gradient(135deg,#B45309,var(--turmeric));}
+.ev-attending-txt{font-size:10px;color:var(--muted);font-weight:600;}
+.ev-attending-n{color:var(--text);font-weight:800;}
+
+/* right: price + CTA */
+.ev-card-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;padding:16px 18px 16px 8px;flex-shrink:0;min-width:130px;}
+.ev-price-block{text-align:right;}
+.ev-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);line-height:1;}
+.ev-price-sub{font-size:9px;color:var(--muted);font-weight:600;margin-top:1px;}
+.ev-price-free{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#16A34A;}
+.ev-seats-badge{font-size:9px;font-weight:800;padding:2px 8px;border-radius:5px;margin-top:4px;display:inline-block;}
+.ev-seats-low{background:rgba(220,38,38,0.09);color:#DC2626;}
+.ev-seats-ok{background:rgba(21,128,61,0.09);color:#15803D;}
+.ev-sold-badge{background:#F3F4F6;color:#6B7280;font-size:9px;font-weight:800;padding:2px 8px;border-radius:5px;}
+.ev-cta-area{display:flex;flex-direction:column;gap:6px;align-items:flex-end;}
+.ev-rsvp-btn{padding:9px 16px;background:linear-gradient(135deg,var(--flame),var(--flame2));color:#fff;border:none;border-radius:9px;font-weight:800;font-size:11px;cursor:pointer;white-space:nowrap;box-shadow:0 3px 10px rgba(232,66,10,0.22);transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.ev-rsvp-btn:hover{box-shadow:0 5px 18px rgba(232,66,10,0.35);transform:translateY(-1px);}
+.ev-rsvp-btn.free{background:linear-gradient(135deg,#16A34A,#22C55E);box-shadow:0 3px 10px rgba(22,163,74,0.22);}
+.ev-rsvp-btn.disabled{background:#D8CEC4;box-shadow:none;cursor:not-allowed;}
+.ev-save-btn{padding:7px 10px;background:var(--warm);border:1.5px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;transition:all 0.13s;font-family:'DM Sans',sans-serif;}
+.ev-save-btn:hover,.ev-save-btn.saved{border-color:rgba(232,66,10,0.3);color:var(--flame);}
+
+/* featured hero card (first event) */
+.ev-featured-card{background:linear-gradient(130deg,#1E0A3C,#3B0764,#6D28D9,#9D174D);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:28px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(109,40,217,0.25);transition:transform 0.2s;}
+.ev-featured-card:hover{transform:translateY(-3px);}
+.ev-featured-card::after{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;}
+.ev-featured-card::before{content:'';position:absolute;left:25%;bottom:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.03);pointer-events:none;}
+.ev-fc-inner{position:relative;z-index:1;}
+.ev-fc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.ev-fc-badge{font-size:9px;font-weight:800;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:3px 10px;border-radius:5px;letter-spacing:0.08em;text-transform:uppercase;}
+.ev-fc-price{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;text-align:right;}
+.ev-fc-price-sub{font-size:9px;color:rgba(255,255,255,0.45);text-align:right;}
+.ev-fc-emoji{font-size:44px;margin-bottom:10px;animation:sway 4s ease-in-out infinite;}
+.ev-fc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:#fff;margin-bottom:4px;line-height:1.15;}
+.ev-fc-host{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:12px;}
+.ev-fc-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.ev-fc-meta-item{font-size:12px;color:rgba(255,255,255,0.55);font-weight:600;display:flex;align-items:center;gap:5px;}
+.ev-fc-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.ev-fc-attending{display:flex;align-items:center;gap:8px;}
+.ev-fc-att-txt{font-size:11px;color:rgba(255,255,255,0.45);}
+.ev-fc-seats{font-size:11px;color:#F87171;font-weight:800;background:rgba(248,113,113,0.12);padding:3px 9px;border-radius:5px;}
+.ev-fc-btn{padding:11px 22px;background:#fff;color:#6D28D9;border:none;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform 0.14s;}
+.ev-fc-btn:hover{transform:scale(1.04);}
+
+/* empty */
+.ev-empty{text-align:center;padding:60px 20px;color:var(--muted);}
+
+/* responsive */
+@media(max-width:860px){
+  .ev-countdown-bar{padding:8px 20px;}
+  .ev-hero-content{padding:22px 20px 26px;}
+  .ev-filter-bar{padding:0 20px;}
+  .ev-body{padding:22px 20px 56px;}
+  .ev-card-img{width:76px;}
+  .ev-card-right{min-width:110px;}
+}
+@media(max-width:600px){
+  .ev-countdown-bar{padding:8px 14px;gap:10px;flex-wrap:wrap;}
+  .ev-cd-spacer{display:none;}
+  .ev-hero-content{padding:18px 14px 22px;}
+  .ev-filter-bar{padding:0 14px;top:54px;}
+  .ev-body{padding:16px 14px 48px;}
+  .ev-card{flex-wrap:wrap;}
+  .ev-card-date{width:100%;flex-direction:row;gap:8px;padding:10px 14px;justify-content:flex-start;border-right:none;border-bottom:1px solid var(--border);}
+  .ev-card-img{width:100%;height:70px;}
+  .ev-card-right{flex-direction:row;align-items:center;width:100%;padding:0 14px 14px;justify-content:space-between;}
+  .ev-price-block{display:flex;align-items:baseline;gap:6px;}
+  .ev-cta-area{flex-direction:row;}
+  .ev-featured-card{padding:18px;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- SHARED NAV -->
+<nav class="nav">
+  <div class="nav-logo" onclick="goHome()">Indeats <div class="nav-pulse"></div></div>
+  <div class="nav-links">
+    <span class="nav-link" id="nl-home" onclick="goHome()">Discover</span>
+    <span class="nav-link" id="nl-deals" onclick="goDeals()">Deals</span>
+    <span class="nav-link" id="nl-bk" onclick="goMyBookings()">My Bookings</span>
+    <span class="nav-link" id="nl-ev" onclick="goEvents()">Events</span>
+  </div>
+  <div class="nav-spacer"></div>
+  <div class="nav-city">📍 Fremont ▾</div>
+  <button class="nbtn nbtn-ghost">Sign In</button>
+  <button class="nbtn nbtn-primary">Get Started</button>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+<div class="home-hero">
+  <div class="home-orb"></div>
+  <div class="h-eyebrow"><div class="h-eyebrow-dot"></div><span class="h-eyebrow-txt">Indian Diaspora · California</span></div>
+  <h1 class="h-title">Find your kind of<br><em>Indian food.</em></h1>
+  <p class="h-tagline"><strong>Halal. Veg. Jain.</strong> Deals auto-applied. No fine print.</p>
+  <div class="search-wrap">
+    <div class="search-box">
+      <div class="search-city-btn"><span>📍</span> Fremont ▾</div>
+      <input class="search-input" id="hero-search" placeholder="Biryani, Halal, Dosa, Kongunadu…" oninput="filterAndRender()">
+      <button class="search-btn">🔍 Search</button>
+    </div>
+  </div>
+  <div class="h-pills">
+    <span class="hpill" onclick="setDiet('Halal')">🥩 Halal</span>
+    <span class="hpill" onclick="setDiet('Pure Veg')">🌿 Pure Veg</span>
+    <span class="hpill" onclick="setDiet('Jain OK')">🪷 Jain</span>
+    <span class="hpill" onclick="qfSet('biryani')">🍛 Biryani</span>
+    <span class="hpill" onclick="qfSet('open')">🟢 Open Now</span>
+    <span class="hpill" onclick="goDeals()">🏷️ All Deals →</span>
+  </div>
+</div>
+
+<div class="ticker"><div class="ticker-inner" id="h-ticker"></div></div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">34</div><div class="stat-l">Partner Restaurants</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">Pilot Cities</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Indian Focus</div></div>
+  <div class="stat"><div class="stat-n">$0</div><div class="stat-l">Hidden Fees</div></div>
+  <div class="stat"><div class="stat-n">4.7★</div><div class="stat-l">Avg Partner Rating</div></div>
+</div>
+
+<div class="fest" onclick="goDeals()">
+  <div class="fest-l">
+    <div class="fest-ico">🎨</div>
+    <div>
+      <div class="fest-badge">🪔 UPCOMING · MAR 13 2026</div>
+      <div class="fest-title">Holi Special Dining — All 5 Restaurants</div>
+      <div class="fest-sub">Exclusive menus · Limited seats · Deals auto-applied</div>
+    </div>
+  </div>
+  <button class="fest-btn">See Deals →</button>
+</div>
+
+<div class="section">
+  <div class="sec-hd">
+    <div><div class="sec-label">Live Now</div><div class="sec-title">🏷️ Today's Best Deals</div></div>
+    <span class="sec-more" onclick="goDeals()">All 12 deals →</span>
+  </div>
+  <div class="deal-strip" id="h-deal-strip"></div>
+</div>
+
+<div class="main">
+  <div class="main-grid">
+    <aside class="sidebar">
+      <div class="sb-sec">
+        <div class="sb-head">City</div>
+        <div id="city-filters"></div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-head">Dietary</div>
+        <div class="diet-pills" id="diet-filters"></div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-head">Open Now</div>
+        <div class="open-row" onclick="toggleOpen()">
+          <span class="open-lbl">🟢 Show only open</span>
+          <div class="toggle" id="open-tog"><div class="toggle-k"></div></div>
+        </div>
+        <div class="more-filters" id="more-filters">
+          <div class="sb-head" style="margin-top:14px;">Price Range</div>
+          <div class="price-row">
+            <div class="pbtn on" onclick="setPrice('all',this)">All</div>
+            <div class="pbtn" onclick="setPrice('$',this)">$</div>
+            <div class="pbtn" onclick="setPrice('$$',this)">$$</div>
+            <div class="pbtn" onclick="setPrice('$$$',this)">$$$</div>
+          </div>
+        </div>
+        <button class="more-toggle" id="more-toggle-btn" onclick="toggleMoreFilters()">＋ More filters</button>
+      </div>
+    </aside>
+    <div class="content">
+      <div class="content-top">
+        <div><div class="ct-title" id="ct-title">Restaurants in All Cities</div><div class="ct-count" id="ct-count">5 restaurants</div></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div class="view-btns">
+            <button class="vb on" id="vb-grid" onclick="setView('grid')">⊞</button>
+            <button class="vb" id="vb-list" onclick="setView('list')">☰</button>
+          </div>
+          <select class="sort-sel" id="sort-sel" onchange="filterAndRender()">
+            <option>Best Match</option><option>Rating: High to Low</option><option>Most Reviews</option><option>Open Now First</option>
+          </select>
+        </div>
+      </div>
+      <div class="qf-row">
+        <div class="qf on" onclick="qfClick(this,'all')">All</div>
+        <div class="qf" onclick="qfClick(this,'open')">🟢 Open Now</div>
+        <div class="qf" onclick="qfClick(this,'halal')">✅ Halal</div>
+        <div class="qf" onclick="qfClick(this,'veg')">🌿 Pure Veg</div>
+        <div class="qf" onclick="qfClick(this,'jain')">🪷 Jain OK</div>
+        <div class="qf" onclick="qfClick(this,'cheap')">💰 Under $15</div>
+        <div class="qf" onclick="qfClick(this,'regional')">🗺️ Regional</div>
+        <div class="qf" onclick="qfClick(this,'biryani')">🍛 Biryani</div>
+      </div>
+      <div id="rest-container"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="foot-logo">Indeats</div><div class="foot-tagline">Halal, Veg, Jain — your kind of Indian food. Deals auto-applied. No fine print.</div></div>
+  <div><div class="foot-col-title">Discover</div><span class="foot-link">Fremont</span><span class="foot-link">San Jose</span><span class="foot-link">Sunnyvale</span><span class="foot-link">Artesia</span></div>
+  <div><div class="foot-col-title">Cuisine</div><span class="foot-link">Hyderabadi</span><span class="foot-link">South Indian</span><span class="foot-link">Gujarati</span><span class="foot-link">Kongu Nadu</span></div>
+  <div><div class="foot-col-title">Company</div><span class="foot-link">About</span><span class="foot-link">For Restaurants</span><span class="foot-link">Contact</span></div>
+</footer>
+<div class="foot-bottom"><div class="foot-bottom-txt">© 2026 Indeats Inc. · Fremont, CA</div><div class="foot-bottom-txt">Privacy · Terms</div></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     DEALS PAGE
+════════════════════════════════════════════ -->
+<div class="page" id="page-deals">
+
+<div class="deals-hero">
+  <div class="dh-orb-1"></div><div class="dh-orb-2"></div>
+  <div class="dh-inner">
+    <div class="dh-eyebrow"><div class="dh-eyebrow-dot"></div><span class="dh-eyebrow-txt">Live Deals · Updated Daily</span></div>
+    <h1 class="dh-title">Deals that are actually <em>real.</em></h1>
+    <p class="dh-sub">Every offer is verified with the restaurant. Auto-applied when you book — no coupon codes, no fine print.</p>
+    <div class="dh-live">
+      <div class="dlb-item"><div class="dlb-dot"></div><span class="dlb-txt"><span class="dlb-n">18</span> deals live right now</span></div>
+      <div class="dlb-sep"></div>
+      <div class="dlb-item"><span class="dlb-txt"><span class="dlb-n">247</span> deals claimed this week</span></div>
+      <div class="dlb-sep"></div>
+      <div class="dlb-item"><span class="dlb-txt">Avg saving <span class="dlb-n">$8.40</span> per booking</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker"><div class="ticker-inner" id="d-ticker"></div></div>
+
+<div class="deals-filter-bar">
+  <button class="fb on" onclick="dSetFilter('all',this)">All Deals</button>
+  <button class="fb" onclick="dSetFilter('percent',this)">% OFF</button>
+  <button class="fb" onclick="dSetFilter('free',this)">Free Item</button>
+  <button class="fb" onclick="dSetFilter('fixed',this)">Fixed Price</button>
+  <button class="fb" onclick="dSetFilter('happyhour',this)">Happy Hour</button>
+  <button class="fb" onclick="dSetFilter('combo',this)">Combos</button>
+  <button class="fb" onclick="dSetFilter('festival',this)">Festival</button>
+  <div class="fb-sep"></div>
+  <button class="fb" onclick="dSetFilter('open',this)">🟢 Open Now</button>
+  <select class="fb-sort" onchange="dSortDeals(this.value)">
+    <option value="default">Best Match</option>
+    <option value="expiry">Ending Soon</option>
+    <option value="saving">Biggest Saving</option>
+    <option value="trending">Trending</option>
+  </select>
+</div>
+
+<div class="deals-body" id="deals-body"></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     DETAIL PAGE
+════════════════════════════════════════════ -->
+<div class="page" id="page-detail">
+  <div class="det-hero">
+    <div>
+      <div class="det-back" onclick="goHome()">← Back to results</div>
+      <div class="det-tags" id="d-tags"></div>
+      <div class="det-name" id="d-name"></div>
+      <div class="det-tagline" id="d-tagline"></div>
+      <div class="det-meta">
+        <div class="det-chip det-chip-rating">★ <span id="d-rating"></span> <span id="d-reviews" style="opacity:0.6;font-size:10px;font-weight:400;"></span></div>
+        <div id="d-open-chip"></div>
+        <div class="det-chip det-chip-info">📍 <span id="d-loc"></span></div>
+        <div class="det-chip det-chip-info">💰 <span id="d-price"></span></div>
+      </div>
+    </div>
+    <div class="det-photo-col">
+      <div class="det-photo-main" id="d-photo-main"></div>
+      <div class="det-thumbs" id="d-thumbs"></div>
+    </div>
+  </div>
+  <div class="det-body">
+    <div>
+      <div class="deal-box">
+        <div class="deal-box-eye">🏷️ TODAY'S EXCLUSIVE DEAL</div>
+        <div class="deal-box-main" id="d-deal"></div>
+        <div class="deal-box-foot"><span class="deal-box-exp" id="d-expiry"></span><span class="deal-box-auto">Auto-applied when you book →</span></div>
+      </div>
+      <div class="dtabs">
+        <button class="dtab active" onclick="switchTab('menu',this)">Menu</button>
+        <button class="dtab" onclick="switchTab('about',this)">About</button>
+        <button class="dtab" onclick="switchTab('reviews',this)">Reviews</button>
+      </div>
+      <div id="tab-menu"></div>
+      <div id="tab-about" style="display:none"></div>
+      <div id="tab-reviews" style="display:none"></div>
+    </div>
+    <div class="bk-wrap">
+      <div class="bk-widget">
+        <div class="bk-title">Reserve a Table</div>
+        <div class="bk-sub">Deal auto-applied at confirmation</div>
+        <div class="bk-lbl">Select Date</div>
+        <div class="date-strip" id="bw-dates"></div>
+        <div class="bk-lbl">Select Time</div>
+        <div class="tgrid" id="bw-times"></div>
+        <div class="bk-lbl">Guests</div>
+        <div class="guest-row">
+          <span class="guest-lbl">Number of people</span>
+          <div class="guest-ctrl">
+            <button class="gbtn" onclick="chG(-1)">−</button>
+            <div class="g-n" id="g-num">2</div>
+            <button class="gbtn" onclick="chG(1)">+</button>
+          </div>
+        </div>
+        <div class="bk-summary">
+          <div class="bks-row"><span class="bks-k">📍 Restaurant</span><span class="bks-v" id="bks-rest">—</span></div>
+          <div class="bks-row"><span class="bks-k">📅 Date</span><span class="bks-v" id="bks-date">—</span></div>
+          <div class="bks-row"><span class="bks-k">🕐 Time</span><span class="bks-v" id="bks-time">—</span></div>
+          <div class="bks-row"><span class="bks-k">👥 Guests</span><span class="bks-v" id="bks-guests">2 people</span></div>
+          <hr class="bks-div">
+          <div class="bks-row"><span class="bks-k">🏷️ Deal</span><span class="bks-deal" id="bks-deal">—</span></div>
+        </div>
+        <button class="bk-btn" id="bk-btn" onclick="goConfirmed()" disabled>✓ Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMED -->
+<div class="page" id="page-confirmed">
+  <div class="conf-wrap">
+    <div class="conf-center">
+      <div class="conf-icon">✓</div>
+      <div class="conf-title">You're all set!</div>
+      <div class="conf-sub" id="conf-sub"></div>
+    </div>
+    <div class="conf-card">
+      <div class="conf-rest-row">
+        <div class="conf-img" id="conf-img"></div>
+        <div><div class="conf-rest-name" id="conf-name"></div><div class="conf-rest-cuisine" id="conf-cuisine"></div></div>
+      </div>
+      <div class="conf-details">
+        <div class="conf-detail"><div class="conf-detail-k">Date</div><div class="conf-detail-v" id="conf-date">—</div></div>
+        <div class="conf-detail"><div class="conf-detail-k">Time</div><div class="conf-detail-v" id="conf-time">—</div></div>
+        <div class="conf-detail"><div class="conf-detail-k">Guests</div><div class="conf-detail-v" id="conf-guests">2</div></div>
+        <div class="conf-detail"><div class="conf-detail-k">Address</div><div class="conf-detail-v" id="conf-addr" style="font-size:12px;"></div></div>
+      </div>
+      <div class="conf-deal-bar"><div class="conf-deal-txt" id="conf-deal">🏷️ Deal Applied!</div><div style="font-size:20px;">✅</div></div>
+    </div>
+    <div class="conf-id" id="conf-id"></div>
+    <div class="conf-acts">
+      <button class="conf-btn-p" onclick="goHome()">← Discover More</button>
+      <button class="conf-btn-s" onclick="goMyBookings()">📅 My Bookings</button>
+    </div>
+  </div>
+</div>
+
+<!-- MY BOOKINGS -->
+<div class="page" id="page-mybookings">
+  <div class="mb-wrap">
+    <div class="mb-hd">
+      <button class="mb-back" onclick="goHome()">← Back</button>
+      <h1 class="mb-title">My Bookings</h1>
+    </div>
+    <div class="mb-tabs">
+      <button class="dtab active" id="mbt-up" onclick="switchMBTab('upcoming')">Upcoming (1)</button>
+      <button class="dtab" id="mbt-past" onclick="switchMBTab('past')">Past (2)</button>
+    </div>
+    <div id="mb-list"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════
+// SHARED DATA
+// ════════════════════════════════════════════════
+const RESTS = [
+  {id:1,name:"Charminar",tagline:"Authentic Hyderabadi Since 2003",cuisine:"Hyderabadi · Biryani",location:"Fremont",rating:4.6,reviews:1145,tags:["Non-Veg","Halal"],deal:"20% OFF on all Biryani",dealExpiry:"Ends tonight 10 PM",dealColor:"red",bg:"food-bg-1",emoji:"🍛",foods:["🍛","🫕","🥘"],price:"$$",isOpen:true,featured:true,time:"25 min",about:"One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003. Family-owned, halal-certified, fiercely authentic.",addr:"3720 Mowry Ave, Fremont, CA 94538",
+    menu:[{cat:"Biryani",items:[{name:"Hyderabadi Dum Biryani",price:"$16.99",note:"Signature · 20% OFF today",hot:true},{name:"Mutton Biryani",price:"$18.99",note:"Slow-cooked · 20% OFF",hot:true},{name:"Chicken Biryani",price:"$15.99",note:"Bestseller",hot:false}]},{cat:"Curries",items:[{name:"Butter Chicken",price:"$14.99",note:"Mild & creamy",hot:false},{name:"Mutton Nihari",price:"$17.99",note:"Slow-cooked overnight",hot:true}]}],
+    reviews:[{name:"Priya S.",initials:"P",rating:5,comment:"Best biryani in the Bay Area. The 20% deal was auto-applied — no fine print!",time:"2 days ago",src:"Google"},{name:"Rahul M.",initials:"R",rating:4,comment:"Halal certified and genuinely authentic.",time:"1 week ago",src:"Google"}]},
+  {id:2,name:"Naga's Kitchen",tagline:"South Indian Home Cooking",cuisine:"South Indian · Halal",location:"Fremont",rating:4.8,reviews:368,tags:["Halal","Non-Veg"],deal:"Free Chai with any meal",dealExpiry:"All day today",dealColor:"green",bg:"food-bg-2",emoji:"🥘",foods:["🥘","🫓","☕"],price:"$",isOpen:true,featured:false,time:"15 min",about:"A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.",addr:"4210 Irvington Ave, Fremont, CA 94536",
+    menu:[{cat:"Dosas",items:[{name:"Masala Dosa",price:"$10.99",note:"Crispy · Fresh potato masala",hot:false},{name:"Rava Dosa",price:"$11.99",note:"Bestseller",hot:true}]},{cat:"Curries",items:[{name:"Chicken Chettinad",price:"$13.99",note:"Spicy · Authentic",hot:true}]}],
+    reviews:[{name:"Suresh P.",initials:"S",rating:5,comment:"The free chai is real — and it's the best I've had outside India.",time:"3 days ago",src:"Google"}]},
+  {id:3,name:"Mylapore",tagline:"Pure Vegetarian Tamil Cuisine",cuisine:"South Indian · Pure Veg",location:"Fremont",rating:4.3,reviews:716,tags:["Pure Veg","Jain OK"],deal:"Thali Special $11.99",dealExpiry:"Lunch · Until 3 PM",dealColor:"gold",bg:"food-bg-3",emoji:"🌿",foods:["🌿","🥗","🫙"],price:"$",isOpen:true,featured:false,time:"20 min",about:"Mylapore brings Chennai's Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified. The unlimited thali is legendary.",addr:"3636 Thornton Ave, Fremont, CA 94536",
+    menu:[{cat:"Thali",items:[{name:"Unlimited Thali",price:"$11.99",note:"Deal price · Normally $14.99",hot:true},{name:"Mini Tiffin Box",price:"$8.99",note:"Idli + Vada + Sambar",hot:false}]}],
+    reviews:[{name:"Kavitha N.",initials:"K",rating:4,comment:"The thali deal is unbeatable. 7 items for $11.99 and everything was fresh.",time:"4 days ago",src:"Google"}]},
+  {id:4,name:"Meenakshi Bhavan",tagline:"Temple-Style Pure Veg Since 2019",cuisine:"South Indian · Pure Veg",location:"San Jose",rating:4.8,reviews:167,tags:["Pure Veg","Jain OK"],deal:"Buy 2 Dosas, Get 1 Free",dealExpiry:"Weekends only",dealColor:"green",bg:"food-bg-4",emoji:"🥞",foods:["🥞","🌾","🪔"],price:"$",isOpen:false,featured:true,time:"30 min",about:"Temple-style pure veg South Indian. Jain-friendly by default. The dosas are tissue-thin and perfectly crispy.",addr:"4996 Stevens Creek Blvd, San Jose, CA 95129",
+    menu:[{cat:"Dosas",items:[{name:"Plain Dosa",price:"$8.99",note:"Buy 2 get 1 free",hot:true},{name:"Masala Dosa",price:"$10.99",note:"Buy 2 get 1 free",hot:true}]}],
+    reviews:[{name:"Lakshmi V.",initials:"L",rating:5,comment:"The dosa deal is genuine. Got 3 dosas for the price of 2.",time:"5 days ago",src:"Google"}]},
+  {id:5,name:"Kongunadu",tagline:"The Only Kongu Nadu Specialist in the Bay",cuisine:"Kongu Nadu · Regional",location:"San Jose",rating:4.6,reviews:1056,tags:["Non-Veg","Halal"],deal:"Lunch Special — $12.99",dealExpiry:"Mon–Fri until 3 PM",dealColor:"gold",bg:"food-bg-5",emoji:"🍲",foods:["🍲","🌶️","🫕"],price:"$$",isOpen:true,featured:false,time:"22 min",about:"The only Kongu Nadu specialist in the Bay Area. Rare dishes you literally cannot find anywhere else in California.",addr:"5672 Snell Ave, San Jose, CA 95123",
+    menu:[{cat:"Kongu Specials",items:[{name:"Lunch Special Thali",price:"$12.99",note:"Deal price · 5 dishes",hot:true},{name:"Kongu Biryani",price:"$15.99",note:"Rare · Distinct spice blend",hot:true}]}],
+    reviews:[{name:"Senthil K.",initials:"S",rating:5,comment:"Finally! Kongu Nadu food in the Bay. The lunch special is incredible value.",time:"1 week ago",src:"Google"}]},
+];
+
+const BOOKINGS=[
+  {id:"#IND-2026-4471",rid:1,date:"Saturday, 8 Mar 2026",time:"7:00 PM",guests:2,deal:"20% OFF on all Biryani",status:"upcoming"},
+  {id:"#IND-2026-3892",rid:3,date:"Sunday, 2 Mar 2026",time:"1:00 PM",guests:4,deal:"Thali Special $11.99",status:"past"},
+  {id:"#IND-2026-3541",rid:2,date:"Friday, 21 Feb 2026",time:"12:30 PM",guests:2,deal:"Free Chai with any meal",status:"past"},
+];
+
+const MOS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const WDAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAYS_S=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const TIMES=['12:00 PM','12:30 PM','1:00 PM','1:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM','8:00 PM','8:30 PM','9:00 PM','9:30 PM'];
+const UNAVAIL=['12:30 PM','6:30 PM','8:00 PM'];
+const TC={"Pure Veg":"tv","Halal":"th","Jain OK":"tj","Non-Veg":"tn"};
+
+// ════════════════════════════════════════════════
+// SHARED STATE & UTILS
+// ════════════════════════════════════════════════
+let homeSaved={}, dealsSaved={};
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2500);
+}
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  [['home','home'],['deals','deals'],['bk','mybookings'],['ev','events']].forEach(([k,pg])=>{
+    const el=document.getElementById('nl-'+k);
+    if(el) el.classList.toggle('active', n===pg);
+  });
+  window.scrollTo(0,0);
+}
+function goHome(){buildHomeTicker();buildDealsStrip();buildSidebar();filterAndRender();showPage('home');}
+function goDeals(){buildDealsTicker();renderDeals();showPage('deals');}
+function tagHtml(t){return`<span class="tag ${TC[t]||''}">${t}</span>`;}
+function cardBg(r){
+  const m={1:'rgba(200,80,0,0.45)',2:'rgba(0,140,60,0.4)',3:'rgba(180,130,0,0.4)',4:'rgba(180,100,0,0.4)',5:'rgba(80,60,180,0.45)'};
+  return m[r.id]?`radial-gradient(ellipse at 40% 60%,${m[r.id]} 0%,transparent 55%)`:'';
+}
+
+// ════════════════════════════════════════════════
+// HOME PAGE LOGIC
+// ════════════════════════════════════════════════
+let activeCity="All",activeDiet="All",activePrice="all",openOnly=false,qfState="all",viewMode="grid",moreOpen=false;
+let currentR=null,selDate=null,selTime=null,guests=2;
+
+function buildHomeTicker(){
+  const items=["🍛 Charminar · 20% OFF all Biryani tonight","☕ Naga's Kitchen · Free Chai with every order","🌿 Mylapore · Unlimited Thali $11.99 until 3 PM","🥞 Meenakshi Bhavan · Buy 2 Dosas Get 1 Free","🍲 Kongunadu · Lunch Special $12.99 weekdays","🎨 Holi 2026 Special Dining · March 13","📍 New restaurants coming to Sunnyvale soon"];
+  const html=[...items,...items].map(i=>`<span class="tick-item"><span class="tick-gem">✦</span>${i}</span>`).join('');
+  document.getElementById('h-ticker').innerHTML=html+html;
+}
+
+function buildDealsStrip(){
+  const colors={red:"var(--flame)",green:"#15803D",gold:"rgba(180,120,0,0.9)"};
+  document.getElementById('h-deal-strip').innerHTML=RESTS.map(r=>`
+    <div class="dcard" onclick="goDetail(${r.id})">
+      <div class="dcard-img ${r.bg}" style="background-image:${cardBg(r)};position:relative;">
+        <div class="food-pattern"></div>
+        <div class="food-emoji-large">${r.emoji}</div>
+        <div class="dcard-badge" style="background:${colors[r.dealColor]||'var(--flame)'}">🏷️ ${r.deal}</div>
+        <button class="dcard-heart" onclick="event.stopPropagation();toggleHomeSave(${r.id},this)">${homeSaved[r.id]?'♥':'♡'}</button>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-name">${r.name}</div>
+        <div class="dcard-cuisine">${r.cuisine}</div>
+        ${tagHtml(r.tags[0])}
+      </div>
+    </div>`).join('');
+}
+
+function buildSidebar(){
+  const CITIES=["All","Fremont","San Jose","Sunnyvale","Artesia"];
+  const DIETS=["All","Pure Veg","Halal","Jain OK","Non-Veg"];
+  document.getElementById('city-filters').innerHTML=CITIES.map(c=>`
+    <div class="city-pill ${activeCity===c?'on':''}" onclick="setCity('${c}')">
+      ${c==='All'?'🗺️ All Cities':'📍 '+c}
+      <span class="city-cnt">${c==='All'?RESTS.length:RESTS.filter(r=>r.location===c).length}</span>
+    </div>`).join('');
+  document.getElementById('diet-filters').innerHTML=DIETS.map(d=>`
+    <div class="dp ${activeDiet===d?'on':''}" onclick="setDiet('${d}')">${d}</div>`).join('');
+}
+
+function filterAndRender(){
+  const q=(document.getElementById('hero-search')||{value:''}).value.toLowerCase();
+  let list=RESTS.filter(r=>{
+    const cm=activeCity==='All'||r.location===activeCity;
+    const dm=activeDiet==='All'||r.tags.includes(activeDiet);
+    const pm=activePrice==='all'||r.price===activePrice;
+    const om=!openOnly||r.isOpen;
+    const sm=!q||r.name.toLowerCase().includes(q)||r.cuisine.toLowerCase().includes(q)||r.tags.some(t=>t.toLowerCase().includes(q));
+    let qm=true;
+    if(qfState==='open')qm=r.isOpen;
+    else if(qfState==='halal')qm=r.tags.includes('Halal');
+    else if(qfState==='veg')qm=r.tags.includes('Pure Veg');
+    else if(qfState==='jain')qm=r.tags.includes('Jain OK');
+    else if(qfState==='cheap')qm=r.price==='$';
+    else if(qfState==='regional')qm=r.cuisine.includes('Regional')||r.cuisine.includes('Kongu');
+    else if(qfState==='biryani')qm=r.cuisine.includes('Biryani')||r.name.includes('Kongu');
+    return cm&&dm&&pm&&om&&sm&&qm;
+  });
+  const sort=(document.getElementById('sort-sel')||{value:''}).value;
+  if(sort==='Rating: High to Low')list.sort((a,b)=>b.rating-a.rating);
+  else if(sort==='Most Reviews')list.sort((a,b)=>b.reviews-a.reviews);
+  else if(sort==='Open Now First')list.sort((a,b)=>(b.isOpen?1:0)-(a.isOpen?1:0));
+  document.getElementById('ct-title').textContent=`Restaurants in ${activeCity==='All'?'All Cities':activeCity}`;
+  document.getElementById('ct-count').textContent=`${list.length} restaurant${list.length!==1?'s':''} · Best deals first`;
+  const el=document.getElementById('rest-container');
+  if(!list.length){el.innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">No restaurants found</div><p>Try adjusting your filters</p></div>`;return;}
+  el.innerHTML=viewMode==='grid'?`<div class="r-grid">${list.map(renderGrid).join('')}</div>`:`<div class="r-list">${list.map(renderList).join('')}</div>`;
+}
+
+function renderGrid(r){
+  const dc={red:"rc-deal-pill",green:"rc-deal-pill green",gold:"rc-deal-pill gold"};
+  return `<div class="rc rc-v2" onclick="goDetail(${r.id})">
+    <div class="rc-img ${r.bg}">
+      <div style="position:absolute;inset:0;background-image:${cardBg(r)};"></div>
+      <div class="food-pattern"></div>
+      <div class="food-emoji-large">${r.emoji}</div>
+      <div class="rc-img-overlay"></div>
+      <div class="rc-img-content">
+        <div class="rc-img-top">
+          ${r.featured?'<div class="rc-featured-badge">Featured</div>':'<div></div>'}
+          <button class="rc-save-btn ${homeSaved[r.id]?'saved':''}" onclick="event.stopPropagation();toggleHomeSave(${r.id},this)" aria-label="Save restaurant">${homeSaved[r.id]?'♥':'♡'}</button>
+        </div>
+        <div class="rc-img-bottom">
+          <div class="${dc[r.dealColor]||'rc-deal-pill'}">${r.deal}</div>
+        </div>
+      </div>
+    </div>
+    <div class="rc-body">
+      <div class="rc-top">
+        <div class="rc-title-wrap">
+          <div class="rc-name">${r.name}</div>
+          <div class="rc-submeta">${r.cuisine} · ${r.location}</div>
+        </div>
+        <div class="rc-rating"><span class="rc-rating-star">★</span><span class="rc-rating-n">${r.rating}</span></div>
+      </div>
+      <div class="rc-meta rc-meta-v2"><span class="rc-price">${r.price}</span><span class="rc-meta-sep">•</span><span class="rc-status-text ${r.isOpen?'open':'closed'}">${r.isOpen?'Open now':'Closed'}</span></div>
+      <div class="rc-tags">${r.tags.map(tagHtml).join('')}</div>
+      <div class="rc-actions">
+        <button class="btn-book btn-book-full" onclick="event.stopPropagation();goDetail(${r.id})">View Restaurant</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderList(r){
+  return `<div class="rl" onclick="goDetail(${r.id})">
+    <div class="rl-img ${r.bg}" style="position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background-image:${cardBg(r)};"></div>
+      <div class="food-pattern" style="position:absolute;inset:0;"></div>
+      <div style="position:absolute;font-size:44px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.25;">${r.emoji}</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-top">
+        <div><div class="rl-name">${r.name}</div><div class="rl-meta">📍 ${r.location} · ${r.cuisine} · ${r.price}</div></div>
+        <div class="rl-rating"><span style="color:var(--turmeric);font-size:11px;">★</span><span style="font-size:11px;font-weight:800;">${r.rating}</span><span style="font-size:9px;color:var(--muted);">(${r.reviews.toLocaleString()})</span></div>
+      </div>
+      <div class="rl-foot">
+        <div class="rl-deal">🏷️ ${r.deal}</div>
+        <div class="rc-status-pill ${r.isOpen?'rc-open':'rc-closed'}">${r.isOpen?'● Open':'● Closed'}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function setCity(c){activeCity=c;buildSidebar();filterAndRender();}
+function setDiet(d){activeDiet=d;buildSidebar();filterAndRender();}
+function setPrice(p,el){activePrice=p;document.querySelectorAll('.pbtn').forEach(b=>b.classList.remove('on'));el.classList.add('on');filterAndRender();}
+function toggleOpen(){openOnly=!openOnly;document.getElementById('open-tog').classList.toggle('on');filterAndRender();}
+function setView(v){viewMode=v;document.getElementById('vb-grid').classList.toggle('on',v==='grid');document.getElementById('vb-list').classList.toggle('on',v==='list');filterAndRender();}
+function qfClick(el,v){qfState=v;document.querySelectorAll('.qf').forEach(q=>q.classList.remove('on'));el.classList.add('on');filterAndRender();}
+function qfSet(v){qfState=v;document.querySelectorAll('.qf').forEach(q=>{q.classList.toggle('on',q.getAttribute('onclick')&&q.getAttribute('onclick').includes("'"+v+"'"));});filterAndRender();}
+function toggleMoreFilters(){moreOpen=!moreOpen;document.getElementById('more-filters').classList.toggle('open');document.getElementById('more-toggle-btn').textContent=moreOpen?'− Hide filters':'＋ More filters';}
+function toggleHomeSave(id,btn){homeSaved[id]=!homeSaved[id];btn.classList.toggle('saved',homeSaved[id]);btn.textContent=homeSaved[id]?'♥':'♡';}
+
+// ── DETAIL ────────────────────────────────────────────────────────────────
+function goDetail(id){
+  const r=RESTS.find(x=>x.id===id);if(!r)return;
+  currentR=r;selDate=null;selTime=null;guests=2;
+  document.getElementById('d-tags').innerHTML=r.tags.map(tagHtml).join('');
+  document.getElementById('d-name').textContent=r.name;
+  document.getElementById('d-tagline').textContent=r.tagline;
+  document.getElementById('d-rating').textContent=r.rating;
+  document.getElementById('d-reviews').textContent=`(${r.reviews.toLocaleString()} Google reviews)`;
+  document.getElementById('d-deal').textContent=r.deal;
+  document.getElementById('d-expiry').textContent=`⏰ ${r.dealExpiry}`;
+  document.getElementById('d-loc').textContent=r.location+', CA';
+  document.getElementById('d-price').textContent=r.price;
+  document.getElementById('d-open-chip').innerHTML=r.isOpen?'<div class="det-chip det-chip-open">🟢 Open Now</div>':'<div class="det-chip det-chip-closed">🔴 Closed</div>';
+  const pm=document.getElementById('d-photo-main');
+  pm.className=`det-photo-main ${r.bg}`;pm.style.backgroundImage=cardBg(r);
+  pm.innerHTML=`<div class="food-pattern"></div><div style="position:absolute;font-size:90px;top:50%;left:50%;transform:translate(-50%,-52%);opacity:0.2;">${r.emoji}</div>`;
+  document.getElementById('d-thumbs').innerHTML=r.foods.map(f=>`<div class="det-thumb ${r.bg}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;opacity:0.5;">${f}</div></div>`).join('');
+  document.getElementById('bks-rest').textContent=r.name;
+  document.getElementById('bks-deal').textContent=r.deal;
+  document.getElementById('g-num').textContent=2;
+  document.getElementById('bks-guests').textContent='2 people';
+  buildMenu(r);buildAbout(r);buildReviews(r);buildDates();buildTimes();updateBkBtn();
+  switchTab('menu',null);showPage('detail');
+}
+function buildMenu(r){document.getElementById('tab-menu').innerHTML=r.menu.map(s=>`<div class="menu-sec"><div class="menu-cat">${s.cat}</div>${s.items.map(i=>`<div class="mi ${i.hot?'hot':''}"><div><div class="mi-name">${i.name}${i.hot?'<span class="mi-badge">DEAL</span>':''}</div><div class="mi-note">${i.note}</div></div><div class="mi-price">${i.price}</div></div>`).join('')}</div>`).join('');}
+function buildAbout(r){document.getElementById('tab-about').innerHTML=`<p class="about-p">${r.about}</p><div class="about-acts"><button class="about-btn" onclick="showToast('Calling…')">📞 Call</button><button class="about-btn" onclick="showToast('Opening maps…')">🗺️ Directions</button><button class="about-btn" onclick="showToast('Copied!')">🔗 Share</button></div>`;}
+function buildReviews(r){document.getElementById('tab-reviews').innerHTML=r.reviews.map(rv=>`<div class="rev-card"><div class="rev-head"><div style="display:flex;align-items:center;gap:8px;"><div class="rev-av">${rv.initials}</div><div><div class="rev-name">${rv.name}</div><div class="rev-time">${rv.time}</div></div></div><div style="display:flex;align-items:center;gap:6px;"><div class="rev-stars">${'★'.repeat(rv.rating)}</div><div class="rev-src">${rv.src}</div></div></div><div class="rev-text">${rv.comment}</div></div>`).join('');}
+function switchTab(tab){['menu','about','reviews'].forEach(t=>{document.getElementById('tab-'+t).style.display=t===tab?'block':'none';});document.querySelectorAll('#page-detail .dtab').forEach(b=>{b.classList.toggle('active',b.textContent.toLowerCase().trim().startsWith(tab));});}
+function buildDates(){const today=new Date();let h='';for(let i=0;i<8;i++){const d=new Date(today);d.setDate(today.getDate()+i);const lbl=i===0?'Today':i===1?'Tmrw':DAYS_S[d.getDay()];const val=d.toDateString();h+=`<div class="dsl ${selDate===val?'on':''}" onclick="selD('${val}','${d.getDate()} ${MOS[d.getMonth()]}')"><div class="d-day">${lbl}</div><div class="d-n">${d.getDate()}</div><div class="d-mo">${MOS[d.getMonth()]}</div></div>`;}document.getElementById('bw-dates').innerHTML=h;}
+function selD(val,label){selDate=val;document.getElementById('bks-date').textContent=label;buildDates();updateBkBtn();}
+function buildTimes(){document.getElementById('bw-times').innerHTML=TIMES.map(t=>{const ua=UNAVAIL.includes(t);return`<div class="ts ${ua?'ua':''} ${selTime===t?'on':''}" onclick="${ua?'':'selT(\''+t+'\')'}">${t}</div>`;}).join('');}
+function selT(t){selTime=t;document.getElementById('bks-time').textContent=t;buildTimes();updateBkBtn();}
+function chG(d){guests=Math.max(1,Math.min(10,guests+d));document.getElementById('g-num').textContent=guests;document.getElementById('bks-guests').textContent=`${guests} ${guests===1?'person':'people'}`;}
+function updateBkBtn(){const b=document.getElementById('bk-btn');if(b)b.disabled=!(selDate&&selTime);}
+function goConfirmed(){
+  if(!currentR||!selDate||!selTime)return;
+  const r=currentR,d=new Date(selDate);
+  const dateLabel=`${WDAYS[d.getDay()]}, ${d.getDate()} ${MOS[d.getMonth()]} 2026`;
+  const bid='#IND-2026-'+Math.floor(1000+Math.random()*9000);
+  const ci=document.getElementById('conf-img');
+  ci.className=`conf-img ${r.bg}`;ci.style.backgroundImage=cardBg(r);
+  ci.innerHTML=`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;opacity:0.5;">${r.emoji}</div>`;
+  document.getElementById('conf-name').textContent=r.name;
+  document.getElementById('conf-cuisine').textContent=r.cuisine+' · '+r.location;
+  document.getElementById('conf-sub').textContent='Your table at '+r.name+' is reserved';
+  document.getElementById('conf-date').textContent=dateLabel;
+  document.getElementById('conf-time').textContent=selTime;
+  document.getElementById('conf-guests').textContent=guests+' '+(guests===1?'person':'people');
+  document.getElementById('conf-deal').textContent='🏷️ '+r.deal+' applied!';
+  document.getElementById('conf-id').textContent='Booking ID: '+bid+' · Show this at the restaurant';
+  document.getElementById('conf-addr').textContent=r.addr;
+  showPage('confirmed');
+}
+function goMyBookings(){buildMBList('upcoming');showPage('mybookings');}
+function switchMBTab(tab){
+  document.getElementById('mbt-up').className='dtab'+(tab==='upcoming'?' active':'');
+  document.getElementById('mbt-past').className='dtab'+(tab==='past'?' active':'');
+  buildMBList(tab);
+}
+function buildMBList(tab){
+  const list=BOOKINGS.filter(b=>b.status===tab);
+  const el=document.getElementById('mb-list');
+  if(!list.length){el.innerHTML=`<div class="empty-state"><div class="empty-icon">${tab==='upcoming'?'📅':'🍽️'}</div><div class="empty-title">No ${tab} bookings</div></div>`;return;}
+  el.innerHTML=list.map(b=>{const r=RESTS.find(x=>x.id===b.rid)||RESTS[0];return`<div class="mb-card ${b.status}"><div class="mb-img ${r.bg}" style="background-image:${cardBg(r)};position:relative;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;opacity:0.45;">${r.emoji}</div></div><div class="mb-body"><div class="mb-name-row"><div class="mb-name">${r.name}</div><span class="mb-badge ${b.status==='upcoming'?'mb-s-up':'mb-s-past'}">${b.status==='upcoming'?'✓ UPCOMING':'COMPLETED'}</span></div><div class="mb-cuisine">${r.cuisine} · ${r.location}</div><div class="mb-meta"><span>📅 ${b.date}</span><span>🕐 ${b.time}</span><span>👥 ${b.guests} guests</span></div><div class="mb-deal">🏷️ ${b.deal}</div></div><div class="mb-acts">${b.status==='past'?`<button class="mb-btn-p" onclick="goDetail(${r.id})">Book Again</button>`:`<button class="mb-btn-c" onclick="showToast('Booking cancelled')">Cancel</button>`}</div></div>`;}).join('');
+}
+
+// ════════════════════════════════════════════════
+// DEALS PAGE LOGIC
+// ════════════════════════════════════════════════
+const _now = new Date();
+function _minsFromNow(m){const d=new Date(_now);d.setMinutes(d.getMinutes()+m);return d;}
+function _todayAt(h,min=0){const d=new Date(_now);d.setHours(h,min,0,0);return d;}
+
+const DEALS=[
+  {id:1,type:'percent',featured:true,name:'20% OFF All Biryani',emoji:'🍛',bg:'food-bg-1',restaurant:'Charminar',location:'Fremont',cuisine:'Hyderabadi · Biryani',rating:4.6,reviews:1145,tags:['Halal','Non-Veg'],isOpen:true,accentClass:'acc-red',badgeClass:'dtb-red',badgeLabel:'% OFF Deal',discount:'20%',discountLabel:'off all Biryani',urgency:{expiresAt:_todayAt(22,0),trending:true,seatsLeft:6},saveAmount:'$3.40',claimedToday:41,rid:1},
+  {id:2,type:'happyhour',featured:false,name:'Happy Hour — 30% OFF Starters',emoji:'🥘',bg:'food-bg-2',restaurant:"Naga's Kitchen",location:'Fremont',cuisine:'South Indian · Halal',rating:4.8,reviews:368,tags:['Halal'],isOpen:true,accentClass:'acc-teal',badgeClass:'dtb-teal',badgeLabel:'Happy Hour',discount:'30%',discountLabel:'starters · 3–6 PM only',urgency:{expiresAt:_todayAt(18,0),trending:false,seatsLeft:null},saveAmount:'$4.20',claimedToday:19,rid:2},
+  {id:3,type:'free',featured:false,name:'Free Masala Chai with Every Meal',emoji:'☕',bg:'food-bg-2',restaurant:"Naga's Kitchen",location:'Fremont',cuisine:'South Indian · Halal',rating:4.8,reviews:368,tags:['Halal'],isOpen:true,accentClass:'acc-green',badgeClass:'dtb-green',badgeLabel:'Free Item',freeItem:'Masala Chai',freeNote:'With any main course',urgency:{expiresAt:null,trending:true,seatsLeft:null},saveAmount:'$3.50',claimedToday:83,rid:2},
+  {id:4,type:'fixed',featured:false,name:'Unlimited Thali — $11.99',emoji:'🌿',bg:'food-bg-3',restaurant:'Mylapore',location:'Fremont',cuisine:'South Indian · Pure Veg',rating:4.3,reviews:716,tags:['Pure Veg','Jain OK'],isOpen:true,accentClass:'acc-gold',badgeClass:'dtb-gold',badgeLabel:'Fixed Price',priceOld:'$14.99',priceNew:'$11.99',urgency:{expiresAt:_todayAt(15,0),trending:false,seatsLeft:11},saveAmount:'$3.00',claimedToday:27,rid:3},
+  {id:5,type:'free',featured:false,name:'Buy 2 Dosas, Get 1 Free',emoji:'🥞',bg:'food-bg-4',restaurant:'Meenakshi Bhavan',location:'San Jose',cuisine:'South Indian · Pure Veg',rating:4.8,reviews:167,tags:['Pure Veg','Jain OK'],isOpen:false,accentClass:'acc-green',badgeClass:'dtb-green',badgeLabel:'Free Item',freeItem:'1 Dosa Free',freeNote:'Buy any 2 dosas',urgency:{expiresAt:null,trending:false,seatsLeft:null},saveAmount:'$10.99',claimedToday:34,rid:4},
+  {id:6,type:'combo',featured:true,name:'Biryani + Raita + Dessert Combo',emoji:'🫕',bg:'food-bg-1',restaurant:'Charminar',location:'Fremont',cuisine:'Hyderabadi · Biryani',rating:4.6,reviews:1145,tags:['Halal','Non-Veg'],isOpen:true,accentClass:'acc-red',badgeClass:'dtb-red',badgeLabel:'Combo Meal',comboPrice:'$21.99',comboNote:'Worth $28.97 · Save $6.98',urgency:{expiresAt:_minsFromNow(95),trending:true,seatsLeft:4},saveAmount:'$6.98',claimedToday:22,rid:1},
+  {id:7,type:'fixed',featured:false,name:'Kongu Lunch Special — $12.99',emoji:'🍲',bg:'food-bg-5',restaurant:'Kongunadu',location:'San Jose',cuisine:'Kongu Nadu · Regional',rating:4.6,reviews:1056,tags:['Halal','Non-Veg'],isOpen:true,accentClass:'acc-gold',badgeClass:'dtb-gold',badgeLabel:'Fixed Price',priceOld:'$18.99',priceNew:'$12.99',urgency:{expiresAt:_todayAt(15,0),trending:true,seatsLeft:8},saveAmount:'$6.00',claimedToday:38,rid:5},
+  {id:8,type:'combo',featured:false,name:'Dosa Trio Combo for 2',emoji:'🥗',bg:'food-bg-3',restaurant:'Mylapore',location:'Fremont',cuisine:'South Indian · Pure Veg',rating:4.3,reviews:716,tags:['Pure Veg','Jain OK'],isOpen:true,accentClass:'acc-teal',badgeClass:'dtb-teal',badgeLabel:'Combo Meal',comboPrice:'$24.99',comboNote:'3 dosas + all sides · Worth $33',urgency:{expiresAt:null,trending:false,seatsLeft:null},saveAmount:'$8.00',claimedToday:16,rid:3},
+  {id:9,type:'happyhour',featured:false,name:'Early Bird — 25% OFF Dinner',emoji:'🌙',bg:'food-bg-5',restaurant:'Kongunadu',location:'San Jose',cuisine:'Kongu Nadu · Regional',rating:4.6,reviews:1056,tags:['Halal'],isOpen:true,accentClass:'acc-purple',badgeClass:'dtb-purple',badgeLabel:'Happy Hour',discount:'25%',discountLabel:'dinner · 5–6:30 PM only',urgency:{expiresAt:_todayAt(18,30),trending:false,seatsLeft:12},saveAmount:'$4.75',claimedToday:9,rid:5},
+  {id:10,type:'festival',featured:true,name:'Holi Special — Thandai + Thali',emoji:'🎨',bg:'food-bg-3',restaurant:'Mylapore',location:'Fremont',cuisine:'South Indian · Pure Veg',rating:4.3,reviews:716,tags:['Pure Veg','Jain OK'],isOpen:true,accentClass:'acc-purple',badgeClass:'dtb-purple',badgeLabel:'Festival Special',comboPrice:'$19.99',comboNote:'Holi special menu · March 13–14 only',urgency:{expiresAt:_todayAt(22,0),trending:true,seatsLeft:7},saveAmount:'$5.00',claimedToday:54,rid:3},
+  {id:11,type:'festival',featured:false,name:'Ugadi Special Thali — $15.99',emoji:'🌺',bg:'food-bg-4',restaurant:'Meenakshi Bhavan',location:'San Jose',cuisine:'South Indian · Pure Veg',rating:4.8,reviews:167,tags:['Pure Veg','Jain OK'],isOpen:false,accentClass:'acc-purple',badgeClass:'dtb-purple',badgeLabel:'Festival Special',priceOld:'$22.99',priceNew:'$15.99',urgency:{expiresAt:_minsFromNow(28800),trending:false,seatsLeft:18},saveAmount:'$7.00',claimedToday:11,rid:4},
+  {id:12,type:'percent',featured:false,name:'15% OFF — First Indeats Booking',emoji:'🎉',bg:'food-bg-4',restaurant:'Meenakshi Bhavan',location:'San Jose',cuisine:'South Indian · Pure Veg',rating:4.8,reviews:167,tags:['Pure Veg','Jain OK'],isOpen:false,accentClass:'acc-green',badgeClass:'dtb-green',badgeLabel:'% OFF Deal',discount:'15%',discountLabel:'your first booking',urgency:{expiresAt:null,trending:false,seatsLeft:null},saveAmount:'$3.45',claimedToday:66,rid:4},
+];
+
+let dFilter='all', dSort='default';
+
+function buildDealsTicker(){
+  const items=["🍛 Charminar · 20% OFF Biryani · 41 claimed today","☕ Naga's Kitchen · Free Chai · 83 claimed this week","🌿 Mylapore · Unlimited Thali $11.99 · Ends 3 PM","🫕 Charminar · Biryani Combo $21.99 · 4 seats left","🍲 Kongunadu · Lunch Special $12.99 · Trending","🎨 Holi Special · Mylapore · March 13–14 only","🥞 Meenakshi Bhavan · Buy 2 Dosas Get 1 Free","⏰ Happy Hour at Naga's · 30% OFF · Until 6 PM"];
+  const html=[...items,...items].map(i=>`<span class="tick-item"><span class="tick-gem">✦</span>${i}</span>`).join('');
+  document.getElementById('d-ticker').innerHTML=html+html;
+}
+
+function fmtCountdown(target){
+  const diff=target-new Date();
+  if(diff<=0)return{str:'Expired',hot:false};
+  const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  const hot=diff<3600000;
+  const str=h>0?`${h}h ${String(m).padStart(2,'0')}m`:`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return{str,hot};
+}
+
+function startDealTimers(){
+  clearInterval(window._dt);
+  window._dt=setInterval(()=>{
+    DEALS.forEach(d=>{
+      if(!d.urgency.expiresAt)return;
+      const el=document.getElementById('dt-'+d.id);if(!el)return;
+      const{str,hot}=fmtCountdown(d.urgency.expiresAt);
+      el.textContent='⏱ '+str;el.className='ub ub-timer'+(hot?' hot':'');
+    });
+  },1000);
+}
+
+function dRenderPrice(d){
+  if(d.type==='percent')return`<div class="dr-discount">${d.discount}</div><div class="dr-discount-label">${d.discountLabel}</div>`;
+  if(d.type==='free')return`<div class="dr-free">FREE</div><div class="dr-discount-label">${d.freeNote}</div>`;
+  if(d.type==='fixed')return`<div class="dr-price-old">${d.priceOld}</div><div class="dr-price-new">${d.priceNew}</div>`;
+  if(d.type==='happyhour')return`<div class="dr-discount">${d.discount}</div><div class="dr-discount-label">${d.discountLabel}</div>`;
+  return`<div class="dr-combo-price">${d.comboPrice||d.priceNew||'—'}</div><div class="dr-discount-label">${d.comboNote||d.festivalBadge||''}</div>`;
+}
+
+function dRenderUrgency(d){
+  const bits=[];
+  if(d.urgency.expiresAt){const{str,hot}=fmtCountdown(d.urgency.expiresAt);bits.push(`<span class="ub ub-timer${hot?' hot':''}" id="dt-${d.id}">⏱ ${str}</span>`);}
+  if(d.urgency.trending)bits.push(`<span class="ub ub-trending">🔥 Trending</span>`);
+  if(d.urgency.seatsLeft)bits.push(`<span class="ub ub-seats">🪑 ${d.urgency.seatsLeft} seats left</span>`);
+  bits.push(`<span class="ub ub-tag">${d.claimedToday} claimed today</span>`);
+  if(d.tags)bits.push(`<span class="tag ${TC[d.tags[0]]||''}" style="font-size:9px;">${d.tags[0]}</span>`);
+  return bits.join('');
+}
+
+function dRenderRow(d){
+  const typeIcon={percent:'🏷️',free:'🎁',fixed:'💲',happyhour:'⚡',combo:'🍱',festival:'🎉'};
+  return`<div class="deal-row${d.featured?' featured':''}" onclick="goDetail(${d.rid})">
+    <div class="dr-accent ${d.accentClass}"></div>
+    <div class="dr-img ${d.bg}">
+      <div class="dr-img-bg"></div><div class="dr-img-pattern"></div>
+      <div class="dr-img-emoji-bg">${d.emoji}</div>
+      <div class="dr-img-emoji">${d.emoji}</div>
+    </div>
+    <div class="dr-body">
+      <div class="dr-type-badge ${d.badgeClass}">${typeIcon[d.type]||'🏷️'} ${d.badgeLabel}</div>
+      <div class="dr-name">${d.name}</div>
+      <div class="dr-rest">
+        <span class="dr-rest-name">${d.restaurant}</span><span class="dr-rest-sep">·</span>
+        <span>${d.location}</span><span class="dr-rest-sep">·</span>
+        <span>★ ${d.rating} <span style="color:var(--faint);font-size:10px;">(${d.reviews.toLocaleString()})</span></span>
+        <span class="dr-rest-sep">·</span>
+        <span style="font-weight:700;color:${d.isOpen?'var(--green)':'#DC2626'}">${d.isOpen?'● Open':'● Closed'}</span>
+      </div>
+      <div class="dr-urgency">${dRenderUrgency(d)}</div>
+    </div>
+    <div class="dr-right">
+      <div class="dr-price-block">${dRenderPrice(d)}</div>
+      <div class="dr-cta-area">
+        <button class="dr-book-btn" onclick="event.stopPropagation();goDetail(${d.rid})">Reserve →</button>
+        <button class="dr-save${dealsSaved[d.id]?' saved':''}" id="dsave-${d.id}" onclick="event.stopPropagation();dToggleSave(${d.id})">
+          ${dealsSaved[d.id]?'♥ Saved':'♡ Save'}
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function dGetFiltered(){
+  let list=[...DEALS];
+  if(dFilter==='open')list=list.filter(d=>d.isOpen);
+  else if(dFilter!=='all')list=list.filter(d=>d.type===dFilter);
+  if(dSort==='expiry')list.sort((a,b)=>(a.urgency.expiresAt?a.urgency.expiresAt.getTime():Infinity)-(b.urgency.expiresAt?b.urgency.expiresAt.getTime():Infinity));
+  else if(dSort==='saving')list.sort((a,b)=>parseFloat(b.saveAmount||0)-parseFloat(a.saveAmount||0));
+  else if(dSort==='trending')list.sort((a,b)=>(b.urgency.trending?1:0)-(a.urgency.trending?1:0));
+  return list;
+}
+
+function renderDeals(){
+  const list=dGetFiltered();
+  const body=document.getElementById('deals-body');
+  if(!list.length){body.innerHTML=`<div class="deals-empty"><div style="font-size:40px;margin-bottom:10px;">🔍</div><div style="font-size:16px;font-weight:700;color:var(--text);">No deals found</div></div>`;return;}
+  let html='';
+  if(dFilter==='all'||dFilter==='festival'){
+    html+=`<div class="fest-strip" onclick="showToast('Holi bookings open March 12!')">
+      <div class="fs-left"><div class="fs-emoji">🎨</div><div>
+        <div class="fs-badge">🪔 HOLI 2026 · MARCH 13–14 · LIMITED SEATS</div>
+        <div class="fs-title">Festival Dining — special menus at all 5 restaurants</div>
+        <div class="fs-sub">Thandai · Gujiya · Traditional thalis · Only 30 seats per restaurant</div>
+      </div></div>
+      <button class="fs-btn" onclick="event.stopPropagation();showToast('Holi bookings open March 12!')">Explore Holi →</button>
+    </div>`;
+  }
+  const featured=list.filter(d=>d.featured), rest=list.filter(d=>!d.featured);
+  if(featured.length){
+    html+=`<div class="section-hd"><div class="section-hd-title">⭐ Featured Deals</div><div class="section-hd-line"></div><div class="section-hd-count">${featured.length} deals</div></div>`;
+    html+=`<div class="deals-list">${featured.map(dRenderRow).join('')}</div>`;
+  }
+  const typeOrder=['happyhour','percent','free','fixed','combo','festival'];
+  const typeLabels={happyhour:'⚡ Happy Hour',percent:'🏷️ Percentage Off',free:'🎁 Free Item Deals',fixed:'💲 Fixed Price Specials',combo:'🍱 Combo Meals',festival:'🎉 Festival Specials'};
+  typeOrder.forEach(type=>{
+    const group=rest.filter(d=>d.type===type);if(!group.length)return;
+    html+=`<div class="section-hd"><div class="section-hd-title">${typeLabels[type]}</div><div class="section-hd-line"></div><div class="section-hd-count">${group.length} deal${group.length>1?'s':''}</div></div>`;
+    html+=`<div class="deals-list">${group.map(dRenderRow).join('')}</div>`;
+  });
+  body.innerHTML=html;
+  startDealTimers();
+}
+
+function dSetFilter(f,el){dFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderDeals();}
+function dSortDeals(v){dSort=v;renderDeals();}
+function dToggleSave(id){dealsSaved[id]=!dealsSaved[id];const btn=document.getElementById('dsave-'+id);if(btn){btn.classList.toggle('saved',dealsSaved[id]);btn.textContent=dealsSaved[id]?'♥ Saved':'♡ Save';}showToast(dealsSaved[id]?'Deal saved!':'Removed');}
+
+
+// ════════════════════════════════════════════════
+// EVENTS PAGE LOGIC
+// ════════════════════════════════════════════════
+const EVENTS = [
+  // ── FESTIVAL DINNERS ──────────────────────────
+  {id:1,type:'festival',featured:true,
+   name:'Holi Feast — Colours & Flavours',emoji:'🎨',bg:'food-bg-3',
+   slabClass:'evs-fest',badgeClass:'evtb-fest',badgeLabel:'Festival Dinner',
+   date:'2026-03-13',time:'7:00 PM – 11:00 PM',
+   restaurant:'Mylapore',location:'Fremont, CA',rid:3,
+   price:3499,priceFmt:'$34.99',priceNote:'per person · incl. thandai',
+   seatsLeft:7,totalSeats:40,soldOut:false,
+   attending:62,attendees:['P','R','S','A','K'],
+   desc:'A 5-course Holi special menu — bevu-bella shot, mango rice, kobbari payasam, and traditional thandai. Live dhol performance. Jain options available.',
+   tags:['Pure Veg','Jain OK']},
+
+  {id:2,type:'festival',featured:false,
+   name:'Ugadi Thali Night',emoji:'🌺',bg:'food-bg-4',
+   slabClass:'evs-fest',badgeClass:'evtb-fest',badgeLabel:'Festival Dinner',
+   date:'2026-03-30',time:'6:30 PM – 9:30 PM',
+   restaurant:'Meenakshi Bhavan',location:'San Jose, CA',rid:4,
+   price:2999,priceFmt:'$29.99',priceNote:'per person',
+   seatsLeft:18,totalSeats:35,soldOut:false,
+   attending:28,attendees:['L','H','D','M'],
+   desc:'Traditional Ugadi thali marking the Telugu New Year. Bevu-bella, raw mango rice, neem chutney, and 7-item festive menu.',
+   tags:['Pure Veg','Jain OK']},
+
+  {id:3,type:'festival',featured:false,
+   name:'Eid Al-Fitr Grand Iftar Dinner',emoji:'🌙',bg:'food-bg-1',
+   slabClass:'evs-fest',badgeClass:'evtb-fest',badgeLabel:'Festival Dinner',
+   date:'2026-03-29',time:'7:15 PM – 11:00 PM',
+   restaurant:'Charminar',location:'Fremont, CA',rid:1,
+   price:4499,priceFmt:'$44.99',priceNote:'per person · full Iftar spread',
+   seatsLeft:12,totalSeats:60,soldOut:false,
+   attending:74,attendees:['A','R','F','Z','M'],
+   desc:'Authentic Eid iftar — dates & shorba to start, full Hyderabadi dum biryani spread, haleem, sheer khurma. Halal-certified. Community seating.',
+   tags:['Halal','Non-Veg']},
+
+  // ── LIVE MUSIC ────────────────────────────────
+  {id:4,type:'music',featured:true,
+   name:'Sufi Night — Ghazals & Biryani',emoji:'🎶',bg:'food-bg-5',
+   slabClass:'evs-music',badgeClass:'evtb-music',badgeLabel:'Live Music + Dining',
+   date:'2026-03-14',time:'8:00 PM – 11:30 PM',
+   restaurant:'Charminar',location:'Fremont, CA',rid:1,
+   price:5499,priceFmt:'$54.99',priceNote:'per person · dinner incl.',
+   seatsLeft:4,totalSeats:30,soldOut:false,
+   attending:41,attendees:['S','P','K','N','R'],
+   desc:'Live Sufi qawwali and ghazal performance over a slow-cooked Hyderabadi dum biryani dinner. Artist: Ustad Irfan Khan ensemble. Limited to 30 guests.',
+   tags:['Halal','Non-Veg']},
+
+  {id:5,type:'music',featured:false,
+   name:'Carnatic Fusion Dinner',emoji:'🪗',bg:'food-bg-2',
+   slabClass:'evs-music',badgeClass:'evtb-music',badgeLabel:'Live Music + Dining',
+   date:'2026-03-21',time:'7:30 PM – 10:30 PM',
+   restaurant:"Naga's Kitchen",location:'Fremont, CA',rid:2,
+   price:3999,priceFmt:'$39.99',priceNote:'per person · 4-course meal',
+   seatsLeft:14,totalSeats:28,soldOut:false,
+   attending:19,attendees:['V','T','S'],
+   desc:'Live veena and mridangam performance paired with a 4-course South Indian meal. A rare convergence of Carnatic classical music and authentic Tamil cooking.',
+   tags:['Halal','Non-Veg']},
+
+  // ── CULTURAL NIGHTS ───────────────────────────
+  {id:6,type:'cultural',featured:false,
+   name:'Bharatanatyam Evening',emoji:'💃',bg:'food-bg-3',
+   slabClass:'evs-cultural',badgeClass:'evtb-cultural',badgeLabel:'Cultural Night',
+   date:'2026-03-15',time:'6:00 PM – 9:00 PM',
+   restaurant:'Mylapore',location:'Fremont, CA',rid:3,
+   price:0,priceFmt:'Free',priceNote:'dinner billed separately',
+   seatsLeft:22,totalSeats:50,soldOut:false,
+   attending:38,attendees:['K','P','S','A'],
+   desc:'Classical Bharatanatyam performance by the Sri Lalitha Dance Academy followed by a traditional South Indian dinner. Free entry, food à la carte.',
+   tags:['Pure Veg']},
+
+  {id:7,type:'cultural',featured:false,
+   name:'Tamil Film Music Night',emoji:'🎬',bg:'food-bg-5',
+   slabClass:'evs-cultural',badgeClass:'evtb-cultural',badgeLabel:'Cultural Night',
+   date:'2026-03-28',time:'7:00 PM – 10:00 PM',
+   restaurant:'Kongunadu',location:'San Jose, CA',rid:5,
+   price:1999,priceFmt:'$19.99',priceNote:'per person · snacks incl.',
+   seatsLeft:0,totalSeats:45,soldOut:true,
+   attending:88,attendees:['S','D','M','K','T'],
+   desc:'A curated evening of classic and contemporary Tamil film music performed live, paired with Kongu Nadu small plates and filter coffee.',
+   tags:['Halal','Non-Veg']},
+
+  {id:8,type:'cultural',featured:false,
+   name:'Ghazal Mehfil — Urdu Poetry Night',emoji:'🕯️',bg:'food-bg-1',
+   slabClass:'evs-cultural',badgeClass:'evtb-cultural',badgeLabel:'Cultural Night',
+   date:'2026-04-05',time:'8:00 PM – 11:00 PM',
+   restaurant:'Charminar',location:'Fremont, CA',rid:1,
+   price:4999,priceFmt:'$49.99',priceNote:'per person · dinner + chai incl.',
+   seatsLeft:9,totalSeats:25,soldOut:false,
+   attending:22,attendees:['F','Z','A'],
+   desc:'An intimate ghazal mehfil in the Hyderabadi tradition — live poetry recitation, mujra-style seating, and a 3-course dinner culminating in double ka meetha.',
+   tags:['Halal']},
+
+  // ── COMMUNITY MEETUPS ─────────────────────────
+  {id:9,type:'meetup',featured:false,
+   name:'Bay Area Telugu Community Brunch',emoji:'🤝',bg:'food-bg-4',
+   slabClass:'evs-meetup',badgeClass:'evtb-meetup',badgeLabel:'Community Meetup',
+   date:'2026-03-22',time:'11:00 AM – 2:00 PM',
+   restaurant:'Meenakshi Bhavan',location:'San Jose, CA',rid:4,
+   price:0,priceFmt:'Free',priceNote:'food à la carte',
+   seatsLeft:31,totalSeats:60,soldOut:false,
+   attending:54,attendees:['S','R','P','L','H'],
+   desc:'Monthly brunch for the Bay Area Telugu diaspora. Meet families, professionals, and newcomers. Meenakshi Bhavan hosts — thali available at $11.99 deal price.',
+   tags:['Pure Veg','Jain OK']},
+
+  {id:10,type:'meetup',featured:false,
+   name:'Tamil Professionals Networking Dinner',emoji:'💼',bg:'food-bg-2',
+   slabClass:'evs-meetup',badgeClass:'evtb-meetup',badgeLabel:'Community Meetup',
+   date:'2026-03-25',time:'6:30 PM – 9:00 PM',
+   restaurant:"Naga's Kitchen",location:'Fremont, CA',rid:2,
+   price:0,priceFmt:'Free',priceNote:'dinner billed separately',
+   seatsLeft:18,totalSeats:40,soldOut:false,
+   attending:29,attendees:['K','V','T','S'],
+   desc:'Monthly networking dinner for Tamil professionals in the Bay Area. Tech, finance, healthcare, and startup community. Casual format, great food.',
+   tags:['Halal']},
+
+  {id:11,type:'meetup',featured:false,
+   name:'Kongu Nadu Diaspora Gathering',emoji:'🌾',bg:'food-bg-5',
+   slabClass:'evs-meetup',badgeClass:'evtb-meetup',badgeLabel:'Community Meetup',
+   date:'2026-04-12',time:'12:00 PM – 3:00 PM',
+   restaurant:'Kongunadu',location:'San Jose, CA',rid:5,
+   price:0,priceFmt:'Free',priceNote:'lunch deal $12.99',
+   seatsLeft:24,totalSeats:50,soldOut:false,
+   attending:17,attendees:['S','D'],
+   desc:'The only regular gathering for the Kongu Nadu diaspora in California. Connect with others from Coimbatore, Erode, Tiruppur, and the Kongu belt.',
+   tags:['Halal']},
+];
+
+let evFilter = 'all';
+let evSaved = {};
+
+// Holi countdown
+const HOLI_DATE = new Date('2026-03-13T19:00:00');
+function startHoliCountdown(){
+  function tick(){
+    const diff = HOLI_DATE - new Date();
+    if(diff <= 0){ ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';}); return; }
+    const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+    const fmt=n=>String(n).padStart(2,'0');
+    const ids={d,h,m,s};
+    Object.entries(ids).forEach(([k,v])=>{const el=document.getElementById('cd-'+k);if(el)el.textContent=fmt(v);});
+  }
+  tick();
+  clearInterval(window._holiCd);
+  window._holiCd = setInterval(tick, 1000);
+}
+
+function evFmtDate(dateStr){
+  const d = new Date(dateStr+'T12:00:00');
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return { month: months[d.getMonth()].toUpperCase(), day: d.getDate(), dow: days[d.getDay()].toUpperCase(), full: `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} 2026` };
+}
+
+function evRenderAvatar(initial, cls){ return `<div class="ev-av ${cls}">${initial}</div>`; }
+const AV_CLASSES = ['ev-av-1','ev-av-2','ev-av-3','ev-av-4','ev-av-5'];
+
+function evRenderAttending(ev){
+  const avHtml = ev.attendees.slice(0,5).map((a,i)=>evRenderAvatar(a, AV_CLASSES[i%5])).join('');
+  const extra = ev.attending > ev.attendees.length ? `+${ev.attending - ev.attendees.length}` : '';
+  return `<div class="ev-card-attending">
+    <div class="ev-avatars">${avHtml}</div>
+    <span class="ev-attending-txt"><span class="ev-attending-n">${ev.attending}</span> people going</span>
+  </div>`;
+}
+
+function evRenderSeats(ev){
+  if(ev.soldOut) return `<div class="ev-sold-badge">SOLD OUT</div>`;
+  if(ev.seatsLeft === 0) return `<div class="ev-sold-badge">SOLD OUT</div>`;
+  if(ev.seatsLeft <= 8) return `<div class="ev-seats-badge ev-seats-low">🔴 ${ev.seatsLeft} seats left</div>`;
+  return `<div class="ev-seats-badge ev-seats-ok">✓ ${ev.seatsLeft} seats</div>`;
+}
+
+function evRenderFeatured(ev){
+  const df = evFmtDate(ev.date);
+  const avHtml = ev.attendees.slice(0,5).map((a,i)=>evRenderAvatar(a, AV_CLASSES[i%5])).join('');
+  return `<div class="ev-featured-card" onclick="showToast('RSVP for ${ev.name.replace(/'/g,"\'")} — opens soon!')">
+    <div class="ev-fc-inner">
+      <div class="ev-fc-top">
+        <div class="ev-fc-badge">✦ FEATURED EVENT</div>
+        <div><div class="ev-fc-price">${ev.priceFmt}</div><div class="ev-fc-price-sub">${ev.priceNote}</div></div>
+      </div>
+      <div class="ev-fc-emoji">${ev.emoji}</div>
+      <div class="ev-fc-name">${ev.name}</div>
+      <div class="ev-fc-host">Hosted by ${ev.restaurant} · ${ev.location}</div>
+      <div class="ev-fc-meta">
+        <span class="ev-fc-meta-item">📅 ${df.full}</span>
+        <span class="ev-fc-meta-item">🕐 ${ev.time}</span>
+        <span class="ev-fc-meta-item">📍 ${ev.location}</span>
+      </div>
+      <div class="ev-fc-bottom">
+        <div class="ev-fc-attending">
+          <div class="ev-avatars">${avHtml}</div>
+          <span class="ev-fc-att-txt" style="margin-left:6px;">${ev.attending} going</span>
+          ${ev.seatsLeft <= 8 ? `<span class="ev-fc-seats">🔴 ${ev.seatsLeft} seats left</span>` : ''}
+        </div>
+        <button class="ev-fc-btn" onclick="event.stopPropagation();showToast('RSVP confirmed for ${ev.name.replace(/'/g,"\'")}!')">Reserve Seat →</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function evRenderCard(ev){
+  const df = evFmtDate(ev.date);
+  const isFree = ev.price === 0;
+  return `<div class="ev-card${ev.featured?' featured':''}${ev.soldOut?' sold-out':''}" onclick="showToast('${ev.name.replace(/'/g,"\'")} — RSVP page coming soon!')">
+    <div class="ev-card-slab ${ev.slabClass}"></div>
+    <div class="ev-card-date">
+      <div class="ev-card-month">${df.month}</div>
+      <div class="ev-card-day">${df.day}</div>
+      <div class="ev-card-dow">${df.dow}</div>
+    </div>
+    <div class="ev-card-img ${ev.bg}">
+      <div class="ev-card-img-bg"></div>
+      <div class="ev-card-img-pattern"></div>
+      <div class="ev-card-emoji-bg">${ev.emoji}</div>
+      <div class="ev-card-emoji">${ev.emoji}</div>
+    </div>
+    <div class="ev-card-body">
+      <div class="ev-card-type-badge ${ev.badgeClass}">${ev.type==='festival'?'🎉':ev.type==='music'?'🎵':ev.type==='cultural'?'🪷':'🤝'} ${ev.badgeLabel}</div>
+      <div class="ev-card-name">${ev.name}</div>
+      <div class="ev-card-host"><span class="ev-card-host-name">${ev.restaurant}</span><span style="color:var(--border2)">·</span>${ev.location}</div>
+      <div class="ev-card-meta">
+        <span class="ev-card-meta-item">🕐 ${ev.time}</span>
+      </div>
+      ${evRenderAttending(ev)}
+    </div>
+    <div class="ev-card-right">
+      <div class="ev-price-block">
+        ${isFree ? `<div class="ev-price-free">FREE</div>` : `<div class="ev-price">${ev.priceFmt}</div>`}
+        <div class="ev-price-sub">${ev.priceNote}</div>
+        ${evRenderSeats(ev)}
+      </div>
+      <div class="ev-cta-area">
+        <button class="ev-rsvp-btn${isFree?' free':''}${ev.soldOut?' disabled':''}"
+          onclick="event.stopPropagation();${ev.soldOut?`showToast('Sold out — join waitlist coming soon!')`:`showToast('RSVP for ${ev.name.replace(/'/g,"\'")} confirmed!')`}">
+          ${ev.soldOut ? 'Join Waitlist' : isFree ? 'RSVP Free →' : 'Reserve →'}
+        </button>
+        <button class="ev-save-btn${evSaved[ev.id]?' saved':''}" id="evsave-${ev.id}" onclick="event.stopPropagation();evToggleSave(${ev.id})">
+          ${evSaved[ev.id]?'♥ Saved':'♡ Save'}
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function evGetFiltered(){
+  let list = [...EVENTS];
+  if(evFilter === 'free') list = list.filter(e => e.price === 0);
+  else if(evFilter !== 'all') list = list.filter(e => e.type === evFilter);
+  list.sort((a,b) => new Date(a.date) - new Date(b.date));
+  return list;
+}
+
+function renderEvents(){
+  startHoliCountdown();
+  const list = evGetFiltered();
+  const body = document.getElementById('ev-body');
+  if(!list.length){
+    body.innerHTML = `<div class="ev-empty"><div style="font-size:40px;margin-bottom:10px;">🔍</div><div style="font-size:16px;font-weight:700;color:var(--text);">No events found</div></div>`;
+    return;
+  }
+
+  // Group by date
+  const byDate = {};
+  list.forEach(ev => {
+    if(!byDate[ev.date]) byDate[ev.date] = [];
+    byDate[ev.date].push(ev);
+  });
+
+  const todayStr = new Date().toISOString().split('T')[0];
+  const holiStr = '2026-03-13';
+
+  let html = '';
+
+  // Featured cards first (if showing all)
+  if(evFilter === 'all' || evFilter === 'festival'){
+    const featured = list.filter(e => e.featured);
+    if(featured.length){
+      html += `<div style="margin-bottom:4px;"><div class="section-hd"><div class="section-hd-title" style="color:var(--text);">✦ Don't Miss</div><div class="section-hd-line"></div></div></div>`;
+      featured.forEach(ev => { html += evRenderFeatured(ev); });
+    }
+  }
+
+  // Timeline grouped by date
+  html += `<div class="section-hd" style="margin-top:8px;"><div class="section-hd-title" style="color:var(--text);">📅 Full Programme</div><div class="section-hd-line"></div><div class="section-hd-count">${list.length} event${list.length!==1?'s':''}</div></div>`;
+
+  Object.entries(byDate).forEach(([dateStr, events]) => {
+    const df = evFmtDate(dateStr);
+    const isToday = dateStr === todayStr;
+    const isHoli = dateStr === holiStr;
+    const dividerClass = isToday ? 'today' : isHoli ? 'soon' : '';
+    const label = isToday ? `📅 Today · ${df.day} ${df.month}` : isHoli ? `🎨 Holi · ${df.day} ${df.month}` : `${df.day} ${df.month}`;
+
+    html += `<div class="ev-date-divider">
+      <div class="ev-date-badge ${dividerClass}">${label}</div>
+      <div class="ev-date-line"></div>
+      <div class="ev-date-dow">${df.full.split(',')[0]}</div>
+    </div>`;
+    events.forEach(ev => { html += evRenderCard(ev); });
+  });
+
+  body.innerHTML = html;
+}
+
+function evSetFilter(f, el){
+  evFilter = f;
+  document.querySelectorAll('.efb').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  renderEvents();
+}
+
+function evToggleSave(id){
+  evSaved[id] = !evSaved[id];
+  const btn = document.getElementById('evsave-'+id);
+  if(btn){ btn.classList.toggle('saved', evSaved[id]); btn.textContent = evSaved[id] ? '♥ Saved' : '♡ Save'; }
+  showToast(evSaved[id] ? 'Event saved!' : 'Removed from saved');
+}
+
+function goEvents(){ renderEvents(); showPage('events'); }
+
+// ════════════════════════════════════════════════
+// BOOT
+// ════════════════════════════════════════════════
+goHome();
+</script>
+
+<!-- ════════════════════════════════════════════
+     EVENTS PAGE
+════════════════════════════════════════════ -->
+<div class="page" id="page-events">
+
+<!-- Hero: countdown + title -->
+<div class="ev-hero">
+  <div class="ev-hero-bg"></div>
+  <div class="ev-hero-grid"></div>
+  <div class="ev-hero-glow"></div>
+  <!-- Countdown bar -->
+  <div class="ev-countdown-bar">
+    <span class="ev-cd-label">🎨 Holi 2026 starts in</span>
+    <div class="ev-cd-units">
+      <div class="ev-cd-unit"><span class="ev-cd-n" id="cd-d">--</span><span class="ev-cd-l">days</span></div>
+      <span class="ev-cd-sep">:</span>
+      <div class="ev-cd-unit"><span class="ev-cd-n" id="cd-h">--</span><span class="ev-cd-l">hrs</span></div>
+      <span class="ev-cd-sep">:</span>
+      <div class="ev-cd-unit"><span class="ev-cd-n" id="cd-m">--</span><span class="ev-cd-l">min</span></div>
+      <span class="ev-cd-sep">:</span>
+      <div class="ev-cd-unit"><span class="ev-cd-n" id="cd-s">--</span><span class="ev-cd-l">sec</span></div>
+    </div>
+    <div class="ev-cd-spacer"></div>
+    <div class="ev-cd-next"><div class="ev-cd-dot"></div><span class="ev-cd-next-txt">Next: <span class="ev-cd-next-name">Holi Feast at Mylapore</span></span></div>
+  </div>
+  <div class="ev-hero-content">
+    <div class="ev-hero-eyebrow"><div class="ev-hero-eyebrow-dot"></div><span class="ev-hero-eyebrow-txt">Live Events · Bay Area</span></div>
+    <h1 class="ev-hero-title">Where <em>culture</em> meets<br>the dinner table.</h1>
+    <p class="ev-hero-sub">Festival feasts, live ghazals, chef's tables, community nights. Every event is at one of our partner restaurants — deals apply automatically.</p>
+    <div class="ev-hero-stats">
+      <div class="ev-hstat"><div class="ev-hstat-n">14</div><div class="ev-hstat-l">Events this month</div></div>
+      <div class="ev-hstat-sep"></div>
+      <div class="ev-hstat"><div class="ev-hstat-n">840+</div><div class="ev-hstat-l">People attending</div></div>
+      <div class="ev-hstat-sep"></div>
+      <div class="ev-hstat"><div class="ev-hstat-n">Free</div><div class="ev-hstat-l">Community meetups</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter bar -->
+<div class="ev-filter-bar">
+  <button class="efb on" onclick="evSetFilter('all',this)">All Events</button>
+  <button class="efb" onclick="evSetFilter('festival',this)">🎉 Festival Dinners</button>
+  <button class="efb" onclick="evSetFilter('music',this)">🎵 Live Music</button>
+  <button class="efb" onclick="evSetFilter('cultural',this)">🪷 Cultural Nights</button>
+  <button class="efb" onclick="evSetFilter('meetup',this)">🤝 Community</button>
+  <button class="efb" onclick="evSetFilter('free',this)">🎁 Free Entry</button>
+</div>
+
+<div class="ev-body" id="ev-body"></div>
+</div>
+
+</body>
+</html>
