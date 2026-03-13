@@ -97,6 +97,118 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .booking-cancel{background:#fff1f0;color:#d1432a;border:1px solid #f6c7c0;border-radius:12px;height:40px;padding:0 16px;font-weight:800}
 @media (max-width: 1100px){.deals-row{grid-template-columns:repeat(3,minmax(0,1fr))}.rest-grid,.events-grid-page{grid-template-columns:repeat(2,minmax(0,1fr))}.discover-grid{grid-template-columns:1fr}.feature-card{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}}
 @media (max-width: 760px){.nav{flex-wrap:wrap}.nav-links{order:3;width:100%;justify-content:center}.hero-title,.page-title{font-size:44px}.search{grid-template-columns:1fr}.deals-row,.rest-grid,.events-grid-page{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:8px}.booking-card{grid-template-columns:1fr}.wrap{padding:0 16px}}
+
+/* === V2 polish package: CSS-only refinements === */
+
+/* Discover + deals cards slightly tighter and cleaner */
+.rest-body{
+  padding:14px;
+  min-height:220px;
+}
+.rest-desc{
+  margin-top:12px;
+  line-height:1.45;
+  font-size:14px;
+}
+.rest-actions{
+  margin-top:14px;
+  align-items:stretch;
+}
+.btn-primary,.btn-secondary{
+  min-height:44px;
+}
+.rest-name{
+  font-size:25px;
+}
+.rest-meta{
+  font-size:13px;
+}
+
+/* Deals page cards feel a little stronger */
+.deal-img{
+  height:146px;
+}
+.deal-body{
+  padding:13px 14px 14px;
+}
+.deal-name{
+  font-size:15px;
+}
+.deal-meta{
+  font-size:12px;
+}
+
+/* Slightly more breathing room under pills/filter bars */
+.pills-bar{
+  padding:18px 0;
+  margin-bottom:6px;
+}
+
+/* Events page spacing rhythm */
+.feature-card{
+  padding:24px 26px;
+}
+.section-title{
+  line-height:1.08;
+}
+.events-grid-page{
+  padding-top:32px;
+}
+.event-card{
+  min-height:284px;
+}
+.event-title{
+  font-size:31px;
+}
+.event-sub{
+  font-size:15px;
+  line-height:1.52;
+}
+
+/* Bookings page tighter cards */
+.booking-card{
+  padding:16px 20px;
+  min-height:108px;
+}
+.booking-name{
+  font-size:20px;
+}
+.booking-meta{
+  font-size:13px;
+  margin-top:3px;
+}
+.badge-deal{
+  margin-top:7px;
+}
+
+/* Slightly better footer breathing */
+.footer{
+  margin-top:64px;
+}
+
+@media (max-width:760px){
+  .rest-body{
+    min-height:unset;
+  }
+  .deal-img{
+    height:134px;
+  }
+  .feature-card{
+    padding:22px 20px;
+  }
+  .event-title{
+    font-size:28px;
+  }
+}
+
+
+/* Discover filters functional */
+.city-filter,.dietary-filter,.top-filter,.open-filter{cursor:pointer}
+.city-filter:hover,.dietary-filter:hover,.top-filter:hover,.open-filter:hover{transform:translateY(-1px)}
+.restaurant-card.hidden{display:none !important}
+.open-filter.active{background:#071827;color:#fff;border-color:#071827}
+.open-filter.active .open-indicator{color:#4ade80}
+
 </style></head><body>
 
 <nav class="nav">
@@ -130,17 +242,17 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 </div></div></section>
 <section class="section"><div class="wrap discover-grid">
 <aside class="sidebar">
-<div class="side-sec"><div class="side-head">City</div><a class="side-pill active" href="index.html"><span>🗺️ All Cities</span><span>5</span></a><a class="side-pill" href="index.html"><span>📍 Fremont</span><span>3</span></a><a class="side-pill" href="index.html"><span>📍 San Jose</span><span>2</span></a><a class="side-pill" href="index.html"><span>📍 Sunnyvale</span><span>0</span></a><a class="side-pill" href="index.html"><span>📍 Artesia</span><span>0</span></a></div>
-<div class="side-sec"><div class="side-head">Dietary</div><div class="filter-row"><a class="filter active" href="index.html">All</a><a class="filter" href="deals.html">Pure Veg</a><a class="filter" href="deals.html">Halal</a><a class="filter" href="deals.html">Jain OK</a><a class="filter" href="deals.html">Non-Veg</a></div></div>
-<div class="side-sec"><div class="side-head">Open now</div><a class="side-pill" href="deals.html"><span>🟢 Show only open</span><span>◯</span></a><a class="side-pill" href="deals.html" style="justify-content:center;color:#8e7c6c">＋ More filters</a></div>
+<div class="side-sec"><div class="side-head">City</div><a class="side-pill active city-filter" href="#" data-city="all"><span>🗺️ All Cities</span><span>5</span></a><a class="side-pill city-filter" href="#" data-city="fremont"><span>📍 Fremont</span><span>3</span></a><a class="side-pill city-filter" href="#" data-city="san jose"><span>📍 San Jose</span><span>2</span></a><a class="side-pill city-filter" href="#" data-city="sunnyvale"><span>📍 Sunnyvale</span><span>0</span></a><a class="side-pill city-filter" href="#" data-city="artesia"><span>📍 Artesia</span><span>0</span></a></div>
+<div class="side-sec"><div class="side-head">Dietary</div><div class="filter-row dietary-filters"><a class="filter active dietary-filter" href="#" data-diet="all">All</a><a class="filter dietary-filter" href="#" data-diet="pure veg">Pure Veg</a><a class="filter dietary-filter" href="#" data-diet="halal">Halal</a><a class="filter dietary-filter" href="#" data-diet="jain ok">Jain OK</a><a class="filter dietary-filter" href="#" data-diet="non-veg">Non-Veg</a></div></div>
+<div class="side-sec"><div class="side-head">Open now</div><a class="side-pill open-filter" href="#" data-open="false"><span>🟢 Show only open</span><span class="open-indicator">◯</span></a><a class="side-pill" href="deals.html" style="justify-content:center;color:#8e7c6c">＋ More filters</a></div>
 </aside>
 <div>
-<div class="section-head" style="margin-bottom:14px"><div><div class="section-title">Restaurants in All Cities</div><div style="margin-top:6px;color:var(--muted);font-weight:700">5 restaurants · Best deals first</div></div><div style="display:flex;gap:12px;align-items:center"><div class="filter" style="padding:10px 12px">⊞</div><div class="filter" style="padding:10px 12px">☰</div><a class="filter" href="deals.html" style="min-width:160px;justify-content:space-between;display:flex">Best Match <span>⌄</span></a></div></div>
-<div class="filter-row"><a class="filter active" href="index.html">All</a><a class="filter" href="deals.html">🟢 Open Now</a><a class="filter" href="deals.html">✅ Halal</a><a class="filter" href="deals.html">🌿 Pure Veg</a><a class="filter" href="deals.html">🪷 Jain OK</a><a class="filter" href="deals.html">💰 Under $15</a><a class="filter" href="deals.html">🗺️ Regional</a><a class="filter" href="deals.html">🍛 Biryani</a></div>
-<div class="rest-grid">
-<a class="rest-card" href="bookings.html"><div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Charminar</div><div class="rest-rating">★ 4.6</div></div><div class="rest-meta">📍 Fremont · 25 min · $$</div><div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div><div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
-<a class="rest-card" href="bookings.html"><div class="rest-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Naga's Kitchen</div><div class="rest-rating">★ 4.8</div></div><div class="rest-meta">📍 Fremont · 15 min · $</div><div class="rest-tags"><div class="tag blue">Halal</div><div class="tag red">Non-Veg</div></div><div class="rest-desc">A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
-<a class="rest-card" href="bookings.html"><div class="rest-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Mylapore</div><div class="rest-rating">★ 4.3</div></div><div class="rest-meta">📍 Fremont · 20 min · $</div><div class="rest-tags"><div class="tag">Pure Veg</div><div class="tag" style="background:#fff2cb;color:#a67500">Jain OK</div></div><div class="rest-desc">Mylapore brings Chennai’s Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
+<div class="section-head" style="margin-bottom:14px"><div><div class="section-title" id="restaurants-title">Restaurants in All Cities</div><div id="restaurants-subtitle" style="margin-top:6px;color:var(--muted);font-weight:700">3 restaurants · Best deals first</div></div><div style="display:flex;gap:12px;align-items:center"><div class="filter" style="padding:10px 12px">⊞</div><div class="filter" style="padding:10px 12px">☰</div><a class="filter" href="deals.html" style="min-width:160px;justify-content:space-between;display:flex">Best Match <span>⌄</span></a></div></div>
+<div class="filter-row"><a class="filter active top-filter" href="#" data-top="all">All</a><a class="filter top-filter" href="#" data-top="open">🟢 Open Now</a><a class="filter top-filter" href="#" data-top="halal">✅ Halal</a><a class="filter top-filter" href="#" data-top="pure veg">🌿 Pure Veg</a><a class="filter top-filter" href="#" data-top="jain ok">🪷 Jain OK</a><a class="filter top-filter" href="#" data-top="under15">💰 Under $15</a><a class="filter top-filter" href="#" data-top="regional">🗺️ Regional</a><a class="filter top-filter" href="#" data-top="biryani">🍛 Biryani</a></div>
+<div id="no-results" style="display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;font-weight:700;color:#746759;margin-bottom:18px">No restaurants match this filter yet.</div><div class="rest-grid" id="restaurants-grid">
+<a class="rest-card restaurant-card" href="bookings.html" data-city="fremont" data-diets="non-veg halal" data-open="true" data-price="$$" data-tags="biryani"><div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Charminar</div><div class="rest-rating">★ 4.6</div></div><div class="rest-meta">📍 Fremont · 25 min · $$</div><div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div><div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
+<a class="rest-card restaurant-card" href="bookings.html" data-city="fremont" data-diets="halal non-veg" data-open="true" data-price="$" data-tags="south indian"><div class="rest-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Naga's Kitchen</div><div class="rest-rating">★ 4.8</div></div><div class="rest-meta">📍 Fremont · 15 min · $</div><div class="rest-tags"><div class="tag blue">Halal</div><div class="tag red">Non-Veg</div></div><div class="rest-desc">A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
+<a class="rest-card restaurant-card" href="bookings.html" data-city="fremont" data-diets="pure veg jain ok" data-open="true" data-price="$" data-tags="regional under15"><div class="rest-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Mylapore</div><div class="rest-rating">★ 4.3</div></div><div class="rest-meta">📍 Fremont · 20 min · $</div><div class="rest-tags"><div class="tag">Pure Veg</div><div class="tag" style="background:#fff2cb;color:#a67500">Jain OK</div></div><div class="rest-desc">Mylapore brings Chennai’s Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
 </div>
 </div></div></section>
 
@@ -176,5 +288,64 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
     <div>Privacy · Terms</div>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  const state = { city:'all', diet:'all', top:'all', openOnly:false };
+  const titleEl = document.getElementById('restaurants-title');
+  const subtitleEl = document.getElementById('restaurants-subtitle');
+  const noResults = document.getElementById('no-results');
+  const cards = Array.from(document.querySelectorAll('.restaurant-card'));
+  function normalize(v){ return (v||'').toLowerCase().trim(); }
+  function cityLabel(city){ if(city==='all') return 'All Cities'; return city.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' '); }
+  function cardMatches(card){
+    const city = normalize(card.dataset.city);
+    const diets = normalize(card.dataset.diets);
+    const open = normalize(card.dataset.open) === 'true';
+    const price = normalize(card.dataset.price);
+    const tags = normalize(card.dataset.tags);
+    if(state.city !== 'all' && city !== state.city) return false;
+    if(state.diet !== 'all' && !diets.includes(state.diet)) return false;
+    if(state.openOnly && !open) return false;
+    if(state.top !== 'all'){
+      if(state.top === 'open' && !open) return false;
+      if(state.top === 'under15' && price !== '$') return false;
+      if(['halal','pure veg','jain ok'].includes(state.top) && !diets.includes(state.top)) return false;
+      if(['regional','biryani'].includes(state.top) && !tags.includes(state.top)) return false;
+    }
+    return true;
+  }
+  function updateActive(selector, attr, value){
+    document.querySelectorAll(selector).forEach(el=>el.classList.toggle('active', el.dataset[attr] === value));
+  }
+  function render(){
+    let count = 0;
+    cards.forEach(card=>{
+      const show = cardMatches(card);
+      card.classList.toggle('hidden', !show);
+      if(show) count++;
+    });
+    if(titleEl) titleEl.textContent = 'Restaurants in ' + cityLabel(state.city);
+    if(subtitleEl) subtitleEl.textContent = count + ' restaurant' + (count===1?'':'s') + ' · Best deals first';
+    if(noResults) noResults.style.display = count ? 'none' : 'block';
+    updateActive('.city-filter', 'city', state.city);
+    updateActive('.dietary-filter', 'diet', state.diet);
+    updateActive('.top-filter', 'top', state.top);
+    const openFilter = document.querySelector('.open-filter');
+    if(openFilter){
+      openFilter.classList.toggle('active', state.openOnly);
+      const ind = openFilter.querySelector('.open-indicator');
+      if(ind) ind.textContent = state.openOnly ? '●' : '◯';
+    }
+  }
+  document.querySelectorAll('.city-filter').forEach(el=>el.addEventListener('click', e=>{ e.preventDefault(); state.city = el.dataset.city; render(); }));
+  document.querySelectorAll('.dietary-filter').forEach(el=>el.addEventListener('click', e=>{ e.preventDefault(); state.diet = el.dataset.diet; render(); }));
+  document.querySelectorAll('.top-filter').forEach(el=>el.addEventListener('click', e=>{ e.preventDefault(); state.top = el.dataset.top; if(state.top === 'open') state.openOnly = true; else if(state.top === 'all') state.openOnly = false; render(); }));
+  const openFilter = document.querySelector('.open-filter');
+  if(openFilter){ openFilter.addEventListener('click', e=>{ e.preventDefault(); state.openOnly = !state.openOnly; if(!state.openOnly && state.top === 'open') state.top = 'all'; render(); }); }
+  render();
+})();
+</script>
 
 </body></html>
