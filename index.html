@@ -674,85 +674,131 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
 }
 
 
-/* === Stable visual refresh + hard page hiding === */
-.page{display:none !important;}
-.page.active{display:block !important;}
-
-.ticker,.stats-bar{display:none !important;}
-
-.home-hero{
-  padding-top:104px !important;
-  padding-bottom:88px !important;
-}
+/* Stable visual restore: original navigation logic preserved */
+.home-hero{padding-top:104px !important;padding-bottom:88px !important;}
 .h-title{max-width:1120px;margin:0 auto 16px;}
 .h-tagline{max-width:760px;margin:0 auto 34px;}
 .h-pills{gap:14px !important;}
-.hpill{
-  border-color:rgba(255,255,255,.08) !important;
-  background:rgba(255,255,255,.04) !important;
-  padding:12px 18px !important;
-  box-shadow:none !important;
-}
-.hpill:hover{
-  border-color:rgba(255,255,255,.14) !important;
-  background:rgba(255,255,255,.06) !important;
-}
+.hpill{border-color:rgba(255,255,255,.08) !important;background:rgba(255,255,255,.04) !important;padding:12px 18px !important;box-shadow:none !important;}
+.hpill:hover{border-color:rgba(255,255,255,.14) !important;background:rgba(255,255,255,.06) !important;}
 
-.events-feature{background:var(--bg);padding:56px 0 22px;}
-.events-wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
-.events-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px;}
-.events-eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8d7b66;font-weight:800;margin-bottom:10px;}
-.events-title{font-family:'Cormorant Garamond',serif;font-size:56px;line-height:.98;color:#171717;margin:0 0 10px 0;}
-.events-copy{max-width:760px;color:#716657;font-size:18px;line-height:1.6;margin:0;}
-.events-link{border:none;background:transparent;color:var(--flame);font-size:16px;font-weight:800;cursor:pointer;white-space:nowrap;padding:0;margin-bottom:8px;}
-.events-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch;}
-.event-card{min-height:280px;display:flex;flex-direction:column;justify-content:flex-start;gap:14px;padding:28px;border-radius:24px;background:linear-gradient(135deg,#4d167e 0%, #7b2df5 42%, #b1166a 100%);color:#fff;cursor:pointer;box-shadow:0 16px 36px rgba(71,35,138,.14);}
-.event-pill{display:inline-flex;align-items:center;width:max-content;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;font-size:12px;font-weight:800;letter-spacing:.02em;}
-.event-title{font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.05;margin:0;color:#fff;}
-.event-sub{margin:0;color:rgba(255,255,255,.86);font-size:16px;line-height:1.55;flex:1;}
-.event-cta{align-self:flex-start;min-height:48px;padding:0 18px;border:none;border-radius:14px;background:#fff;color:#5b2bc5;font-size:15px;font-weight:800;cursor:pointer;}
-.event-cta.secondary{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.16);}
+#page-home .ticker,#page-home .stats-bar{display:none !important;}
 
-.main{padding:28px 40px 56px;}
-.main-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;align-items:start;}
-.sidebar{padding:20px;border-radius:22px;min-height:462px;display:flex;flex-direction:column;box-shadow:0 8px 28px rgba(17,24,39,.06);}
-.sb-sec{margin-bottom:20px;padding-bottom:20px;}
-.city-pill{min-height:42px;border-radius:12px;padding:0 14px;margin-bottom:8px;font-size:14px;}
-.diet-pills{gap:8px;}
-.dp{min-height:34px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-size:12px;}
-.open-row{min-height:48px;border-radius:14px;}
-.more-toggle{min-height:44px;border-radius:14px;margin-top:10px;}
-.content-top{margin-bottom:16px;}
-.ct-title{font-size:24px;}
-.ct-count{font-size:13px;margin-top:4px;}
-.qf-row{gap:10px;margin-bottom:18px;}
-.qf{min-height:38px;display:inline-flex;align-items:center;border-radius:999px;padding:0 14px;font-size:13px;}
-.r-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch;}
-.rc{min-height:462px;border-radius:22px;}
-.rc-body{flex:1;}
-.rc-actions{margin-top:auto;padding-top:8px;}
+#page-home .fest{margin:0 40px 0 !important;border-radius:26px !important;min-height:116px !important;box-shadow:0 16px 36px rgba(71,35,138,.12) !important;}
+#page-home .fest-inner{min-height:116px !important;padding:22px 26px !important;}
+#page-home .fest-title{font-size:18px !important;line-height:1.15 !important;}
+#page-home .fest-sub{font-size:13px !important;line-height:1.45 !important;}
+#page-home .fest-btn{min-height:44px !important;padding:0 16px !important;border-radius:14px !important;}
+#page-home .fest-left{gap:10px !important;}
+
+#page-home .main{padding:28px 40px 56px;}
+#page-home .main-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;align-items:start;}
+#page-home .sidebar{padding:20px;border-radius:22px;min-height:462px;display:flex;flex-direction:column;box-shadow:0 8px 28px rgba(17,24,39,.06);}
+#page-home .sb-sec{margin-bottom:20px;padding-bottom:20px;}
+#page-home .city-pill{min-height:42px;border-radius:12px;padding:0 14px;margin-bottom:8px;font-size:14px;}
+#page-home .diet-pills{gap:8px;}
+#page-home .dp{min-height:34px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-size:12px;}
+#page-home .open-row{min-height:48px;border-radius:14px;}
+#page-home .more-toggle{min-height:44px;border-radius:14px;margin-top:10px;}
+#page-home .content-top{margin-bottom:16px;}
+#page-home .ct-title{font-size:24px;}
+#page-home .ct-count{font-size:13px;margin-top:4px;}
+#page-home .qf-row{gap:10px;margin-bottom:18px;}
+#page-home .qf{min-height:38px;display:inline-flex;align-items:center;border-radius:999px;padding:0 14px;font-size:13px;}
+#page-home .r-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch;}
+#page-home .rc{min-height:462px;border-radius:22px;}
+#page-home .rc-body{flex:1;}
+#page-home .rc-actions{margin-top:auto;padding-top:8px;}
 
 @media (max-width:1024px){
-  .events-title{font-size:46px;}
-  .events-grid{grid-template-columns:1fr 1fr;}
-  .events-grid article:last-child{grid-column:1 / -1;}
-  .main-grid{grid-template-columns:250px minmax(0,1fr);}
-  .r-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #page-home .main-grid{grid-template-columns:250px minmax(0,1fr);}
+  #page-home .r-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
 }
 @media (max-width:768px){
   .home-hero{padding-top:80px !important;padding-bottom:72px !important;}
-  .events-feature{padding:46px 0 16px;}
-  .events-wrap{padding:0 16px;}
-  .events-head{flex-direction:column;align-items:flex-start;margin-bottom:20px;}
-  .events-title{font-size:38px;line-height:1.02;}
-  .events-copy{font-size:16px;}
-  .events-grid{grid-template-columns:1fr;}
-  .event-card{min-height:unset;padding:22px;}
-  .main{padding:22px 16px 44px;}
-  .main-grid{grid-template-columns:1fr;}
-  .sidebar{min-height:unset;position:static;}
-  .r-grid{grid-template-columns:1fr;}
-  .rc{min-height:unset;}
+  #page-home .fest{margin:0 16px 0 !important;}
+  #page-home .fest-inner{padding:18px 18px !important;min-height:104px !important;}
+  #page-home .fest-title{font-size:16px !important;}
+  #page-home .fest-sub{font-size:12px !important;}
+  #page-home .main{padding:22px 16px 44px;}
+  #page-home .main-grid{grid-template-columns:1fr;}
+  #page-home .sidebar{min-height:unset;position:static;}
+  #page-home .r-grid{grid-template-columns:1fr;}
+  #page-home .rc{min-height:unset;}
+}
+
+
+/* === Discover homepage layout polish (CSS-only safe pass) === */
+
+/* More breathing room below hero */
+#page-home .home-hero{
+  padding-bottom: 108px !important;
+}
+
+/* Event banner spacing + slimmer size */
+#page-home .fest{
+  margin-top: 36px !important;
+  min-height: 96px !important;
+  border-radius: 22px !important;
+}
+
+#page-home .fest-inner{
+  min-height: 96px !important;
+  padding: 16px 22px !important;
+}
+
+/* Smaller banner content */
+#page-home .fest-title{
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+}
+
+#page-home .fest-sub{
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  opacity: 0.82 !important;
+}
+
+#page-home .fest-btn{
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  border-radius: 12px !important;
+  font-size: 12px !important;
+}
+
+/* Slightly tighter deals section spacing so rhythm feels intentional */
+#page-home .section{
+  padding-top: 24px !important;
+}
+
+/* Mobile-safe adjustments */
+@media (max-width: 768px){
+  #page-home .home-hero{
+    padding-bottom: 78px !important;
+  }
+
+  #page-home .fest{
+    margin-top: 24px !important;
+    min-height: 88px !important;
+  }
+
+  #page-home .fest-inner{
+    min-height: 88px !important;
+    padding: 14px 16px !important;
+  }
+
+  #page-home .fest-title{
+    font-size: 15px !important;
+  }
+
+  #page-home .fest-sub{
+    font-size: 11px !important;
+  }
+
+  #page-home .fest-btn{
+    min-height: 34px !important;
+    padding: 0 12px !important;
+  }
 }
 
 </style>
@@ -811,50 +857,16 @@ footer{background:var(--midnight);padding:44px 40px 0;display:grid;grid-template
   <div class="stat"><div class="stat-n">4.7★</div><div class="stat-l">Avg Partner Rating</div></div>
 </div>
 
-
-<section class="events-feature">
-  <div class="events-wrap">
-    <div class="events-head">
-      <div>
-        <div class="events-eyebrow">Upcoming experiences</div>
-        <h2 class="events-title">Upcoming Indian Dining Experiences</h2>
-        <p class="events-copy">Seasonal celebrations, special menus, and cultural dining moments curated for your city.</p>
-      </div>
-      <button class="events-link" onclick="goEvents()">Explore all events →</button>
-    </div>
-
-    <div class="events-grid">
-      <article class="event-card" onclick="goEvents()">
-        <div class="event-pill">🎨 Mar 13 · Limited seats</div>
-        <h3 class="event-title">Holi Special Dining</h3>
-        <p class="event-sub">Festive menus across 5 Indian restaurants celebrating Holi.</p>
-        <button class="event-cta">View Event</button>
-      </article>
-
-      <article class="event-card" onclick="goEvents()">
-        <div class="event-pill">🍽 Weekend</div>
-        <h3 class="event-title">South Indian Buffet Night</h3>
-        <p class="event-sub">Unlimited dosa, idli, and specials in a more casual gathering format.</p>
-        <button class="event-cta secondary">See Details</button>
-      </article>
-
-      <article class="event-card" onclick="goEvents()">
-        <div class="event-pill">👨‍🍳 Chef Special</div>
-        <h3 class="event-title">Chef Tasting Menu</h3>
-        <p class="event-sub">Limited curated dishes by guest chefs, designed as a premium dining experience.</p>
-        <button class="event-cta secondary">See Details</button>
-      </article>
-    </div>
-  </div>
-</section>
-
+<div class="fest" onclick="goDeals()">
+  <div class="fest-l">
+    <div class="fest-ico">🎨</div>
     <div>
       <div class="fest-badge">🪔 UPCOMING · MAR 13 2026</div>
-      <div class="fest-title">Holi Special Dining — All 5 Restaurants</div>
-      <div class="fest-sub">Exclusive menus · Limited seats · Deals auto-applied</div>
+      <div class="fest-title">Upcoming Indian Dining Experiences</div>
+      <div class="fest-sub">Seasonal celebrations · Special menus · Cultural dining moments</div>
     </div>
   </div>
-  <button class="fest-btn">See Deals →</button>
+  <button class="fest-btn">View Events →</button>
 </div>
 
 <div class="section">
@@ -1884,51 +1896,6 @@ goHome();
 
 <div class="ev-body" id="ev-body"></div>
 </div>
-
-
-<script>
-(function(){
-  function stableShowPage(n){
-    document.querySelectorAll('.page').forEach(function(p){
-      p.classList.remove('active');
-    });
-    var target = document.getElementById('page-' + n);
-    if(target) target.classList.add('active');
-
-    [['home','home'],['deals','deals'],['bk','mybookings'],['ev','events']].forEach(function(pair){
-      var el = document.getElementById('nl-' + pair[0]);
-      if(el) el.classList.toggle('active', n === pair[1]);
-    });
-    window.scrollTo(0,0);
-  }
-
-  window.showPage = stableShowPage;
-  window.goHome = function(){
-    stableShowPage('home');
-    try{ buildHomeTicker(); }catch(e){}
-    try{ buildDealsStrip(); }catch(e){}
-    try{ buildSidebar(); }catch(e){}
-    try{ filterAndRender(); }catch(e){}
-  };
-  window.goDeals = function(){
-    stableShowPage('deals');
-    try{ buildDealsTicker(); }catch(e){}
-    try{ renderDeals(); }catch(e){}
-  };
-  window.goEvents = function(){
-    stableShowPage('events');
-    try{ renderEvents(); }catch(e){}
-  };
-  window.goMyBookings = function(){
-    stableShowPage('mybookings');
-    try{ buildMBList('upcoming'); }catch(e){}
-  };
-
-  document.addEventListener('DOMContentLoaded', function(){
-    stableShowPage('home');
-  });
-})();
-</script>
 
 </body>
 </html>
