@@ -210,97 +210,68 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .open-filter.active .open-indicator{color:#4ade80}
 
 
-/* Discover V3 patch */
-.section-copy{margin-top:8px;color:var(--muted);font-size:15px;font-weight:600}
-.deals-header-stack{display:flex;flex-direction:column}
-.featured-tonight{margin:24px 0 8px}
-.featured-card{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:22px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:24px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
+/* Discover completion review */
+.hero-badge:empty{display:none}
+.hero{padding-bottom:84px!important}
+.hero-title{max-width:860px}
+.shortcuts-section{
+  background:#04192a;
+  padding:0 0 30px;
+  margin-top:-8px;
 }
-.featured-visual{
-  min-height:290px;
-  background:
-    radial-gradient(circle at 25% 25%, rgba(255,255,255,.12), transparent 22%),
-    linear-gradient(145deg,#210d00,#662600,#a44619);
-  position:relative;
-  padding:24px;
+.shortcuts-head{
+  text-align:center;
+  margin-bottom:14px;
+}
+.shortcuts-copy{
+  color:rgba(255,255,255,.68);
+  font-weight:600;
+  font-size:15px;
+  margin-top:6px;
+}
+.shortcuts-row{
   display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
 }
-.featured-overlay-badges{display:flex;gap:10px;flex-wrap:wrap}
-.featured-pill{
+.shortcut-chip{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:8px 12px;
+  padding:12px 16px;
   border-radius:999px;
-  background:rgba(255,255,255,.12);
-  color:#fff;
-  border:1px solid rgba(255,255,255,.18);
-  font-weight:800;
-  font-size:12px;
-}
-.featured-name{
-  font-family:Georgia,"Times New Roman",serif;
-  color:#fff;
-  font-size:54px;
-  line-height:.95;
-  margin:0;
-}
-.featured-meta{
-  color:rgba(255,255,255,.82);
-  font-size:16px;
-  margin-top:10px;
-}
-.featured-right{padding:28px;display:flex;flex-direction:column;justify-content:center}
-.featured-kicker{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:#9a8365;
-  font-weight:800;
-}
-.featured-title{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:34px;
-  line-height:1.05;
-  margin:8px 0 12px;
-}
-.featured-copy{
-  color:#6e6357;
-  line-height:1.7;
-  font-size:16px;
-  margin:0 0 18px;
-}
-.featured-points{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  margin-bottom:20px;
-}
-.featured-point{
-  background:#faf5ee;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:12px 14px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  color:#f2efe9;
   font-weight:700;
-  color:#5e5245;
+  transition:.18s ease;
 }
-.featured-actions{display:flex;gap:12px;flex-wrap:wrap}
+.shortcut-chip:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.08);
+}
+.section-events{padding-top:20px}
+.section{padding-top:42px}
+.section-subtitle{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:15px;
+  font-weight:600;
+}
+.deals-row{margin-top:18px}
+.discover-grid{gap:30px}
+.sidebar{
+  opacity:.92;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(10px);
+  border-color:#eadfd1;
+}
 .city-summary{
   display:flex;
   align-items:center;
   gap:10px;
-  margin-top:10px;
   flex-wrap:wrap;
+  margin:0 0 10px;
 }
 .city-chip{
   display:inline-flex;
@@ -318,10 +289,150 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   font-weight:700;
   font-size:14px;
 }
+.social-proof{
+  display:inline-flex;
+  margin-top:8px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#fff3e8;
+  border:1px solid #ffd7b5;
+  color:var(--accent);
+  font-size:11px;
+  font-weight:800;
+}
+.deal-signal{
+  margin-top:10px;
+  color:#5d4d3e;
+  font-weight:800;
+  font-size:13px;
+}
+.rest-body{min-height:255px}
+.compact-feature{
+  margin-top:26px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns:320px 1fr;
+}
+.compact-feature-media{
+  background:
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,.12), transparent 22%),
+    linear-gradient(145deg,#210d00,#662600,#a44619);
+  min-height:220px;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.compact-badge-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.compact-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+}
+.compact-name{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:42px;
+  line-height:.95;
+  color:#fff;
+  margin:0;
+}
+.compact-meta{
+  color:rgba(255,255,255,.84);
+  font-size:15px;
+  margin-top:8px;
+}
+.compact-feature-body{
+  padding:24px 26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.compact-kicker{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#9a8365;
+  font-weight:800;
+}
+.compact-title{
+  margin-top:6px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:28px;
+  line-height:1.08;
+}
+.compact-copy{
+  margin-top:10px;
+  color:#6e6357;
+  line-height:1.7;
+  font-size:16px;
+}
+.compact-stats{
+  margin-top:14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.compact-stats span{
+  display:inline-flex;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#faf5ee;
+  border:1px solid var(--line);
+  font-weight:700;
+  color:#5e5245;
+  font-size:13px;
+}
+.compact-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+@media (max-width: 1200px){
+  .deals-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media (max-width: 980px){
-  .featured-card{grid-template-columns:1fr}
-  .featured-name{font-size:42px}
-  .featured-points{grid-template-columns:1fr}
+  .discover-grid{grid-template-columns:1fr}
+  .sidebar{order:2}
+  .compact-feature{grid-template-columns:1fr}
+}
+@media (max-width: 768px){
+  .hero{padding:56px 0 72px!important}
+  .hero-title{font-size:42px!important}
+  .hero-sub{font-size:16px}
+  .search{
+    grid-template-columns:1fr!important;
+    border-radius:20px!important;
+  }
+  .search .city{
+    border-right:none!important;
+    border-bottom:1px solid #eee!important;
+    justify-content:flex-start!important;
+    padding:0 18px!important;
+  }
+  .search input{min-height:54px}
+  .search button{min-height:54px}
+  .banner{flex-direction:column;align-items:flex-start}
+  .banner-btn{width:100%;justify-content:center}
+  .deals-row,.rest-grid{grid-template-columns:1fr!important}
+  .compact-name{font-size:38px}
+  .compact-title{font-size:24px}
+  .shortcuts-row{justify-content:flex-start}
 }
 
 </style></head><body>
@@ -340,64 +451,30 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   <a class="nav-btn primary" href="bookings.html">Get Started</a>
 </nav>
 <section class="hero"><div class="wrap">
-<div class="hero-badge">● Indian Diaspora · California</div>
+
 <h1 class="hero-title">Discover Indian food, deals,<br><em>and dining events near you.</em></h1>
 <p class="hero-sub">Curated Indian restaurants, exclusive offers, and cultural dining events.</p>
 <form class="search" action="deals.html"><div class="city">📍 Fremont ▾</div><input placeholder="Search dishes, cuisines, dietary needs, or deals"><button type="submit">🔍 Search</button></form>
-<div class="hero-pills">
-<a class="hero-pill" href="deals.html">🥩 Halal</a><a class="hero-pill" href="deals.html">🌿 Pure Veg</a><a class="hero-pill" href="deals.html">🪷 Jain</a><a class="hero-pill" href="deals.html">🍛 Biryani</a><a class="hero-pill" href="deals.html">🟢 Open Now</a><a class="hero-pill" href="deals.html">🏷️ All Deals →</a>
-</div></div></section>
+</div></section>
 <section class="home-banner"><div class="wrap"><div class="banner"><div><div class="banner-kicker">🎨 Upcoming · Mar 13 2026</div><div class="banner-title">Upcoming Indian Dining Experiences</div><p class="banner-sub">Seasonal celebrations · Special menus · Cultural dining moments</p></div><a class="banner-btn" href="events.html">View Events →</a></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head"><div class="deals-header-stack"><div class="section-kicker">Live now</div><div class="section-title">Trending Deals Tonight</div><div class="section-copy">A quick scan of the strongest live offers — then jump into restaurant discovery below.</div></div><a class="section-link" href="deals.html">All 12 deals →</a></div><div class="deals-row">
+<section class="section"><div class="wrap"><div class="section-head"><div><div class="section-kicker">Live now</div><div class="section-title">Trending Deals Tonight</div><div class="section-subtitle">Top offers diners are booking right now.</div></div><a class="section-link" href="deals.html">All 12 deals →</a></div><div class="deals-row">
 <a class="deal-card" href="deals.html"><div class="deal-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Charminar</div><div class="deal-meta">Hyderabadi · Biryani</div><div class="tag red">Non-Veg</div></div></a>
 <a class="deal-card" href="deals.html"><div class="deal-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Naga's Kitchen</div><div class="deal-meta">South Indian · Halal</div><div class="tag blue">Halal</div></div></a>
 <a class="deal-card" href="deals.html"><div class="deal-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Mylapore</div><div class="deal-meta">South Indian · Pure Veg</div><div class="tag">Pure Veg</div></div></a>
 <a class="deal-card" href="deals.html"><div class="deal-img"><div class="card-badge green">Buy 2 Dosas, Get 1 Free</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Meenakshi Bhavan</div><div class="deal-meta">South Indian · Pure Veg</div><div class="tag">Pure Veg</div></div></a>
 <a class="deal-card" href="deals.html"><div class="deal-img blue"><div class="card-badge gold">Lunch Special $12.99</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Kongunadu</div><div class="deal-meta">Kongu Nadu · Regional</div><div class="tag red">Non-Veg</div></div></a>
 </div></div></section>
-
-<section class="featured-tonight"><div class="wrap">
-  <div class="featured-card">
-    <div class="featured-visual">
-      <div class="featured-overlay-badges">
-        <span class="featured-pill">⭐ 4.6</span>
-        <span class="featured-pill">20% OFF today</span>
-        <span class="featured-pill">Open now</span>
-      </div>
-      <div>
-        <h2 class="featured-name">Charminar</h2>
-        <div class="featured-meta">Hyderabadi · Biryani · Fremont, CA · 25 min · $$</div>
-      </div>
-    </div>
-    <div class="featured-right">
-      <div class="featured-kicker">Featured tonight</div>
-      <div class="featured-title">Best quick recommendation if someone wants a strong “where should I eat tonight?” answer.</div>
-      <p class="featured-copy">Charminar gives Indeats a clearer hero restaurant moment: recognizable cuisine, a strong live deal, and a page that converts directly into reservation intent.</p>
-      <div class="featured-points">
-        <div class="featured-point">🔥 Deal-led discovery: 20% off on all biryani</div>
-        <div class="featured-point">🥘 Strong category fit: Hyderabadi & biryani craving</div>
-        <div class="featured-point">👥 Good for groups, dinner, and late-night comfort food</div>
-        <div class="featured-point">➡️ Natural bridge into restaurant detail and booking</div>
-      </div>
-      <div class="featured-actions">
-        <a class="btn-primary" href="charminar.html">View Restaurant →</a>
-        <a class="btn-secondary" href="deals.html">See all deals</a>
-      </div>
-    </div>
-  </div>
-</div></section>
 <section class="section"><div class="wrap discover-grid">
-
 <aside class="sidebar">
 <div class="side-sec"><div class="side-head">City</div><a class="side-pill active city-filter" href="#" data-city="all"><span>🗺️ All Cities</span><span>5</span></a><a class="side-pill city-filter" href="#" data-city="fremont"><span>📍 Fremont</span><span>3</span></a><a class="side-pill city-filter" href="#" data-city="san jose"><span>📍 San Jose</span><span>2</span></a><a class="side-pill city-filter" href="#" data-city="sunnyvale"><span>📍 Sunnyvale</span><span>0</span></a><a class="side-pill city-filter" href="#" data-city="artesia"><span>📍 Artesia</span><span>0</span></a></div>
-<div class="side-sec"><div class="side-head">Dietary</div><div class="filter-row dietary-filters"><a class="filter active dietary-filter" href="#" data-diet="all">All</a><a class="filter dietary-filter" href="#" data-diet="pure veg">Pure Veg</a><a class="filter dietary-filter" href="#" data-diet="halal">Halal</a><a class="filter dietary-filter" href="#" data-diet="jain ok">Jain OK</a><a class="filter dietary-filter" href="#" data-diet="non-veg">Non-Veg</a></div></div>
+<div class="side-sec"><div class="side-head">Dietary</div></div>
 <div class="side-sec"><div class="side-head">Open now</div><a class="side-pill open-filter" href="#" data-open="false"><span>🟢 Show only open</span><span class="open-indicator">◯</span></a><a class="side-pill" href="deals.html" style="justify-content:center;color:#8e7c6c">＋ More filters</a></div>
 </aside>
 <div>
-<div class="section-head" style="margin-bottom:14px"><div><div class="city-summary"><span class="city-chip">Recommended for tonight</span><span class="quick-note">Use filters to narrow by city, dietary needs, cuisine, and value.</span></div><div class="section-title" id="restaurants-title">Restaurants in All Cities</div><div id="restaurants-subtitle" style="margin-top:6px;color:var(--muted);font-weight:700">3 restaurants · Best deals first</div></div><div style="display:flex;gap:12px;align-items:center"><div class="filter" style="padding:10px 12px">⊞</div><div class="filter" style="padding:10px 12px">☰</div><a class="filter" href="deals.html" style="min-width:160px;justify-content:space-between;display:flex">Best Match <span>⌄</span></a></div></div>
+<div class="section-head discover-head" style="margin-bottom:14px"><div><div class="city-summary"><span class="city-chip">Recommended for tonight</span><span class="quick-note">Start with quick wins, then narrow by diet, cuisine, price, or city.</span></div><div class="section-title" id="restaurants-title">Restaurants Near Fremont</div><div id="restaurants-subtitle" style="margin-top:6px;color:var(--muted);font-weight:700">3 restaurants · Best deals first</div></div><div style="display:flex;gap:12px;align-items:center"><div class="filter" style="padding:10px 12px">⊞</div><div class="filter" style="padding:10px 12px">☰</div><a class="filter" href="deals.html" style="min-width:160px;justify-content:space-between;display:flex">Best Match <span>⌄</span></a></div></div>
 <div class="filter-row"><a class="filter active top-filter" href="#" data-top="all">All</a><a class="filter top-filter" href="#" data-top="open">🟢 Open Now</a><a class="filter top-filter" href="#" data-top="halal">✅ Halal</a><a class="filter top-filter" href="#" data-top="pure veg">🌿 Pure Veg</a><a class="filter top-filter" href="#" data-top="jain ok">🪷 Jain OK</a><a class="filter top-filter" href="#" data-top="under15">💰 Under $15</a><a class="filter top-filter" href="#" data-top="biryani">🍛 Biryani</a><a class="filter top-filter" href="#" data-top="regional">🗺️ Regional</a></div>
 <div id="no-results" style="display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;font-weight:700;color:#746759;margin-bottom:18px">No restaurants match this filter yet.</div><div class="rest-grid" id="restaurants-grid">
-<a class="rest-card restaurant-card" href="charminar.html" data-city="fremont" data-diets="non-veg halal" data-open="true" data-price="$$" data-tags="biryani"><div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Charminar</div><div class="rest-rating">★ 4.6</div></div><div class="rest-meta">📍 Fremont · 25 min · $$</div><div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div><div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
+<a class="rest-card restaurant-card" href="charminar.html" data-city="fremont" data-diets="non-veg halal" data-open="true" data-price="$$" data-tags="biryani"><div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div><div class="rest-name">Charminar</div><div class="social-proof">Popular tonight</div></div><div class="rest-rating">★ 4.6</div></div><div class="rest-meta">📍 Fremont · 25 min · $$</div><div class="deal-signal">🔥 20% OFF on all biryani today</div><div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div><div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
 <a class="rest-card restaurant-card" href="nagas-kitchen.html" data-city="fremont" data-diets="halal non-veg" data-open="true" data-price="$" data-tags="south indian"><div class="rest-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Naga's Kitchen</div><div class="rest-rating">★ 4.8</div></div><div class="rest-meta">📍 Fremont · 15 min · $</div><div class="rest-tags"><div class="tag blue">Halal</div><div class="tag red">Non-Veg</div></div><div class="rest-desc">A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
 <a class="rest-card restaurant-card" href="mylapore.html" data-city="fremont" data-diets="pure veg jain ok" data-open="true" data-price="$" data-tags="regional under15"><div class="rest-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Mylapore</div><div class="rest-rating">★ 4.3</div></div><div class="rest-meta">📍 Fremont · 20 min · $</div><div class="rest-tags"><div class="tag">Pure Veg</div><div class="tag" style="background:#fff2cb;color:#a67500">Jain OK</div></div><div class="rest-desc">Mylapore brings Chennai’s Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
 </div>
