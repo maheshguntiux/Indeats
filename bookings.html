@@ -1,10 +1,4 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Indeats — Discover Indian food, deals, and dining events near you.</title>
-<style>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Indeats — My Bookings</title><style>
 :root{
   --bg:#f6f1ea;
   --card:#ffffff;
@@ -190,17 +184,15 @@ img{max-width:100%;display:block}
   .booking-card{grid-template-columns:1fr}
   .wrap{padding:0 16px}
 }
-</style>
-</head>
-<body>
+</style></head><body>
 
 <nav class="nav">
   <a class="brand" href="index.html">Indeats<span class="brand-dot">•</span></a>
   <div class="nav-links">
-    <a class="nav-link active" href="index.html">Discover</a>
+    <a class="nav-link" href="index.html">Discover</a>
     <a class="nav-link" href="deals.html">Deals</a>
     <a class="nav-link" href="events.html">Events</a>
-    <a class="nav-link" href="bookings.html">My Bookings</a>
+    <a class="nav-link active" href="bookings.html">My Bookings</a>
   </div>
   <div class="nav-spacer"></div>
   <div class="nav-city">📍 Fremont ▾</div>
@@ -208,133 +200,34 @@ img{max-width:100%;display:block}
   <div class="nav-btn primary">Get Started</div>
 </nav>
 
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-badge">● Indian Diaspora · California</div>
-    <h1 class="hero-title">Discover Indian food, deals,<br><em>and dining events near you.</em></h1>
-    <p class="hero-sub">Curated Indian restaurants, exclusive offers, and cultural dining events.</p>
-    <div class="search">
-      <div class="city">📍 Fremont ▾</div>
-      <input placeholder="Search dishes, cuisines, dietary needs, or deals">
-      <button>🔍 Search</button>
-    </div>
-    <div class="hero-pills">
-      <div class="hero-pill">🥩 Halal</div>
-      <div class="hero-pill">🌿 Pure Veg</div>
-      <div class="hero-pill">🪷 Jain</div>
-      <div class="hero-pill">🍛 Biryani</div>
-      <div class="hero-pill">🟢 Open Now</div>
-      <a class="hero-pill" href="deals.html">🏷️ All Deals →</a>
-    </div>
+<div class="wrap bookings-wrap">
+  <div class="book-head">
+    <a class="back-btn" href="index.html">← Back</a>
+    <div class="section-title" style="font-size:56px">My Bookings</div>
   </div>
-</section>
-
-<section class="home-banner">
-  <div class="wrap">
-    <div class="banner">
-      <div>
-        <div class="banner-kicker">🎨 Upcoming · Mar 13 2026</div>
-        <div class="banner-title">Upcoming Indian Dining Experiences</div>
-        <p class="banner-sub">Seasonal celebrations · Special menus · Cultural dining moments</p>
-      </div>
-      <a class="banner-btn" href="events.html">View Events →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="section-kicker">Live now</div>
-        <div class="section-title">Today's Best Deals</div>
-      </div>
-      <a class="section-link" href="deals.html">All 12 deals →</a>
-    </div>
-    <div class="deals-row">
-      <div class="deal-card"><div class="deal-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Charminar</div><div class="deal-meta">Hyderabadi · Biryani</div><div class="tag red">Non-Veg</div></div></div>
-      <div class="deal-card"><div class="deal-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Naga's Kitchen</div><div class="deal-meta">South Indian · Halal</div><div class="tag blue">Halal</div></div></div>
-      <div class="deal-card"><div class="deal-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Mylapore</div><div class="deal-meta">South Indian · Pure Veg</div><div class="tag">Pure Veg</div></div></div>
-      <div class="deal-card"><div class="deal-img"><div class="card-badge green">Buy 2 Dosas, Get 1 Free</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Meenakshi Bhavan</div><div class="deal-meta">South Indian · Pure Veg</div><div class="tag">Pure Veg</div></div></div>
-      <div class="deal-card"><div class="deal-img blue"><div class="card-badge gold">Lunch Special $12.99</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Kongunadu</div><div class="deal-meta">Kongu Nadu · Regional</div><div class="tag red">Non-Veg</div></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap discover-grid">
-    <aside class="sidebar">
-      <div class="side-sec">
-        <div class="side-head">City</div>
-        <div class="side-pill active"><span>🗺️ All Cities</span><span>5</span></div>
-        <div class="side-pill"><span>📍 Fremont</span><span>3</span></div>
-        <div class="side-pill"><span>📍 San Jose</span><span>2</span></div>
-        <div class="side-pill"><span>📍 Sunnyvale</span><span>0</span></div>
-        <div class="side-pill"><span>📍 Artesia</span><span>0</span></div>
-      </div>
-      <div class="side-sec">
-        <div class="side-head">Dietary</div>
-        <div class="filter-row">
-          <div class="filter active">All</div><div class="filter">Pure Veg</div><div class="filter">Halal</div><div class="filter">Jain OK</div><div class="filter">Non-Veg</div>
-        </div>
-      </div>
-      <div class="side-sec">
-        <div class="side-head">Open now</div>
-        <div class="side-pill"><span>🟢 Show only open</span><span>◯</span></div>
-        <div class="side-pill" style="justify-content:center;color:#8e7c6c">＋ More filters</div>
-      </div>
-    </aside>
-
+  <div class="tabs"><div class="tab active">Upcoming (1)</div><div class="tab">Past (2)</div></div>
+  <div class="booking-card">
+    <div class="booking-thumb"></div>
     <div>
-      <div class="section-head" style="margin-bottom:14px">
-        <div>
-          <div class="section-title">Restaurants in All Cities</div>
-          <div style="margin-top:6px;color:var(--muted);font-weight:700">5 restaurants · Best deals first</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center">
-          <div class="filter" style="padding:10px 12px">⊞</div>
-          <div class="filter" style="padding:10px 12px">☰</div>
-          <div class="filter" style="min-width:160px;justify-content:space-between;display:flex">Best Match <span>⌄</span></div>
-        </div>
-      </div>
-      <div class="filter-row">
-        <div class="filter active">All</div><div class="filter">🟢 Open Now</div><div class="filter">✅ Halal</div><div class="filter">🌿 Pure Veg</div><div class="filter">🪷 Jain OK</div><div class="filter">💰 Under $15</div><div class="filter">🗺️ Regional</div><div class="filter">🍛 Biryani</div>
-      </div>
-      <div class="rest-grid">
-        <div class="rest-card">
-          <div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div>
-          <div class="rest-body">
-            <div class="rest-top"><div class="rest-name">Charminar</div><div class="rest-rating">★ 4.6</div></div>
-            <div class="rest-meta">📍 Fremont · 25 min · $$</div>
-            <div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div>
-            <div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div>
-            <div class="rest-actions"><a class="btn-primary" href="bookings.html">Reserve Table →</a><button class="btn-secondary">Menu</button></div>
-          </div>
-        </div>
-        <div class="rest-card">
-          <div class="rest-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div>
-          <div class="rest-body">
-            <div class="rest-top"><div class="rest-name">Naga's Kitchen</div><div class="rest-rating">★ 4.8</div></div>
-            <div class="rest-meta">📍 Fremont · 15 min · $</div>
-            <div class="rest-tags"><div class="tag blue">Halal</div><div class="tag red">Non-Veg</div></div>
-            <div class="rest-desc">A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.</div>
-            <div class="rest-actions"><a class="btn-primary" href="bookings.html">Reserve Table →</a><button class="btn-secondary">Menu</button></div>
-          </div>
-        </div>
-        <div class="rest-card">
-          <div class="rest-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div>
-          <div class="rest-body">
-            <div class="rest-top"><div class="rest-name">Mylapore</div><div class="rest-rating">★ 4.3</div></div>
-            <div class="rest-meta">📍 Fremont · 20 min · $</div>
-            <div class="rest-tags"><div class="tag">Pure Veg</div><div class="tag" style="background:#fff2cb;color:#a67500">Jain OK</div></div>
-            <div class="rest-desc">Mylapore brings Chennai’s Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified.</div>
-            <div class="rest-actions"><a class="btn-primary" href="bookings.html">Reserve Table →</a><button class="btn-secondary">Menu</button></div>
-          </div>
-        </div>
-      </div>
+      <div class="booking-name">Charminar <span class="badge-success">✓ Upcoming</span></div>
+      <div class="booking-meta">Hyderabadi · Biryani · Fremont</div>
+      <div class="booking-meta">📅 Saturday, 8 Mar 2026 &nbsp; 🕖 7:00 PM &nbsp; 👥 2 guests</div>
+      <div class="badge-deal">🏷️ 20% OFF on all Biryani</div>
     </div>
+    <button class="booking-cancel">Cancel</button>
   </div>
-</section>
+  <div style="height:18px"></div>
+  <div class="booking-card">
+    <div class="booking-thumb"></div>
+    <div>
+      <div class="booking-name">Mylapore</div>
+      <div class="booking-meta">South Indian · Pure Veg · Fremont</div>
+      <div class="booking-meta">📅 Saturday, 2 Mar 2026 &nbsp; 🕖 1:00 PM &nbsp; 👥 3 guests</div>
+      <div class="badge-deal">🏷️ Thali Special $11.99</div>
+    </div>
+    <button class="booking-cancel" style="background:#fff;border-color:var(--line);color:#5b5046">View</button>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="wrap footer-top">
