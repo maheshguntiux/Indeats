@@ -201,6 +201,262 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   }
 }
 
+
+/* === V2 Deals hybrid redesign === */
+.pills-bar{
+  align-items:center;
+}
+.deals-row{
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:18px;
+}
+.deal-card{
+  display:flex;
+  flex-direction:column;
+  border-radius:22px;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.deal-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 36px rgba(17,24,39,.11);
+}
+.deal-card:active{
+  transform:translateY(-1px);
+}
+.deal-img{
+  height:122px;
+  padding:14px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+}
+.deal-card.hybrid-free .deal-img,
+.deal-card.hybrid-combo .deal-img{
+  background:linear-gradient(145deg,#0a1a08,#1c5b18,#166534);
+}
+.deal-card.hybrid-fixed .deal-img{
+  background:linear-gradient(145deg,#1a1200,#5b4300,#8a5310);
+}
+.deal-card.hybrid-percent .deal-img{
+  background:linear-gradient(145deg,#1a0800,#672200,#9b3a10);
+}
+.deal-card.hybrid-family .deal-img{
+  background:linear-gradient(145deg,#0a0a1d,#22206b,#2a237c);
+}
+.card-badge{
+  position:static;
+  display:inline-flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:2px;
+  padding:11px 14px;
+  min-height:64px;
+  max-width:86%;
+  border-radius:22px;
+  font-size:13px;
+  line-height:1.05;
+  font-weight:800;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+.card-badge strong{
+  font-size:18px;
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.card-badge span{
+  font-size:12px;
+  opacity:.96;
+}
+.card-badge.green{
+  background:rgba(28,143,62,.9);
+}
+.card-badge.gold{
+  background:rgba(184,129,10,.92);
+}
+.deal-body{
+  padding:14px 14px 15px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.deal-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+.deal-name{
+  font-size:15px;
+  line-height:1.15;
+  margin:0;
+  max-width:70%;
+}
+.deal-rating{
+  padding:6px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fcf5eb;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.deal-meta{
+  font-size:13px;
+  line-height:1.35;
+  margin-top:-2px;
+}
+.deal-signal{
+  font-size:12px;
+  font-weight:800;
+  color:#d4522f;
+}
+.tag{
+  margin-top:0;
+  width:max-content;
+  padding:6px 10px;
+}
+.deal-actions{
+  display:flex;
+  gap:8px;
+  margin-top:4px;
+}
+.deal-btn-primary,
+.deal-btn-secondary{
+  min-height:40px;
+  border-radius:13px;
+  padding:0 14px;
+  font-size:14px;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.deal-btn-primary{
+  flex:1;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#fff;
+}
+.deal-btn-secondary{
+  background:#f5efe6;
+  color:#2b2016;
+  border:1px solid var(--line);
+}
+@media (max-width:1100px){
+  .deals-row{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+@media (max-width:760px){
+  .pills-bar{
+    gap:10px;
+  }
+  .pills-bar .filter:last-child{
+    margin-left:0 !important;
+  }
+  .deals-row{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:14px;
+  }
+  .deal-img{
+    height:88px;
+    padding:10px;
+  }
+  .card-badge{
+    min-height:54px;
+    max-width:92%;
+    padding:9px 12px;
+    border-radius:20px;
+    gap:1px;
+  }
+  .card-badge strong{
+    font-size:14px;
+  }
+  .card-badge span{
+    font-size:11px;
+  }
+  .deal-body{
+    padding:12px 12px 13px;
+    gap:6px;
+  }
+  .deal-top{
+    gap:8px;
+  }
+  .deal-name{
+    font-size:13px;
+    max-width:68%;
+  }
+  .deal-rating{
+    padding:5px 8px;
+    font-size:11px;
+  }
+  .deal-meta{
+    font-size:11px;
+    line-height:1.28;
+  }
+  .deal-signal{
+    font-size:11px;
+  }
+  .tag{
+    font-size:10px;
+    padding:5px 9px;
+  }
+  .deal-actions{
+    gap:6px;
+  }
+  .deal-btn-primary,
+  .deal-btn-secondary{
+    min-height:34px;
+    font-size:12px;
+    border-radius:11px;
+    padding:0 10px;
+  }
+}
+
+
+/* === Deals V3 interactive chips === */
+.filter,
+.chip-sort{
+  transition:transform .18s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.filter:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(24,20,16,.06);
+}
+.filter:active{
+  transform:translateY(0);
+  box-shadow:0 3px 10px rgba(24,20,16,.05);
+}
+.filter.active{
+  box-shadow:0 10px 22px rgba(255,107,43,.16);
+}
+.deal-card.hidden{
+  display:none !important;
+}
+.deals-empty{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  font-weight:700;
+  color:#746759;
+  margin-top:20px;
+}
+@media (max-width:760px){
+  .pills-bar{
+    overflow-x:auto;
+    flex-wrap:nowrap !important;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:2px;
+  }
+  .pills-bar .filter{
+    flex:0 0 auto;
+  }
+}
+
 </style></head><body>
 
 <nav class="nav">
@@ -216,17 +472,170 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   <a class="nav-btn" href="bookings.html">Sign In</a>
   <a class="nav-btn primary" href="bookings.html">Get Started</a>
 </nav>
-<section class="page-hero"><div class="wrap"><div class="page-eyebrow">Live deals · Updated daily</div><h1 class="page-title">Deals that are actually <em>real.</em></h1><p class="page-sub">Every offer is verified with the restaurant. Auto-applied when you book — no coupon codes, no fine print.</p><div class="page-stats"><div>🟢 18 deals live right now</div><div>247 deals claimed this week</div><div>Avg saving $8.40 per booking</div></div></div></section>
-<div class="wrap"><div class="pills-bar"><a class="filter active" href="deals.html">All Deals</a><a class="filter" href="deals.html">% OFF</a><a class="filter" href="deals.html">Free Item</a><a class="filter" href="deals.html">Fixed Price</a><a class="filter" href="deals.html">Happy Hour</a><a class="filter" href="deals.html">Combos</a><a class="filter" href="deals.html">Festival</a><a class="filter" href="deals.html">🟢 Open Now</a><a style="margin-left:auto" class="filter" href="deals.html">Best Match ⌄</a></div>
-<section class="section" style="padding-top:28px"><div class="deals-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">
-<a class="deal-card" href="charminar.html"><div class="deal-img"><div class="card-badge">20% OFF on all Biryani</div></div><div class="deal-body"><div class="deal-name">Charminar</div><div class="deal-meta">Valid today until 10 PM</div><div class="tag red">Claimed 42x</div></div></a>
-<a class="deal-card" href="nagas-kitchen.html"><div class="deal-img green"><div class="card-badge green">Free Chai with any meal</div></div><div class="deal-body"><div class="deal-name">Naga's Kitchen</div><div class="deal-meta">Auto-applied on booking</div><div class="tag blue">Popular</div></div></a>
-<a class="deal-card" href="mylapore.html"><div class="deal-img gold"><div class="card-badge gold">Thali Special $11.99</div></div><div class="deal-body"><div class="deal-name">Mylapore</div><div class="deal-meta">Weekday lunch only</div><div class="tag">Pure Veg</div></div></a>
-<a class="deal-card" href="bookings.html"><div class="deal-img blue"><div class="card-badge gold">Lunch Special $12.99</div></div><div class="deal-body"><div class="deal-name">Kongunadu</div><div class="deal-meta">Weekdays 12–3 PM</div><div class="tag red">Regional</div></div></a>
-<a class="deal-card" href="bookings.html"><div class="deal-img"><div class="card-badge green">Buy 2 Dosas, Get 1 Free</div></div><div class="deal-body"><div class="deal-name">Meenakshi Bhavan</div><div class="deal-meta">Family special</div><div class="tag">Pure Veg</div></div></a>
-<a class="deal-card" href="bookings.html"><div class="deal-img green"><div class="card-badge green">Festival Combo Meal</div></div><div class="deal-body"><div class="deal-name">A2B</div><div class="deal-meta">Weekend only</div><div class="tag">Combo</div></div></a>
-<a class="deal-card" href="bookings.html"><div class="deal-img gold"><div class="card-badge gold">Masala Dosa + Coffee</div></div><div class="deal-body"><div class="deal-name">Saravana Bhavan</div><div class="deal-meta">Breakfast special</div><div class="tag">South Indian</div></div></a>
-<a class="deal-card" href="bookings.html"><div class="deal-img blue"><div class="card-badge">15% OFF Family Pack</div></div><div class="deal-body"><div class="deal-name">Paradise</div><div class="deal-meta">Dinner only</div><div class="tag red">Biryani</div></div></a>
+<section class="page-hero"><div class="wrap"><div class="page-eyebrow">Live deals · Updated daily</div><h1 class="page-title">Deals that are actually <em>real.</em></h1><p class="page-sub">Every offer is verified with the restaurant. Auto-applied when you book — no coupon codes, no fine print.</p><div class="page-stats"><div>🟢 18 deals live right now</div><div>247 deals claimed this week</div><div>Avg saving $8.40 per booking</div></div></div><div class="deals-empty" id="deals-empty">No deals match this filter right now.</div></section>
+<div class="wrap"><div class="pills-bar">
+  <a class="filter active deals-filter" href="#" data-filter="all">All Deals</a>
+  <a class="filter deals-filter" href="#" data-filter="open">🟢 Open Now</a>
+  <a class="filter deals-filter" href="#" data-filter="percent">% OFF</a>
+  <a class="filter deals-filter" href="#" data-filter="free">Free Item</a>
+  <a class="filter deals-filter" href="#" data-filter="fixed">Fixed Price</a>
+  <a class="filter deals-filter" href="#" data-filter="combo">Combos</a>
+  <a class="filter deals-filter" href="#" data-filter="happy">Happy Hour</a>
+  <a class="filter deals-filter" href="#" data-filter="festival">Festival</a>
+  <a style="margin-left:auto" class="filter chip-sort" href="#">Best Match ⌄</a>
+</div>
+<section class="section" style="padding-top:28px"><div class="deals-row">
+<a class="deal-card hybrid-percent" data-type="percent" data-open="true" data-tags="biryani" href="charminar.html">
+  <div class="deal-img">
+    <div class="card-badge"><strong>20% OFF</strong><span>All Biryani</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Charminar</div>
+      <div class="deal-rating">★ 4.6</div>
+    </div>
+    <div class="deal-meta">Valid today until 10 PM</div>
+    <div class="deal-signal">🔥 Claimed 42 times today</div>
+    <div class="tag red">Biryani</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-free" data-type="free" data-open="true" data-tags="popular" href="nagas-kitchen.html">
+  <div class="deal-img">
+    <div class="card-badge green"><strong>Free Chai</strong><span>with any meal</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Naga's Kitchen</div>
+      <div class="deal-rating">★ 4.8</div>
+    </div>
+    <div class="deal-meta">Auto-applied when you book</div>
+    <div class="deal-signal">⚡ Popular with dinner bookings</div>
+    <div class="tag blue">Popular</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-fixed" data-type="fixed" data-open="true" data-tags="pure veg" href="mylapore.html">
+  <div class="deal-img gold">
+    <div class="card-badge gold"><strong>$11.99</strong><span>Thali Special</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Mylapore</div>
+      <div class="deal-rating">★ 4.3</div>
+    </div>
+    <div class="deal-meta">Weekday lunch only</div>
+    <div class="deal-signal">🕒 Best before 3 PM</div>
+    <div class="tag">Pure Veg</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-fixed hybrid-family" data-type="happy" data-open="false" data-tags="regional" href="bookings.html">
+  <div class="deal-img blue">
+    <div class="card-badge gold"><strong>$12.99</strong><span>Lunch Special</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Kongunadu</div>
+      <div class="deal-rating">★ 4.5</div>
+    </div>
+    <div class="deal-meta">Weekdays 12–3 PM</div>
+    <div class="deal-signal">📍 Great for office lunch breaks</div>
+    <div class="tag red">Regional</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-free" data-type="combo" data-open="true" data-tags="pure veg" href="bookings.html">
+  <div class="deal-img">
+    <div class="card-badge green"><strong>Buy 2, Get 1</strong><span>Dosa combo</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Meenakshi Bhavan</div>
+      <div class="deal-rating">★ 4.4</div>
+    </div>
+    <div class="deal-meta">Family special</div>
+    <div class="deal-signal">👨‍👩‍👧 Works best for group orders</div>
+    <div class="tag">Pure Veg</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-free" data-type="festival" data-open="false" data-tags="combo festival" href="bookings.html">
+  <div class="deal-img green">
+    <div class="card-badge green"><strong>Festival Combo</strong><span>Meal deal</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">A2B</div>
+      <div class="deal-rating">★ 4.5</div>
+    </div>
+    <div class="deal-meta">Weekend only</div>
+    <div class="deal-signal">🎉 Limited festive menu pricing</div>
+    <div class="tag">Combo</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-fixed" data-type="fixed" data-open="true" data-tags="south indian" href="bookings.html">
+  <div class="deal-img gold">
+    <div class="card-badge gold"><strong>Dosa + Coffee</strong><span>Breakfast pair</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Saravana Bhavan</div>
+      <div class="deal-rating">★ 4.6</div>
+    </div>
+    <div class="deal-meta">Breakfast special</div>
+    <div class="deal-signal">☀️ Best before 11 AM</div>
+    <div class="tag">South Indian</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
+
+<a class="deal-card hybrid-family" data-type="percent" data-open="true" data-tags="biryani family" href="bookings.html">
+  <div class="deal-img blue">
+    <div class="card-badge"><strong>15% OFF</strong><span>Family Pack</span></div>
+  </div>
+  <div class="deal-body">
+    <div class="deal-top">
+      <div class="deal-name">Paradise</div>
+      <div class="deal-rating">★ 4.4</div>
+    </div>
+    <div class="deal-meta">Dinner only</div>
+    <div class="deal-signal">🔥 Popular for weekend takeout</div>
+    <div class="tag red">Biryani</div>
+    <div class="deal-actions">
+      <div class="deal-btn-primary">Unlock Deal</div>
+      <div class="deal-btn-secondary">Menu</div>
+    </div>
+  </div>
+</a>
 </div></section></div>
 <footer class="footer">
   <div class="wrap footer-top">
@@ -260,4 +669,50 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
     <div>Privacy · Terms</div>
   </div>
 </footer>
+
+<script>
+(function(){
+  const state = { filter: 'all' };
+  const cards = Array.from(document.querySelectorAll('.deal-card'));
+  const emptyEl = document.getElementById('deals-empty');
+
+  function matches(card){
+    const type = (card.dataset.type || '').toLowerCase();
+    const open = (card.dataset.open || '').toLowerCase() === 'true';
+    const tags = (card.dataset.tags || '').toLowerCase();
+
+    if(state.filter === 'all') return true;
+    if(state.filter === 'open') return open;
+    if(['percent','free','fixed','combo','happy','festival'].includes(state.filter)) return type === state.filter;
+    return tags.includes(state.filter);
+  }
+
+  function render(){
+    let visible = 0;
+    cards.forEach(card => {
+      const show = matches(card);
+      card.classList.toggle('hidden', !show);
+      if(show) visible += 1;
+    });
+
+    document.querySelectorAll('.deals-filter').forEach(chip => {
+      chip.classList.toggle('active', chip.dataset.filter === state.filter);
+    });
+
+    if(emptyEl) emptyEl.style.display = visible ? 'none' : 'block';
+  }
+
+  document.querySelectorAll('.deals-filter').forEach(chip => {
+    chip.addEventListener('click', function(e){
+      e.preventDefault();
+      const next = this.dataset.filter;
+      state.filter = state.filter === next ? 'all' : next;
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
 </body></html>
