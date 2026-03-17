@@ -210,232 +210,518 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .open-filter.active .open-indicator{color:#4ade80}
 
 
-/* Discover completion review */
-.hero-badge:empty{display:none}
-.hero{padding-bottom:84px!important}
-.hero-title{max-width:860px}
-.shortcuts-section{
-  background:#04192a;
-  padding:0 0 30px;
-  margin-top:-8px;
-}
-.shortcuts-head{
-  text-align:center;
-  margin-bottom:14px;
-}
-.shortcuts-copy{
-  color:rgba(255,255,255,.68);
-  font-weight:600;
-  font-size:15px;
-  margin-top:6px;
-}
-.shortcuts-row{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
-}
-.shortcut-chip{
-  display:inline-flex;
-  align-items:center;
-  padding:12px 16px;
-  border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.09);
-  color:#f2efe9;
-  font-weight:700;
-  transition:.18s ease;
-}
-.shortcut-chip:hover{
-  transform:translateY(-1px);
-  background:rgba(255,255,255,.08);
-}
-.section-events{padding-top:20px}
-.section{padding-top:42px}
-.section-subtitle{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:15px;
-  font-weight:600;
-}
-.deals-row{margin-top:18px}
-.discover-grid{gap:30px}
-.sidebar{
-  opacity:.92;
-  background:rgba(255,255,255,.82);
-  backdrop-filter:blur(10px);
-  border-color:#eadfd1;
-}
-.city-summary{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:0 0 10px;
-}
-.city-chip{
-  display:inline-flex;
-  align-items:center;
-  padding:8px 12px;
-  border-radius:999px;
-  background:#fff3e8;
-  color:var(--accent);
-  border:1px solid #f4cfb5;
-  font-weight:800;
-  font-size:12px;
-}
-.quick-note{
-  color:var(--muted);
-  font-weight:700;
-  font-size:14px;
-}
-.social-proof{
-  display:inline-flex;
-  margin-top:8px;
-  padding:5px 9px;
-  border-radius:999px;
-  background:#fff3e8;
-  border:1px solid #ffd7b5;
-  color:var(--accent);
-  font-size:11px;
-  font-weight:800;
-}
-.deal-signal{
-  margin-top:10px;
-  color:#5d4d3e;
-  font-weight:800;
-  font-size:13px;
-}
-.rest-body{min-height:255px}
-.compact-feature{
-  margin-top:26px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  display:grid;
-  grid-template-columns:320px 1fr;
-}
-.compact-feature-media{
-  background:
-    radial-gradient(circle at 25% 25%, rgba(255,255,255,.12), transparent 22%),
-    linear-gradient(145deg,#210d00,#662600,#a44619);
-  min-height:220px;
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.compact-badge-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-.compact-pill{
-  display:inline-flex;
-  align-items:center;
-  padding:8px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);
-  color:#fff;
-  font-size:12px;
-  font-weight:800;
-}
-.compact-name{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:42px;
-  line-height:.95;
-  color:#fff;
-  margin:0;
-}
-.compact-meta{
-  color:rgba(255,255,255,.84);
-  font-size:15px;
-  margin-top:8px;
-}
-.compact-feature-body{
-  padding:24px 26px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.compact-kicker{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:#9a8365;
-  font-weight:800;
-}
-.compact-title{
-  margin-top:6px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:28px;
-  line-height:1.08;
-}
-.compact-copy{
-  margin-top:10px;
-  color:#6e6357;
-  line-height:1.7;
-  font-size:16px;
-}
-.compact-stats{
-  margin-top:14px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.compact-stats span{
-  display:inline-flex;
-  padding:8px 12px;
-  border-radius:999px;
-  background:#faf5ee;
-  border:1px solid var(--line);
-  font-weight:700;
-  color:#5e5245;
-  font-size:13px;
-}
-.compact-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:18px;
-}
-@media (max-width: 1200px){
-  .deals-row{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .rest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width: 980px){
-  .discover-grid{grid-template-columns:1fr}
-  .sidebar{order:2}
-  .compact-feature{grid-template-columns:1fr}
-}
-@media (max-width: 768px){
-  .hero{padding:56px 0 72px!important}
-  .hero-title{font-size:42px!important}
-  .hero-sub{font-size:16px}
-  .search{
-    grid-template-columns:1fr!important;
-    border-radius:20px!important;
-  }
-  .search .city{
-    border-right:none!important;
-    border-bottom:1px solid #eee!important;
-    justify-content:flex-start!important;
-    padding:0 18px!important;
-  }
-  .search input{min-height:54px}
-  .search button{min-height:54px}
-  .banner{flex-direction:column;align-items:flex-start}
-  .banner-btn{width:100%;justify-content:center}
-  .deals-row,.rest-grid{grid-template-columns:1fr!important}
-  .compact-name{font-size:38px}
-  .compact-title{font-size:24px}
-  .shortcuts-row{justify-content:flex-start}
+/* ==== Discover V4 (No Deals, Clean Apple Style) ==== */
+
+.discover-v4-full{
+  max-width:1320px;
 }
 
-</style></head><body>
+.discover-v4-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:20px 0 26px;
+}
+
+.rest-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:28px !important;
+}
+
+.rest-img{
+  height:160px !important;
+}
+
+.rest-body{
+  min-height:220px !important;
+  padding:14px !important;
+}
+
+.rest-name{
+  font-size:24px !important;
+}
+
+.rest-desc{
+  font-size:14px;
+  line-height:1.45;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.section{
+  padding-top:36px !important;
+}
+
+@media (max-width:1100px){
+  .rest-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media (max-width:760px){
+  .rest-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+
+/* ==== Discover V4 header alignment fix ==== */
+.discover-v4-filters{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:16px !important;
+  flex-wrap:nowrap !important;
+}
+.discover-v4-filters .filter{
+  margin:0 !important;
+}
+.discover-v4-filters-left{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  flex:1;
+}
+.discover-v4-filters-right{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  min-width:170px;
+}
+@media (max-width:980px){
+  .discover-v4-filters{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+  .discover-v4-filters-right{
+    min-width:unset;
+    width:100%;
+    justify-content:flex-start;
+  }
+}
+
+
+/* Truck section consistency */
+.truck-grid .rest-img{
+  height:140px !important;
+}
+.truck-grid .rest-body{
+  min-height:180px !important;
+}
+
+
+/* ==== Mobile chips fix preview ==== */
+@media (max-width: 760px){
+  .discover-v4-filters,
+  .discover-v4-filters-left{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    gap:8px !important;
+    align-items:center !important;
+  }
+
+  .discover-v4-filters{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    margin:14px 0 18px !important;
+  }
+
+  .discover-v4-filters-right{
+    width:100% !important;
+    min-width:unset !important;
+    justify-content:flex-start !important;
+    margin-bottom:6px !important;
+  }
+
+  .filter,
+  .top-filter{
+    padding:8px 12px !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    min-height:38px !important;
+    border-radius:999px !important;
+  }
+
+  .chip-sort{
+    min-width:auto !important;
+    width:auto !important;
+    padding:10px 14px !important;
+    font-size:13px !important;
+  }
+
+  .section-title{
+    line-height:1.02 !important;
+  }
+
+  #restaurants-subtitle{
+    margin-top:4px !important;
+    margin-bottom:2px !important;
+  }
+}
+
+
+/* ==== Mobile layout fix V2 ==== */
+@media (max-width: 760px){
+  .section-head{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:10px !important;
+  }
+
+  .discover-v4-filters,
+  .discover-v4-filters-left{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:wrap !important;
+    align-items:center !important;
+    gap:8px !important;
+    width:100% !important;
+  }
+
+  .discover-v4-filters{
+    margin:14px 0 18px !important;
+  }
+
+  .discover-v4-filters-right{
+    display:flex !important;
+    width:100% !important;
+    justify-content:flex-start !important;
+    margin:0 0 10px !important;
+    order:-1 !important;
+  }
+
+  .filter,
+  .top-filter{
+    display:inline-flex !important;
+    width:auto !important;
+    flex:0 0 auto !important;
+    padding:8px 12px !important;
+    min-height:38px !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+
+  .chip-sort{
+    width:auto !important;
+    min-width:160px !important;
+  }
+}
+
+
+
+/* ==== Mobile chip structure fix ==== */
+.discover-v4-filters-mobile{
+  display:flex !important;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin:20px 0 26px;
+}
+
+.discover-v4-filters-mobile .chip-sort{
+  min-width:160px;
+  justify-content:space-between;
+  display:inline-flex;
+  align-items:center;
+}
+
+@media (max-width:760px){
+  .section-head-mobile{
+    margin-bottom:10px !important;
+  }
+
+  .discover-v4-filters-mobile{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch;
+    gap:8px !important;
+    margin:14px -16px 18px !important;
+    padding:0 16px 6px !important;
+    width:calc(100% + 32px) !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    scrollbar-width:none;
+  }
+
+  .discover-v4-filters-mobile::-webkit-scrollbar{
+    display:none;
+  }
+
+  .discover-v4-filters-mobile .filter,
+  .discover-v4-filters-mobile .top-filter,
+  .discover-v4-filters-mobile .chip-sort{
+    display:inline-flex !important;
+    flex:0 0 auto !important;
+    width:auto !important;
+    white-space:nowrap !important;
+    min-height:38px !important;
+    padding:8px 12px !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    border-radius:999px !important;
+    align-items:center !important;
+  }
+
+  .discover-v4-filters-mobile .chip-sort{
+    min-width:auto !important;
+  }
+}
+
+/* ==== Mobile chips alignment fix v2 ==== */
+.discover-v4-sort-row{
+  margin-bottom:12px;
+}
+.discover-v4-chip-rows{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+}
+.discover-v4-chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+@media (max-width: 760px){
+  .discover-v4-filters-mobile{
+    display:block !important;
+    margin:14px 0 20px !important;
+  }
+
+  .discover-v4-sort-row{
+    display:flex;
+    justify-content:flex-start;
+  }
+
+  .discover-v4-sort-row .chip-sort{
+    min-width:190px !important;
+    padding:10px 18px !important;
+    font-size:15px !important;
+  }
+
+  .discover-v4-chip-row-1,
+  .discover-v4-chip-row-2{
+    flex-wrap:nowrap;
+  }
+
+  .discover-v4-chip-row-2{
+    padding-left:110px;
+  }
+}
+
+
+
+/* ==== Desktop restore + mobile-specific chip layout ==== */
+.discover-v4-filters-mobile{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:14px !important;
+  margin:20px 0 26px !important;
+}
+
+.discover-v4-sort-row{
+  display:flex;
+  align-items:center;
+  margin-bottom:0 !important;
+  flex:0 0 auto;
+}
+
+.discover-v4-chip-rows{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px 12px;
+  flex:1 1 auto;
+  min-width:0;
+}
+
+.discover-v4-chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+.discover-v4-chip-row-2{
+  padding-left:0 !important;
+}
+
+@media (min-width: 761px){
+  .discover-v4-chip-rows{
+    flex-direction:row;
+  }
+
+  .discover-v4-chip-row-1,
+  .discover-v4-chip-row-2{
+    flex-wrap:wrap !important;
+  }
+}
+
+@media (max-width: 760px){
+  .discover-v4-filters-mobile{
+    display:block !important;
+    margin:14px 0 18px !important;
+  }
+
+  .discover-v4-sort-row{
+    margin-bottom:10px;
+  }
+
+  .discover-v4-sort-row .chip-sort{
+    min-width:160px !important;
+    font-size:13px !important;
+    padding:8px 14px !important;
+  }
+
+  .discover-v4-chip-row{
+    gap:8px;
+  }
+
+  .discover-v4-chip-row .filter,
+  .discover-v4-chip-row .top-filter{
+    display:inline-flex !important;
+    width:auto !important;
+    flex:0 0 auto !important;
+    white-space:nowrap !important;
+    min-height:38px !important;
+    padding:8px 12px !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    border-radius:999px !important;
+    align-items:center !important;
+  }
+
+  .discover-v4-chip-row-1{
+    flex-wrap:wrap;
+  }
+
+  .discover-v4-chip-row-2{
+    flex-wrap:wrap;
+    padding-left:72px;
+  }
+}
+
+
+        /* V6 compact cards */
+        .restaurant-card,
+        .truck-card {
+            max-width: none;
+        }
+
+        .restaurant-image,
+        .truck-image {
+            height: 138px !important;
+        }
+
+        .restaurant-content,
+        .truck-content {
+            padding: 14px 14px 12px !important;
+        }
+
+        .restaurant-title,
+        .truck-title {
+            font-size: 16px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 8px !important;
+        }
+
+        .restaurant-meta,
+        .truck-meta {
+            font-size: 12px !important;
+            margin-bottom: 8px !important;
+        }
+
+        .restaurant-description,
+        .truck-description {
+            display: none !important;
+        }
+
+        .tags-row,
+        .truck-tags {
+            gap: 6px !important;
+            margin-bottom: 10px !important;
+            flex-wrap: nowrap !important;
+            overflow: hidden !important;
+        }
+
+        .tag,
+        .truck-tag {
+            font-size: 11px !important;
+            padding: 4px 8px !important;
+            white-space: nowrap !important;
+        }
+
+        .card-actions,
+        .truck-actions {
+            gap: 8px !important;
+            margin-top: 0 !important;
+        }
+
+        .reserve-button,
+        .primary-button {
+            height: 40px !important;
+            font-size: 14px !important;
+            border-radius: 12px !important;
+        }
+
+        .menu-button,
+        .secondary-button {
+            height: 40px !important;
+            min-width: 72px !important;
+            font-size: 14px !important;
+            border-radius: 12px !important;
+            padding: 0 14px !important;
+        }
+
+        .rating-badge,
+        .card-rating {
+            padding: 6px 10px !important;
+            font-size: 13px !important;
+        }
+
+        @media (min-width: 769px) {
+            .restaurant-grid,
+            .truck-grid {
+                gap: 20px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .restaurant-image,
+            .truck-image {
+                height: 124px !important;
+            }
+
+            .restaurant-content,
+            .truck-content {
+                padding: 12px 12px 10px !important;
+            }
+
+            .restaurant-title,
+            .truck-title {
+                font-size: 15px !important;
+            }
+
+            .reserve-button,
+            .primary-button,
+            .menu-button,
+            .secondary-button {
+                height: 38px !important;
+                font-size: 13px !important;
+            }
+        }
+
+    </style></head><body>
 
 <nav class="nav">
   <a class="brand" href="index.html">Indeats<span class="brand-dot">•</span></a>
@@ -457,28 +743,112 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 <form class="search" action="deals.html"><div class="city">📍 Fremont ▾</div><input placeholder="Search dishes, cuisines, dietary needs, or deals"><button type="submit">🔍 Search</button></form>
 </div></section>
 <section class="home-banner"><div class="wrap"><div class="banner"><div><div class="banner-kicker">🎨 Upcoming · Mar 13 2026</div><div class="banner-title">Upcoming Indian Dining Experiences</div><p class="banner-sub">Seasonal celebrations · Special menus · Cultural dining moments</p></div><a class="banner-btn" href="events.html">View Events →</a></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head"><div><div class="section-kicker">Live now</div><div class="section-title">Trending Deals Tonight</div><div class="section-subtitle">Top offers diners are booking right now.</div></div><a class="section-link" href="deals.html">All 12 deals →</a></div><div class="deals-row">
-<a class="deal-card" href="deals.html"><div class="deal-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Charminar</div><div class="deal-meta">Hyderabadi · Biryani</div><div class="tag red">Non-Veg</div></div></a>
-<a class="deal-card" href="deals.html"><div class="deal-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Naga's Kitchen</div><div class="deal-meta">South Indian · Halal</div><div class="tag blue">Halal</div></div></a>
-<a class="deal-card" href="deals.html"><div class="deal-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Mylapore</div><div class="deal-meta">South Indian · Pure Veg</div><div class="tag">Pure Veg</div></div></a>
-<a class="deal-card" href="deals.html"><div class="deal-img"><div class="card-badge green">Buy 2 Dosas, Get 1 Free</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Meenakshi Bhavan</div><div class="deal-meta">South Indian · Pure Veg</div><div class="tag">Pure Veg</div></div></a>
-<a class="deal-card" href="deals.html"><div class="deal-img blue"><div class="card-badge gold">Lunch Special $12.99</div><div class="card-heart">♡</div></div><div class="deal-body"><div class="deal-name">Kongunadu</div><div class="deal-meta">Kongu Nadu · Regional</div><div class="tag red">Non-Veg</div></div></a>
-</div></div></section>
-<section class="section"><div class="wrap discover-grid">
-<aside class="sidebar">
-<div class="side-sec"><div class="side-head">City</div><a class="side-pill active city-filter" href="#" data-city="all"><span>🗺️ All Cities</span><span>5</span></a><a class="side-pill city-filter" href="#" data-city="fremont"><span>📍 Fremont</span><span>3</span></a><a class="side-pill city-filter" href="#" data-city="san jose"><span>📍 San Jose</span><span>2</span></a><a class="side-pill city-filter" href="#" data-city="sunnyvale"><span>📍 Sunnyvale</span><span>0</span></a><a class="side-pill city-filter" href="#" data-city="artesia"><span>📍 Artesia</span><span>0</span></a></div>
-<div class="side-sec"><div class="side-head">Dietary</div></div>
-<div class="side-sec"><div class="side-head">Open now</div><a class="side-pill open-filter" href="#" data-open="false"><span>🟢 Show only open</span><span class="open-indicator">◯</span></a><a class="side-pill" href="deals.html" style="justify-content:center;color:#8e7c6c">＋ More filters</a></div>
-</aside>
+
+<section class="section"><div class="wrap discover-v4-full">
+
 <div>
-<div class="section-head discover-head" style="margin-bottom:14px"><div><div class="city-summary"><span class="city-chip">Recommended for tonight</span><span class="quick-note">Start with quick wins, then narrow by diet, cuisine, price, or city.</span></div><div class="section-title" id="restaurants-title">Restaurants Near Fremont</div><div id="restaurants-subtitle" style="margin-top:6px;color:var(--muted);font-weight:700">3 restaurants · Best deals first</div></div><div style="display:flex;gap:12px;align-items:center"><div class="filter" style="padding:10px 12px">⊞</div><div class="filter" style="padding:10px 12px">☰</div><a class="filter" href="deals.html" style="min-width:160px;justify-content:space-between;display:flex">Best Match <span>⌄</span></a></div></div>
-<div class="filter-row"><a class="filter active top-filter" href="#" data-top="all">All</a><a class="filter top-filter" href="#" data-top="open">🟢 Open Now</a><a class="filter top-filter" href="#" data-top="halal">✅ Halal</a><a class="filter top-filter" href="#" data-top="pure veg">🌿 Pure Veg</a><a class="filter top-filter" href="#" data-top="jain ok">🪷 Jain OK</a><a class="filter top-filter" href="#" data-top="under15">💰 Under $15</a><a class="filter top-filter" href="#" data-top="biryani">🍛 Biryani</a><a class="filter top-filter" href="#" data-top="regional">🗺️ Regional</a></div>
+<div class="section-head section-head-mobile" style="margin-bottom:14px"><div><div class="section-title" id="restaurants-title">Restaurants in All Cities</div><div id="restaurants-subtitle" style="margin-top:6px;color:var(--muted);font-weight:700">3 restaurants · Best deals first</div></div></div>
+<div class="discover-v4-filters discover-v4-filters-mobile">
+  <div class="discover-v4-sort-row">
+    <a class="filter chip-sort" href="deals.html">Best Match <span>⌄</span></a>
+  </div>
+  <div class="discover-v4-chip-rows">
+    <div class="discover-v4-chip-row discover-v4-chip-row-1">
+      <a class="filter active top-filter" href="#" data-top="all">All</a>
+      <a class="filter top-filter" href="#" data-top="open">🟢 Open Now</a>
+      <a class="filter top-filter" href="#" data-top="halal">✅ Halal</a>
+      <a class="filter top-filter" href="#" data-top="pure veg">🌿 Pure Veg</a>
+      <a class="filter top-filter" href="#" data-top="jain ok">🪷 Jain OK</a>
+    </div>
+    <div class="discover-v4-chip-row discover-v4-chip-row-2">
+      <a class="filter top-filter" href="#" data-top="under15">💰 Under $15</a>
+      <a class="filter top-filter" href="#" data-top="regional">🗺️ Regional</a>
+      <a class="filter top-filter" href="#" data-top="biryani">🍛 Biryani</a>
+    </div>
+  </div>
+</div>
 <div id="no-results" style="display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;font-weight:700;color:#746759;margin-bottom:18px">No restaurants match this filter yet.</div><div class="rest-grid" id="restaurants-grid">
-<a class="rest-card restaurant-card" href="charminar.html" data-city="fremont" data-diets="non-veg halal" data-open="true" data-price="$$" data-tags="biryani"><div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div><div class="rest-name">Charminar</div><div class="social-proof">Popular tonight</div></div><div class="rest-rating">★ 4.6</div></div><div class="rest-meta">📍 Fremont · 25 min · $$</div><div class="deal-signal">🔥 20% OFF on all biryani today</div><div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div><div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
-<a class="rest-card restaurant-card" href="nagas-kitchen.html" data-city="fremont" data-diets="halal non-veg" data-open="true" data-price="$" data-tags="south indian"><div class="rest-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Naga's Kitchen</div><div class="rest-rating">★ 4.8</div></div><div class="rest-meta">📍 Fremont · 15 min · $</div><div class="rest-tags"><div class="tag blue">Halal</div><div class="tag red">Non-Veg</div></div><div class="rest-desc">A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
-<a class="rest-card restaurant-card" href="mylapore.html" data-city="fremont" data-diets="pure veg jain ok" data-open="true" data-price="$" data-tags="regional under15"><div class="rest-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Mylapore</div><div class="rest-rating">★ 4.3</div></div><div class="rest-meta">📍 Fremont · 20 min · $</div><div class="rest-tags"><div class="tag">Pure Veg</div><div class="tag" style="background:#fff2cb;color:#a67500">Jain OK</div></div><div class="rest-desc">Mylapore brings Chennai’s Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified.</div><div class="rest-actions"><span class="btn-primary">View Restaurant →</span><span class="btn-secondary">Menu</span></div></div></a>
+<a class="rest-card restaurant-card" href="bookings.html" data-city="fremont" data-diets="non-veg halal" data-open="true" data-price="$$" data-tags="biryani"><div class="rest-img"><div class="card-badge">20% OFF on all Biryani</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Charminar</div><div class="rest-rating">★ 4.6</div></div><div class="rest-meta">📍 Fremont · 25 min · $$</div><div class="rest-tags"><div class="tag red">Non-Veg</div><div class="tag blue">Halal</div></div><div class="rest-desc">One of Fremont's most beloved Indian restaurants, Charminar has been serving authentic Hyderabadi dum biryani since 2003.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
+<a class="rest-card restaurant-card" href="bookings.html" data-city="fremont" data-diets="halal non-veg" data-open="true" data-price="$" data-tags="south indian"><div class="rest-img green"><div class="card-badge green">Free Chai with any meal</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Naga's Kitchen</div><div class="rest-rating">★ 4.8</div></div><div class="rest-meta">📍 Fremont · 15 min · $</div><div class="rest-tags"><div class="tag blue">Halal</div><div class="tag red">Non-Veg</div></div><div class="rest-desc">A hidden gem in Fremont run by a Tamil family since 2018. The chai here is legendary.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
+<a class="rest-card restaurant-card" href="bookings.html" data-city="fremont" data-diets="pure veg jain ok" data-open="true" data-price="$" data-tags="regional under15"><div class="rest-img gold"><div class="card-badge gold">Thali Special $11.99</div><div class="card-heart">♡</div></div><div class="rest-body"><div class="rest-top"><div class="rest-name">Mylapore</div><div class="rest-rating">★ 4.3</div></div><div class="rest-meta">📍 Fremont · 20 min · $</div><div class="rest-tags"><div class="tag">Pure Veg</div><div class="tag" style="background:#fff2cb;color:#a67500">Jain OK</div></div><div class="rest-desc">Mylapore brings Chennai’s Mylapore neighborhood to Fremont. Fully vegetarian and Jain-certified.</div><div class="rest-actions"><span class="btn-primary">Reserve Table →</span><span class="btn-secondary">Menu</span></div></div></a>
 </div>
 </div></div></section>
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:14px">
+      <div>
+        <div class="section-kicker">Explore more</div>
+        <div class="section-title">Indian Street & Truck Food</div>
+        <div style="margin-top:6px;color:var(--muted);font-weight:700">
+          Quick bites · Street favorites · Late night eats
+        </div>
+      </div>
+      <a class="section-link" href="deals.html">View all trucks →</a>
+    </div>
+
+    <div class="rest-grid truck-grid">
+
+      <a class="rest-card">
+        <div class="rest-img" style="background:linear-gradient(145deg,#1a0800,#ff7a00,#ffb347)"></div>
+        <div class="rest-body">
+          <div class="rest-top">
+            <div class="rest-name">Mumbai Tadka Truck</div>
+            <div class="rest-rating">★ 4.7</div>
+          </div>
+          <div class="rest-meta">📍 Fremont · 10 min · $</div>
+          <div class="rest-tags">
+            <div class="tag">Pav Bhaji</div>
+            <div class="tag">Vada Pav</div>
+          </div>
+          <div class="rest-actions">
+            <span class="btn-primary">View Truck →</span>
+            <span class="btn-secondary">Menu</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="rest-card">
+        <div class="rest-img green"></div>
+        <div class="rest-body">
+          <div class="rest-top">
+            <div class="rest-name">Chennai Eats</div>
+            <div class="rest-rating">★ 4.6</div>
+          </div>
+          <div class="rest-meta">📍 Sunnyvale · 12 min · $</div>
+          <div class="rest-tags">
+            <div class="tag">Dosa</div>
+            <div class="tag">Kothu</div>
+          </div>
+          <div class="rest-actions">
+            <span class="btn-primary">View Truck →</span>
+            <span class="btn-secondary">Menu</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="rest-card">
+        <div class="rest-img gold"></div>
+        <div class="rest-body">
+          <div class="rest-top">
+            <div class="rest-name">Delhi Chaat Van</div>
+            <div class="rest-rating">★ 4.8</div>
+          </div>
+          <div class="rest-meta">📍 San Jose · 8 min · $</div>
+          <div class="rest-tags">
+            <div class="tag">Chaat</div>
+            <div class="tag">Golgappa</div>
+          </div>
+          <div class="rest-actions">
+            <span class="btn-primary">View Truck →</span>
+            <span class="btn-secondary">Menu</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 
 <footer class="footer">
   <div class="wrap footer-top">
