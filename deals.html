@@ -245,6 +245,133 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   }
 }
 
+
+/* === Deals mobile responsive card fix === */
+@media (max-width: 768px) {
+  .deals-row,
+  .cards-grid,
+  .deals-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .deal-card {
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    min-height: auto !important;
+  }
+
+  .deal-img,
+  .deal-hero,
+  .card-top {
+    height: 86px !important;
+    min-height: 86px !important;
+    padding: 10px !important;
+  }
+
+  .card-badge,
+  .deal-badge,
+  .offer-badge {
+    max-width: 88% !important;
+    padding: 8px 10px !important;
+    border-radius: 18px !important;
+    min-height: auto !important;
+    gap: 2px !important;
+  }
+
+  .card-badge strong,
+  .deal-badge strong,
+  .offer-badge strong {
+    font-size: 13px !important;
+    line-height: 1.05 !important;
+  }
+
+  .card-badge span,
+  .deal-badge span,
+  .offer-badge span {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+  }
+
+  .deal-body,
+  .card-body {
+    padding: 12px 12px 14px !important;
+    gap: 6px !important;
+  }
+
+  .deal-top,
+  .card-head {
+    gap: 8px !important;
+    align-items: flex-start !important;
+  }
+
+  .deal-name,
+  .card-title,
+  .deal-card h3 {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.02em !important;
+    margin: 0 !important;
+  }
+
+  .deal-rating,
+  .rating-badge {
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    align-self: flex-start !important;
+  }
+
+  .deal-meta,
+  .deal-card p,
+  .card-meta {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+  }
+
+  .deal-signal {
+    font-size: 10.5px !important;
+    line-height: 1.2 !important;
+  }
+
+  .tag,
+  .deal-tag {
+    font-size: 10px !important;
+    padding: 5px 9px !important;
+    border-radius: 999px !important;
+  }
+
+  .deal-actions,
+  .card-actions {
+    display: flex !important;
+    gap: 6px !important;
+    margin-top: 2px !important;
+  }
+
+  .deal-btn-primary,
+  .deal-btn-secondary,
+  .primary-button,
+  .secondary-button {
+    min-height: 34px !important;
+    height: 34px !important;
+    font-size: 12px !important;
+    border-radius: 11px !important;
+    padding: 0 10px !important;
+  }
+
+  .deal-btn-primary,
+  .primary-button {
+    flex: 1 1 auto !important;
+  }
+
+  .deal-btn-secondary,
+  .secondary-button {
+    flex: 0 0 auto !important;
+    min-width: 64px !important;
+  }
+}
+
 </style></head><body>
 
 <nav class="nav">
