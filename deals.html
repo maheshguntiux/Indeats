@@ -286,29 +286,21 @@ img { max-width: 100%; display: block; }
 
 .page-body { padding-top: 48px; padding-bottom: 80px; }
 
-/* Breadcrumb */
-.breadcrumb {
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-  padding: 10px 24px;
-}
-.breadcrumb-inner {
-  max-width: 1320px;
-  margin: 0 auto;
-  display: flex;
+/* Back link in hero */
+.hero-back {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-}
-.breadcrumb-inner a {
-  color: var(--muted);
+  font-weight: 600;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 18px;
   transition: color .15s;
+  text-decoration: none;
 }
-.breadcrumb-inner a:hover { color: var(--accent); }
-.breadcrumb-sep { color: var(--line); font-size: 12px; }
-.breadcrumb-current { color: var(--text); font-weight: 700; }
+.hero-back:hover { color: rgba(255,255,255,.75); }
+
+
 
 /* =============================================
    FOOTER
@@ -1228,18 +1220,14 @@ img { max-width: 100%; display: block; }
   <a href="bookings.html" class="nav-btn primary">Get Started</a>
 </nav>
 
-<!-- BREADCRUMB -->
-<div class="breadcrumb">
-  <div class="breadcrumb-inner">
-    <a href="index.html">Discover</a>
-    <span class="breadcrumb-sep">›</span>
-    <span class="breadcrumb-current">Deals</span>
-  </div>
-</div>
-
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
+
+    <a href="index.html" class="hero-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Discover
+    </a>
 
     <div class="hero-badge">
       <span class="hero-badge-pulse"></span>
