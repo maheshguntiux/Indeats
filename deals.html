@@ -286,6 +286,30 @@ img { max-width: 100%; display: block; }
 
 .page-body { padding-top: 48px; padding-bottom: 80px; }
 
+/* Breadcrumb */
+.breadcrumb {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 24px;
+}
+.breadcrumb-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.breadcrumb-inner a {
+  color: var(--muted);
+  transition: color .15s;
+}
+.breadcrumb-inner a:hover { color: var(--accent); }
+.breadcrumb-sep { color: var(--line); font-size: 12px; }
+.breadcrumb-current { color: var(--text); font-weight: 700; }
+
 /* =============================================
    FOOTER
    ============================================= */
@@ -345,10 +369,15 @@ img { max-width: 100%; display: block; }
   line-height: 1.05;
   color: var(--text);
 }
+.section-head-wrap {
+  max-width: 1100px;
+  margin-bottom: 10px;
+}
 
 .featured-deal {
   position: relative;
   width: 100%;
+  max-width: 1100px;
   height: 400px;
   border-radius: 22px;
   overflow: hidden;
@@ -561,6 +590,7 @@ img { max-width: 100%; display: block; }
   padding: 18px 0 22px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
+  max-width: 1100px;
 }
 .filter-sort {
   display: inline-flex;
@@ -642,6 +672,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: 1100px;
 }
 .grid-label:first-child { margin-top: 0; }
 .grid-label::after {
@@ -670,6 +701,7 @@ img { max-width: 100%; display: block; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 8px;
+  max-width: 1100px;
 }
 
 .deal-card {
@@ -914,6 +946,7 @@ img { max-width: 100%; display: block; }
   margin-top: 56px;
   padding-top: 32px;
   border-top: 1px solid var(--line);
+  max-width: 1100px;
 }
 .truck-section-head {
   display: flex;
@@ -1195,6 +1228,15 @@ img { max-width: 100%; display: block; }
   <a href="bookings.html" class="nav-btn primary">Get Started</a>
 </nav>
 
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Discover</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Deals</span>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
@@ -1240,7 +1282,7 @@ img { max-width: 100%; display: block; }
   <div class="wrap">
 
     <!-- FEATURED DEAL BANNER -->
-    <div style="margin-bottom: 10px;">
+    <div class="section-head-wrap">
       <div class="section-kicker">Featured</div>
       <div class="section-title">Deal of the moment</div>
     </div>
@@ -1249,7 +1291,7 @@ img { max-width: 100%; display: block; }
 
       <!-- Slides — JS rotates visibility -->
       <div class="fd-slide" data-index="0">
-        <div class="featured-deal-img" style="background-image: linear-gradient(135deg, #1a0a00 0%, #3d1a00 40%, #6b2d00 100%);"></div>
+        <div class="featured-deal-img" style="background: url('https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=960&q=80&fit=crop') center/cover;"></div>
         <div class="featured-deal-overlay"></div>
         <div class="featured-deal-type"><span class="featured-deal-type-dot"></span> 20% Off</div>
         <div class="featured-deal-savings">Save ~$6</div>
@@ -1270,7 +1312,7 @@ img { max-width: 100%; display: block; }
       </div>
 
       <div class="fd-slide" data-index="1" style="display:none;">
-        <div class="featured-deal-img" style="background-image: linear-gradient(135deg, #001a0f 0%, #003d1a 40%, #005c28 100%);"></div>
+        <div class="featured-deal-img" style="background: url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=960&q=80&fit=crop') center/cover;"></div>
         <div class="featured-deal-overlay"></div>
         <div class="featured-deal-type"><span class="featured-deal-type-dot"></span> Free Item</div>
         <div class="featured-deal-savings">Free Chai</div>
@@ -1291,7 +1333,7 @@ img { max-width: 100%; display: block; }
       </div>
 
       <div class="fd-slide" data-index="2" style="display:none;">
-        <div class="featured-deal-img" style="background-image: linear-gradient(135deg, #0d0020 0%, #260040 40%, #3d0066 100%);"></div>
+        <div class="featured-deal-img" style="background: url('https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=960&q=80&fit=crop') center/cover;"></div>
         <div class="featured-deal-overlay"></div>
         <div class="featured-deal-type"><span class="featured-deal-type-dot"></span> Fixed Price</div>
         <div class="featured-deal-savings">$11.99</div>
@@ -1344,7 +1386,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="pct" data-open="true" data-rating="4.6" data-saving="6" data-distance="25">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#2a0e00,#6b2d00);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#2a0e00,#6b2d00);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">20% Off Biryani</span>
           <span class="deal-expiry-badge urgent">Ends today</span>
@@ -1371,7 +1413,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="free" data-open="true" data-rating="4.8" data-saving="3" data-distance="15">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#001a0d,#005c28);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#001a0d,#005c28);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">Free Item</span>
           <span class="deal-expiry-badge urgent">Ends today</span>
@@ -1398,7 +1440,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="pct" data-open="false" data-rating="4.4" data-saving="5" data-distance="22">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#1a0a00,#4a2000);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#1a0a00,#4a2000);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">15% Off Family Pack</span>
           <span class="deal-expiry-badge urgent">Ends today</span>
@@ -1431,7 +1473,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="fixed" data-open="true" data-rating="4.3" data-saving="4" data-distance="20">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#0d0020,#3d0066);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#0d0020,#3d0066);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">Fixed Price</span>
           <span class="deal-expiry-badge soon">Ends in 2 days</span>
@@ -1458,7 +1500,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="fixed" data-open="true" data-rating="4.5" data-saving="5" data-distance="18">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#001520,#003d5c);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#001520,#003d5c);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">Lunch Special</span>
           <span class="deal-expiry-badge soon">Ends in 3 days</span>
@@ -1485,7 +1527,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="combo" data-open="false" data-rating="4.5" data-saving="7" data-distance="14">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#1a1400,#4a3a00);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#1a1400,#4a3a00);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">Combo</span>
           <span class="deal-expiry-badge soon">Ends in 4 days</span>
@@ -1518,7 +1560,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="free" data-open="true" data-rating="4.4" data-saving="4" data-distance="12">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#001a10,#004d2a);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#001a10,#004d2a);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">Buy 2 Get 1</span>
           <span class="deal-expiry-badge normal">Ongoing</span>
@@ -1545,7 +1587,7 @@ img { max-width: 100%; display: block; }
 
       <div class="deal-card" data-type="combo" data-open="true" data-rating="4.6" data-saving="3" data-distance="10">
         <div class="deal-img">
-          <div class="deal-img-inner" style="background: linear-gradient(135deg,#0a1a00,#2a4a00);"></div>
+          <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1630383249896-483b1cc5d59b?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#0a1a00,#2a4a00);"></div>
           <div class="deal-img-overlay"></div>
           <span class="deal-type-badge">Combo</span>
           <span class="deal-expiry-badge normal">Ongoing</span>
@@ -1959,5 +2001,6 @@ img { max-width: 100%; display: block; }
   </div>
 </footer>
 
+<script src="indeats-ai.js"></script>
 </body>
 </html>

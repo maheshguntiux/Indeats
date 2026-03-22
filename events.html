@@ -314,6 +314,27 @@ img { max-width: 100%; display: block; }
 
 .page-body { padding-top: 48px; padding-bottom: 80px; }
 
+/* Breadcrumb */
+.breadcrumb {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 24px;
+}
+.breadcrumb-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.breadcrumb-inner a { color: var(--muted); transition: color .15s; }
+.breadcrumb-inner a:hover { color: var(--accent); }
+.breadcrumb-sep { color: var(--line); font-size: 12px; }
+.breadcrumb-current { color: var(--text); font-weight: 700; }
+
 /* =============================================
    FOOTER
    ============================================= */
@@ -373,6 +394,10 @@ img { max-width: 100%; display: block; }
   line-height: 1.05;
   color: var(--text);
 }
+.section-head-wrap {
+  max-width: 1100px;
+  margin-bottom: 10px;
+}
 
 /* =============================================
    FEATURED EVENT BANNER
@@ -381,6 +406,7 @@ img { max-width: 100%; display: block; }
 .featured-event {
   position: relative;
   width: 100%;
+  max-width: 1100px;
   height: 420px;
   border-radius: 22px;
   overflow: hidden;
@@ -608,6 +634,7 @@ img { max-width: 100%; display: block; }
   padding: 18px 0 22px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
+  max-width: 1100px;
 }
 .filter-sort {
   display: inline-flex;
@@ -681,6 +708,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: 1100px;
 }
 .grid-label:first-child { margin-top: 0; }
 .grid-label::after {
@@ -709,6 +737,7 @@ img { max-width: 100%; display: block; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 8px;
+  max-width: 1100px;
 }
 
 .event-card {
@@ -977,6 +1006,15 @@ img { max-width: 100%; display: block; }
   <a href="bookings.html" class="nav-btn primary">Get Started</a>
 </nav>
 
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Discover</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Events</span>
+  </div>
+</div>
+
 <!-- COUNTDOWN BANNER -->
 <div class="countdown-banner">
   <span class="countdown-label">Holi 2026 starts in</span>
@@ -1045,7 +1083,7 @@ img { max-width: 100%; display: block; }
   <div class="wrap">
 
     <!-- FEATURED EVENT BANNER -->
-    <div style="margin-bottom: 10px;">
+    <div class="section-head-wrap">
       <div class="section-kicker">Featured</div>
       <div class="section-title">Event of the moment</div>
     </div>
@@ -1054,7 +1092,7 @@ img { max-width: 100%; display: block; }
 
       <!-- Slide 1: Holi Feast -->
       <div class="fe-slide" data-index="0">
-        <div class="featured-event-img" style="background: linear-gradient(135deg, #1a0033 0%, #4a0080 45%, #800020 100%);"></div>
+        <div class="featured-event-img" style="background: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=960&q=80&fit=crop') center/cover;"></div>
         <div class="featured-event-overlay"></div>
         <div class="featured-event-cat"><span class="featured-event-cat-dot"></span> Festival Dinner</div>
         <div class="featured-event-seats urgent">7 seats left</div>
@@ -1082,7 +1120,7 @@ img { max-width: 100%; display: block; }
 
       <!-- Slide 2: South Indian Buffet Night -->
       <div class="fe-slide" data-index="1" style="display:none;">
-        <div class="featured-event-img" style="background: linear-gradient(135deg, #001a10 0%, #004d30 45%, #003366 100%);"></div>
+        <div class="featured-event-img" style="background: url('https://images.unsplash.com/photo-1630383249896-483b1cc5d59b?w=960&q=80&fit=crop') center/cover;"></div>
         <div class="featured-event-overlay"></div>
         <div class="featured-event-cat"><span class="featured-event-cat-dot"></span> Community Night</div>
         <div class="featured-event-seats soon">12 seats left</div>
@@ -1110,7 +1148,7 @@ img { max-width: 100%; display: block; }
 
       <!-- Slide 3: Chef Tasting Menu -->
       <div class="fe-slide" data-index="2" style="display:none;">
-        <div class="featured-event-img" style="background: linear-gradient(135deg, #0d1a00 0%, #2a4400 45%, #1a2800 100%);"></div>
+        <div class="featured-event-img" style="background: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=960&q=80&fit=crop') center/cover;"></div>
         <div class="featured-event-overlay"></div>
         <div class="featured-event-cat"><span class="featured-event-cat-dot"></span> Chef Special</div>
         <div class="featured-event-seats soon">8 seats left</div>
@@ -1167,7 +1205,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="festival" data-free="false">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#1a0033,#4a0080,#800020);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">21</span><span class="event-date-month">Mar</span></div>
           <span class="event-cat-badge festival">Festival Dinner</span>
@@ -1194,7 +1232,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="community" data-free="false">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#001a10,#004d30,#003366);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1630383249896-483b1cc5d59b?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">22</span><span class="event-date-month">Mar</span></div>
           <span class="event-cat-badge community">Community</span>
@@ -1221,7 +1259,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="cultural" data-free="false">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#0d1a00,#2a4400,#1a2800);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">23</span><span class="event-date-month">Mar</span></div>
           <span class="event-cat-badge">Cultural Night</span>
@@ -1254,7 +1292,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="festival" data-free="false">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#1a0a00,#4a2000,#6b1a00);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">28</span><span class="event-date-month">Mar</span></div>
           <span class="event-cat-badge festival">Festival Dinner</span>
@@ -1281,7 +1319,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="music" data-free="false">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#00101a,#002a4a,#001a33);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">29</span><span class="event-date-month">Mar</span></div>
           <span class="event-cat-badge music">Live Music</span>
@@ -1307,7 +1345,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="community" data-free="true">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#001a0a,#004020,#003018);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">30</span><span class="event-date-month">Mar</span></div>
           <span class="event-cat-badge community">Community</span>
@@ -1339,7 +1377,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="cultural" data-free="false">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#0d0020,#2a0050,#1a0040);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">05</span><span class="event-date-month">Apr</span></div>
           <span class="event-cat-badge">Cultural Night</span>
@@ -1366,7 +1404,7 @@ img { max-width: 100%; display: block; }
 
       <div class="event-card" data-type="community" data-free="true">
         <div class="event-img">
-          <div class="event-img-inner" style="background: linear-gradient(135deg,#1a1000,#3d2800,#2a1800);"></div>
+          <div class="event-img-inner" style="background: url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80&fit=crop') center/cover;"></div>
           <div class="event-img-overlay"></div>
           <div class="event-date-badge"><span class="event-date-day">12</span><span class="event-date-month">Apr</span></div>
           <span class="event-cat-badge community">Community</span>
@@ -1608,5 +1646,6 @@ img { max-width: 100%; display: block; }
 })();
 </script>
 
+<script src="indeats-ai.js"></script>
 </body>
 </html>

@@ -139,6 +139,15 @@ img { max-width: 100%; display: block; }
   font-size: 11px;
   letter-spacing: .08em;
   text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero-badge-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
 }
 .hero-title {
   margin: 20px auto 14px;
@@ -1067,10 +1076,23 @@ img { max-width: 100%; display: block; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-pulse"></span>
+      Fremont · San Jose · Sunnyvale · Artesia
+    </div>
     <h1 class="hero-title">Discover Indian food,<br>deals, <em>and dining events near you.</em></h1>
+    <p class="hero-sub">Curated Indian restaurants, exclusive offers, and cultural dining events — all in one place.</p>
     <div class="hero-search">
       <input type="text" placeholder="Search restaurants, cuisines, deals...">
       <button>Search</button>
+    </div>
+    <div class="hero-pills">
+      <span class="hero-pill">Halal</span>
+      <span class="hero-pill">Pure Veg</span>
+      <span class="hero-pill">Jain Ok</span>
+      <span class="hero-pill">Biryani</span>
+      <span class="hero-pill">South Indian</span>
+      <span class="hero-pill">Under $15</span>
     </div>
   </div>
 </section>
@@ -1721,5 +1743,6 @@ img { max-width: 100%; display: block; }
 })();
 </script>
 
+<script src="indeats-ai.js"></script>
 </body>
 </html>
