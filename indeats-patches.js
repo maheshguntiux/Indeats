@@ -608,6 +608,87 @@
     overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
   }
 
+
+  /* ─────────────────────────────────────────────
+     AI COMING SOON — intercept FAB, show teaser
+     Remove fixAIComingSoon() call when AI is ready to launch.
+  ───────────────────────────────────────────── */
+  function fixAIComingSoon() {
+    function intercept() {
+      const fab = document.getElementById('ia-fab');
+      if (!fab || fab.dataset.comingSoon) return;
+      fab.dataset.comingSoon = '1';
+      fab.addEventListener('click', e => {
+        e.stopImmediatePropagation();
+        const panel    = document.getElementById('ia-panel');
+        const backdrop = document.getElementById('ia-backdrop');
+        if (panel)    panel.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('open');
+        fab.classList.remove('open');
+        document.body.classList.remove('ia-open');
+        showAIComingSoonModal();
+      }, true);
+    }
+    intercept();
+    let attempts = 0;
+    const poll = setInterval(() => {
+      intercept();
+      if (++attempts > 20) clearInterval(poll);
+    }, 300);
+  }
+
+  function showAIComingSoonModal() {
+    if (document.getElementById('ai-coming-overlay')) return;
+    const overlay = document.createElement('div');
+    overlay.id = 'ai-coming-overlay';
+    overlay.innerHTML = `
+      <div id="ai-coming-dialog">
+        <button id="ai-coming-close">&#215;</button>
+        <div class="ai-coming-avatar">I</div>
+        <div class="ai-coming-badge">Beta &middot; Coming Soon</div>
+        <h2 class="ai-coming-title">Indeats AI is almost here</h2>
+        <p class="ai-coming-body">
+          We're putting the finishing touches on your personal Indian dining coach —
+          one that knows your taste, finds the best deals, and plans your evening
+          before you even ask.
+        </p>
+        <div class="ai-coming-features">
+          <div class="ai-coming-feature"><span class="ai-coming-dot" style="background:#f2551c;"></span>Personalised restaurant picks</div>
+          <div class="ai-coming-feature"><span class="ai-coming-dot" style="background:#d2a145;"></span>Live deal recommendations</div>
+          <div class="ai-coming-feature"><span class="ai-coming-dot" style="background:#16803d;"></span>Event planning &amp; seat booking</div>
+        </div>
+        <div class="ai-coming-input-wrap">
+          <input class="ai-coming-input" type="text" placeholder="Ask Indeats AI anything..." disabled>
+          <div class="ai-coming-input-note">Available soon &mdash; stay tuned</div>
+        </div>
+        <button id="ai-coming-dismiss" class="ai-coming-btn">Got it, can't wait!</button>
+      </div>`;
+    injectCSS('ai-coming-styles', `
+      #ai-coming-overlay{position:fixed;inset:0;background:rgba(4,22,37,.8);backdrop-filter:blur(8px);z-index:9300;display:flex;align-items:center;justify-content:center;padding:20px;animation:ai-fade .25s ease;}
+      @keyframes ai-fade{from{opacity:0}to{opacity:1}}
+      #ai-coming-dialog{background:#0b1e2d;border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:36px 28px;max-width:400px;width:100%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.5);animation:ai-slide .3s cubic-bezier(.32,.72,0,1);text-align:center;}
+      @keyframes ai-slide{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+      #ai-coming-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:none;cursor:pointer;font-size:18px;color:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;transition:background .15s;}
+      #ai-coming-close:hover{background:rgba(255,255,255,.13);color:#fff;}
+      .ai-coming-avatar{width:56px;height:56px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,#1a0a02,#f2551c);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#fff;box-shadow:0 0 0 6px rgba(242,85,28,.15);}
+      .ai-coming-badge{display:inline-block;padding:4px 12px;border-radius:999px;background:rgba(242,85,28,.15);border:1px solid rgba(242,85,28,.3);font-size:11px;font-weight:700;color:#ff6a3d;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;font-family:Inter,sans-serif;}
+      .ai-coming-title{font-family:Georgia,serif;font-size:22px;font-weight:700;color:#fff;margin:0 0 12px;line-height:1.3;}
+      .ai-coming-body{font-size:14px;color:rgba(255,255,255,.55);line-height:1.65;margin:0 0 24px;font-family:Inter,sans-serif;}
+      .ai-coming-features{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:24px;text-align:left;display:flex;flex-direction:column;gap:10px;}
+      .ai-coming-feature{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:rgba(255,255,255,.75);font-family:Inter,sans-serif;}
+      .ai-coming-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+      .ai-coming-input-wrap{margin-bottom:20px;}
+      .ai-coming-input{width:100%;height:46px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:0 14px;font-size:14px;color:rgba(255,255,255,.25);font-family:Inter,sans-serif;cursor:not-allowed;box-sizing:border-box;}
+      .ai-coming-input-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:6px;font-family:Inter,sans-serif;text-align:center;}
+      .ai-coming-btn{width:100%;height:46px;background:#f2551c;color:#fff;border:none;border-radius:12px;font-weight:700;font-size:15px;font-family:Inter,sans-serif;cursor:pointer;transition:background .15s;}
+      .ai-coming-btn:hover{background:#ff6a3d;}
+    `);
+    document.body.appendChild(overlay);
+    document.getElementById('ai-coming-close').addEventListener('click', () => overlay.remove());
+    document.getElementById('ai-coming-dismiss').addEventListener('click', () => overlay.remove());
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  }
+
   /* ─────────────────────────────────────────────
      RUN
   ───────────────────────────────────────────── */
@@ -619,6 +700,7 @@
     fixDetailNavLayout();
     fixLocationPin();
     fixCitySwitcher();
+    fixAIComingSoon();
 
     if (PAGE === 'home') {
       fixRestaurantCards();
