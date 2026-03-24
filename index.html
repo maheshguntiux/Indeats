@@ -354,9 +354,8 @@ img { max-width: 100%; display: block; }
 
 .rest-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
-  max-width: 960px;
 }
 
 .rest-card {
@@ -631,6 +630,8 @@ img { max-width: 100%; display: block; }
 /* Horizontal scroll strip */
 .truck-strip-wrap {
   position: relative;
+  /* Show ~3.5 cards, rest scroll — ensures arrow buttons are always useful */
+  max-width: 1160px;
 }
 .truck-strip {
   display: flex;
@@ -639,11 +640,23 @@ img { max-width: 100%; display: block; }
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 8px;
-  /* bleed edge on mobile handled via padding-right below */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  padding-bottom: 12px;
 }
-.truck-strip::-webkit-scrollbar { display: none; }
+.truck-strip::-webkit-scrollbar {
+  height: 4px;
+}
+.truck-strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+.truck-strip::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+.truck-strip::-webkit-scrollbar-thumb:hover {
+  background: #c0a88c;
+}
 
 /* Truck card — wider and shorter than restaurant card */
 .truck-card {
@@ -658,7 +671,7 @@ img { max-width: 100%; display: block; }
   transition: transform .2s ease, box-shadow .22s ease;
   cursor: pointer;
   scroll-snap-align: start;
-  flex: 0 0 320px;
+  flex: 0 0 360px;
   min-height: 120px;
 }
 .truck-card:hover {
@@ -795,6 +808,33 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(to right, transparent, var(--bg));
   pointer-events: none;
   border-radius: 0 20px 20px 0;
+}
+
+/* Truck scroll arrows — desktop */
+.truck-scroll-arrows {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.truck-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: var(--muted);
+  transition: border-color .15s, color .15s, opacity .15s;
+  flex-shrink: 0;
+}
+.truck-arrow:hover { border-color: #c0a88c; color: var(--text); }
+.truck-arrow:disabled { opacity: .32; cursor: default; }
+@media (max-width: 760px) {
+  .truck-scroll-arrows { display: none; }
 }
 
 /* =============================================
@@ -1030,6 +1070,10 @@ img { max-width: 100%; display: block; }
    RESPONSIVE
    ============================================= */
 
+@media (max-width: 1200px) {
+  .rest-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 @media (max-width: 900px) {
   .rest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
@@ -1053,6 +1097,8 @@ img { max-width: 100%; display: block; }
   .truck-card { flex: 0 0 280px; }
   .truck-identity { width: 76px; }
   .truck-initials { font-size: 22px; }
+  .truck-strip { scrollbar-width: none; padding-bottom: 8px; }
+  .truck-strip::-webkit-scrollbar { display: none; }
 }
 </style>
 </head>
@@ -1077,7 +1123,7 @@ img { max-width: 100%; display: block; }
 <section class="hero">
   <div class="hero-inner">
     <h1 class="hero-title">Discover Indian food,<br>deals, <em>and dining events near you.</em></h1>
-    <p class="hero-sub">Curated Indian restaurants, exclusive offers, and cultural dining events — all in one place.</p>
+
     <div class="hero-search">
       <input type="text" placeholder="Search restaurants, cuisines, deals...">
       <button>Search</button>
@@ -1288,6 +1334,59 @@ img { max-width: 100%; display: block; }
         </div>
       </a>
 
+
+      <!-- Card: Meenakshi Bhavan -->
+      <a class="rest-card restaurant-card" href="deals.html"
+         data-city="fremont" data-diets="pure veg jain ok" data-open="true" data-price="$" data-tags="">
+        <div class="rest-img">
+          <div class="rest-img-inner" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjIwIiB2aWV3Qm94PSIwIDAgNDAwIDIyMCI+CiAgPGRlZnM+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImJnMSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M4ODMyYSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3YTRhMTAiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InBsYXRlIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM2Q3YTNkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJhNWEyYSIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMjAiIGZpbGw9InVybCgjYmcxKSIvPgogIDwhLS0gYmFuYW5hIGxlYWYgLyB0aGFsaSBjaXJjbGUgLS0+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjExNSIgcng9Ijg1IiByeT0iODIiIGZpbGw9InVybCgjcGxhdGUpIiBvcGFjaXR5PSIwLjkiLz4KICA8ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTE1IiByeD0iODAiIHJ5PSI3NyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSByaWNlIG1vdW5kIC0tPgogIDxlbGxpcHNlIGN4PSIyMDAiIGN5PSIxMTUiIHJ4PSIyOCIgcnk9IjIyIiBmaWxsPSIjZjVmMGUwIi8+CiAgPCEtLSBzbWFsbCBib3dscyBhcnJhbmdlZCBhcm91bmQgLS0+CiAgPGNpcmNsZSBjeD0iMTQyIiBjeT0iMTAwIiByPSIxNCIgZmlsbD0iI2M4NDIwYSIgb3BhY2l0eT0iMC44NSIvPgogIDxjaXJjbGUgY3g9IjI1OCIgY3k9IjEwMCIgcj0iMTQiIGZpbGw9IiNkNGEwMTciIG9wYWNpdHk9IjAuODUiLz4KICA8Y2lyY2xlIGN4PSIyNTgiIGN5PSIxMzIiIHI9IjEyIiBmaWxsPSIjOGE2MDIwIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPGNpcmNsZSBjeD0iMTQyIiBjeT0iMTMyIiByPSIxMiIgZmlsbD0iIzJhN2EyYSIgb3BhY2l0eT0iMC44NSIvPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjgyIiByPSIxMSIgZmlsbD0iI2M4NDIwYSIgb3BhY2l0eT0iMC43Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTUwIiByPSIxMCIgZmlsbD0iI2Q0YTAxNyIgb3BhY2l0eT0iMC43Ii8+CiAgPCEtLSBzdGVhbSBsaW5lcyAtLT4KICA8cGF0aCBkPSJNMTk0IDY1IFExOTYgNTggMTk0IDUyIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yMDAgNjIgUTIwMiA1NSAyMDAgNDkiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjUpIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwNiA2NSBRMjA4IDU4IDIwNiA1MiIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNSkiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIHN1YnRsZSBzcGljZSBkb3RzIC0tPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNDAiIHI9IjMiIGZpbGw9InJnYmEoMjU1LDIwMCw1MCwwLjMpIi8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMTgwIiByPSI0IiBmaWxsPSJyZ2JhKDI1NSwyMDAsNTAsMC4yKSIvPgogIDxjaXJjbGUgY3g9IjMyMCIgY3k9IjM1IiByPSIyIiBmaWxsPSJyZ2JhKDI1NSwyMDAsNTAsMC4zKSIvPgogIDxjaXJjbGUgY3g9IjgwIiBjeT0iMTg1IiByPSIzIiBmaWxsPSJyZ2JhKDI1NSwyMDAsNTAsMC4yKSIvPgo8L3N2Zz4=');"></div>
+          <div class="rest-img-overlay"></div>
+          <div class="rest-deal-badge">Lunch Thali $10.99</div>
+          <div class="rest-save">&#9825;</div>
+        </div>
+        <div class="rest-body">
+          <div class="rest-header">
+            <div class="rest-name">Meenakshi Bhavan</div>
+            <span class="rest-rating">&#9733; 4.4</span>
+          </div>
+          <div class="rest-meta">Fremont &middot; 18 min &middot; $</div>
+          <div class="rest-tags">
+            <span class="tag tag-green">Pure Veg</span>
+            <span class="tag tag-blue">Jain OK</span>
+          </div>
+          <div class="rest-actions">
+            <button class="btn-reserve">Reserve Table &rarr;</button>
+            <button class="btn-menu">Menu</button>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card: Saravana Bhavan -->
+      <a class="rest-card restaurant-card" href="deals.html"
+         data-city="sunnyvale" data-diets="pure veg jain ok" data-open="true" data-price="$" data-tags="">
+        <div class="rest-img">
+          <div class="rest-img-inner" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjIwIiB2aWV3Qm94PSIwIDAgNDAwIDIyMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM4YjQ1MTMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNjMDY1MWUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNmIzMDEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJkb3NhcGxhdGUiIGN4PSI1MCUiIGN5PSI1NSUiIHI9IjU1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmNWYwZTAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZThkOGIwIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIyMCIgZmlsbD0idXJsKCNiZzIpIi8+CiAgPCEtLSBwbGF0ZSAtLT4KICA8ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTMwIiByeD0iOTUiIHJ5PSI2MCIgZmlsbD0idXJsKCNkb3NhcGxhdGUpIiBvcGFjaXR5PSIwLjk1Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjEzMCIgcng9IjkwIiByeT0iNTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxMzksNjksMTksMC4zKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGRvc2Egcm9sbGVkIHNoYXBlIC0tPgogIDxwYXRoIGQ9Ik0xMzAgMTE4IFExNjUgOTUgMjAwIDExOCBRMjM1IDE0MCAyNzAgMTE4IFEyNTUgMTU1IDIwMCAxNjIgUTE0NSAxNjggMTMwIDExOFoiIGZpbGw9IiNkNDkyMmEiIG9wYWNpdHk9IjAuOSIvPgogIDxwYXRoIGQ9Ik0xMzUgMTIwIFExNzAgMTAwIDIwMCAxMjAgUTIzMCAxMzggMjY1IDEyMCIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMykiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIvPgogIDwhLS0gY3Jpc3B5IHRleHR1cmUgbGluZXMgb24gZG9zYSAtLT4KICA8bGluZSB4MT0iMTU1IiB5MT0iMTI1IiB4Mj0iMTgwIiB5Mj0iMTM4IiBzdHJva2U9InJnYmEoMTIwLDYwLDEwLDAuNCkiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIxNzAiIHkxPSIxMTUiIHgyPSIxOTUiIHkyPSIxMzAiIHN0cm9rZT0icmdiYSgxMjAsNjAsMTAsMC40KSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjIyMCIgeTE9IjExOCIgeDI9IjI0NSIgeTI9IjEzMyIgc3Ryb2tlPSJyZ2JhKDEyMCw2MCwxMCwwLjQpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8IS0tIHNhbWJhciBib3dsIC0tPgogIDxlbGxpcHNlIGN4PSIxMTIiIGN5PSIxMTgiIHI9IjE4IiBmaWxsPSIjYzg0MjBhIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPGVsbGlwc2UgY3g9IjExMiIgY3k9IjExNiIgcng9IjE2IiByeT0iMTQiIGZpbGw9IiNlMDUwMjAiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gY2h1dG5leSBib3dscyAtLT4KICA8ZWxsaXBzZSBjeD0iMjg4IiBjeT0iMTE4IiByPSIxNSIgZmlsbD0iIzJhN2EyYSIgb3BhY2l0eT0iMC44NSIvPgogIDxlbGxpcHNlIGN4PSIyODgiIGN5PSIxMTYiIHJ4PSIxMyIgcnk9IjExIiBmaWxsPSIjM2E5YTNhIiBvcGFjaXR5PSIwLjciLz4KICA8ZWxsaXBzZSBjeD0iMjg4IiBjeT0iMTUwIiByPSIxMyIgZmlsbD0iI2U4ZDhiMCIgb3BhY2l0eT0iMC44NSIvPgogIDxlbGxpcHNlIGN4PSIyODgiIGN5PSIxNDgiIHJ4PSIxMSIgcnk9IjkiIGZpbGw9IiNmNWYwZTAiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gc3RlYW0gLS0+CiAgPHBhdGggZD0iTTEwOCA5OCBRMTEwIDkwIDEwOCA4MyIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNSkiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTE1IDk2IFExMTcgODggMTE1IDgxIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gc3BpY2UgZG90cyBiZyAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzIiBmaWxsPSJyZ2JhKDI1NSwyMDAsNTAsMC4yKSIvPgogIDxjaXJjbGUgY3g9IjM2MCIgY3k9IjE3MCIgcj0iNCIgZmlsbD0icmdiYSgyNTUsMjAwLDUwLDAuMTUpIi8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMzAiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDIwMCw1MCwwLjI1KSIvPgo8L3N2Zz4=');"></div>
+          <div class="rest-img-overlay"></div>
+          <div class="rest-deal-badge">Dosa + Filter Coffee $9.99</div>
+          <div class="rest-save">&#9825;</div>
+        </div>
+        <div class="rest-body">
+          <div class="rest-header">
+            <div class="rest-name">Saravana Bhavan</div>
+            <span class="rest-rating">&#9733; 4.6</span>
+          </div>
+          <div class="rest-meta">Sunnyvale &middot; 22 min &middot; $</div>
+          <div class="rest-tags">
+            <span class="tag tag-green">Pure Veg</span>
+            <span class="tag tag-blue">Jain OK</span>
+          </div>
+          <div class="rest-actions">
+            <button class="btn-reserve">Reserve Table &rarr;</button>
+            <button class="btn-menu">Menu</button>
+          </div>
+        </div>
+      </a>
+
     </div><!-- /rest-grid -->
 
     <!-- ==========================================
@@ -1303,6 +1402,10 @@ img { max-width: 100%; display: block; }
         </div>
         <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
           <span class="live-dot">6 trucks nearby</span>
+          <div class="truck-scroll-arrows">
+            <button class="truck-arrow" id="truck-prev" aria-label="Scroll left">&#8592;</button>
+            <button class="truck-arrow" id="truck-next" aria-label="Scroll right">&#8594;</button>
+          </div>
           <a class="section-link" href="deals.html">View all →</a>
         </div>
       </div>
@@ -1728,6 +1831,23 @@ img { max-width: 100%; display: block; }
 
   strip.addEventListener('scroll', updateDots, { passive: true });
   updateDots();
+
+  // Arrow buttons — desktop scroll
+  const prevBtn = document.getElementById('truck-prev');
+  const nextBtn = document.getElementById('truck-next');
+  const SCROLL_AMT = 376; // card width 360 + gap 16
+
+  function updateArrows() {
+    if (!prevBtn || !nextBtn) return;
+    prevBtn.disabled = strip.scrollLeft <= 4;
+    nextBtn.disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 4;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => strip.scrollBy({ left: -SCROLL_AMT, behavior: 'smooth' }));
+  if (nextBtn) nextBtn.addEventListener('click', () => strip.scrollBy({ left: SCROLL_AMT, behavior: 'smooth' }));
+
+  strip.addEventListener('scroll', updateArrows, { passive: true });
+  updateArrows();
 })();
 </script>
 
