@@ -577,12 +577,15 @@ img { max-width: 100%; display: block; }
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding: 18px 0 22px;
+  padding: 14px 0 18px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
-  max-width: 1100px;
+  position: sticky;
+  top: 72px;
+  z-index: 90;
+  background: var(--bg);
 }
 .filter-sort {
   display: inline-flex;
@@ -614,25 +617,31 @@ img { max-width: 100%; display: block; }
 .filter-chip {
   display: inline-flex;
   align-items: center;
-  padding: 9px 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  padding: 7px 14px;
+  background: #fff;
+  border: 1.5px solid var(--line);
   border-radius: 999px;
   font-weight: 600;
-  font-size: 13px;
-  color: #6a5d52;
+  font-size: 12px;
+  color: var(--muted);
   cursor: pointer;
   transition: all .15s;
   user-select: none;
   white-space: nowrap;
+  font-family: var(--font-sans);
 }
-.filter-chip:hover { border-color: #c0a88c; color: var(--text); transform: translateY(-1px); }
+.filter-chip:hover { border-color: #c0a88c; color: var(--text); }
 .filter-chip.active {
-  background: var(--text);
+  background: #171717;
   color: #fff;
-  border-color: var(--text);
+  border-color: #171717;
 }
-.filter-chip.active-accent {
+.filter-chip[data-diet].active {
+  background: #171717;
+  color: #fff;
+  border-color: #171717;
+}
+.filter-chip[data-filter].active {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
@@ -699,23 +708,23 @@ img { max-width: 100%; display: block; }
 .deal-card {
   display: flex;
   flex-direction: column;
-  background: var(--surface);
-  border: 1px solid rgba(221,205,188,.85);
-  border-radius: var(--card-radius);
+  background: #fff;
+  border: none;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 2px 14px rgba(17,24,39,.08);
   transition: transform .18s ease, box-shadow .2s ease;
   cursor: pointer;
 }
 .deal-card:hover {
   transform: translateY(-3px);
-  box-shadow: var(--card-shadow-hover);
+  box-shadow: 0 10px 32px rgba(17,24,39,.13);
 }
 
 /* Image area */
 .deal-img {
   position: relative;
-  height: 110px;
+  height: 148px;
   overflow: hidden;
   background: #d4c4b0;
   flex-shrink: 0;
@@ -731,23 +740,22 @@ img { max-width: 100%; display: block; }
 .deal-img-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.08) 100%);
+  background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.28) 100%);
   pointer-events: none;
 }
 
 /* Deal type badge — top left of image */
 .deal-type-badge {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(242,85,28,.95);
+  top: 9px;
+  left: 9px;
+  background: #c9320a;
   color: #fff;
-  border-radius: 999px;
-  padding: 4px 9px;
-  font-size: 11px;
+  border-radius: 5px;
+  padding: 3px 8px;
+  font-size: 10px;
   font-weight: 700;
-  max-width: 78%;
-  line-height: 1.3;
+  max-width: 80%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -781,17 +789,18 @@ img { max-width: 100%; display: block; }
 /* Save button */
 .deal-save {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 26px;
-  height: 26px;
+  top: 9px;
+  right: 9px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.92);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
+  color: var(--muted);
   cursor: pointer;
   transition: background .15s, transform .15s;
   line-height: 1;
@@ -801,10 +810,10 @@ img { max-width: 100%; display: block; }
 
 /* Card body */
 .deal-body {
-  padding: 10px 11px 12px;
+  padding: 10px 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
   flex: 1;
 }
 .deal-header {
@@ -815,7 +824,7 @@ img { max-width: 100%; display: block; }
 }
 .deal-name {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -.02em;
   color: var(--text);
@@ -827,9 +836,9 @@ img { max-width: 100%; display: block; }
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 11px;
-  font-weight: 800;
-  color: #7a5c1a;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8a6a1a;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -1350,20 +1359,18 @@ img { max-width: 100%; display: block; }
 
     </div><!-- /featured-deal -->
 
-    <!-- FILTER BAR -->
-    <div class="filter-bar">
+    <!-- GLOBAL FILTER BAR -->
+    <div class="filter-bar" id="deals-filter-bar">
+      <button class="filter-chip" data-diet="halal">Halal</button>
+      <button class="filter-chip" data-diet="pure veg">Pure Veg</button>
+      <button class="filter-chip" data-diet="jain ok">Jain OK</button>
+      <div class="filter-divider"></div>
       <button class="filter-chip active" data-filter="all">All Deals</button>
-      <button class="filter-chip" data-filter="open">Open Now</button>
       <button class="filter-chip" data-filter="pct">% Off</button>
       <button class="filter-chip" data-filter="free">Free Item</button>
       <button class="filter-chip" data-filter="fixed">Fixed Price</button>
       <button class="filter-chip" data-filter="combo">Combos</button>
-      <button class="filter-chip" data-filter="happy">Happy Hour</button>
-      <button class="filter-chip" data-filter="festival">Festival</button>
-      <div class="filter-spacer"></div>
-      <div class="filter-divider"></div>
-      <button class="filter-sort" id="deals-sort-btn">Best Match ⌄</button>
-      <span class="deals-count-label" id="deals-count">8 deals</span>
+      <button class="filter-chip" data-filter="open">Open Now</button>
     </div>
 
     <!-- DEAL CARDS GRID -->
@@ -1372,7 +1379,7 @@ img { max-width: 100%; display: block; }
     <div class="grid-label" id="section-ending">Ending Soon <span class="grid-label-count">3</span></div>
     <div class="deals-grid" id="grid-ending">
 
-      <div class="deal-card" data-type="pct" data-open="true" data-rating="4.6" data-saving="6" data-distance="25">
+      <div class="deal-card" data-type="pct" data-open="true" data-rating="4.6" data-saving="6" data-distance="25" data-diets="halal non-veg">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#2a0e00,#6b2d00);"></div>
           <div class="deal-img-overlay"></div>
@@ -1399,7 +1406,7 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <div class="deal-card" data-type="free" data-open="true" data-rating="4.8" data-saving="3" data-distance="15">
+      <div class="deal-card" data-type="free" data-open="true" data-rating="4.8" data-saving="3" data-distance="15" data-diets="halal non-veg">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#001a0d,#005c28);"></div>
           <div class="deal-img-overlay"></div>
@@ -1426,7 +1433,7 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <div class="deal-card" data-type="pct" data-open="false" data-rating="4.4" data-saving="5" data-distance="22">
+      <div class="deal-card" data-type="pct" data-open="false" data-rating="4.4" data-saving="5" data-distance="22" data-diets="halal non-veg">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#1a0a00,#4a2000);"></div>
           <div class="deal-img-overlay"></div>
@@ -1459,7 +1466,7 @@ img { max-width: 100%; display: block; }
     <div class="grid-label" id="section-week">This Week <span class="grid-label-count">3</span></div>
     <div class="deals-grid" id="grid-week">
 
-      <div class="deal-card" data-type="fixed" data-open="true" data-rating="4.3" data-saving="4" data-distance="20">
+      <div class="deal-card" data-type="fixed" data-open="true" data-rating="4.3" data-saving="4" data-distance="20" data-diets="pure veg jain ok">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#0d0020,#3d0066);"></div>
           <div class="deal-img-overlay"></div>
@@ -1486,7 +1493,7 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <div class="deal-card" data-type="fixed" data-open="true" data-rating="4.5" data-saving="5" data-distance="18">
+      <div class="deal-card" data-type="fixed" data-open="true" data-rating="4.5" data-saving="5" data-distance="18" data-diets="non-veg">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#001520,#003d5c);"></div>
           <div class="deal-img-overlay"></div>
@@ -1513,7 +1520,7 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <div class="deal-card" data-type="combo" data-open="false" data-rating="4.5" data-saving="7" data-distance="14">
+      <div class="deal-card" data-type="combo" data-open="false" data-rating="4.5" data-saving="7" data-distance="14" data-diets="pure veg jain ok">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#1a1400,#4a3a00);"></div>
           <div class="deal-img-overlay"></div>
@@ -1546,7 +1553,7 @@ img { max-width: 100%; display: block; }
     <div class="grid-label" id="section-always">Always On <span class="grid-label-count">2</span></div>
     <div class="deals-grid" id="grid-always">
 
-      <div class="deal-card" data-type="free" data-open="true" data-rating="4.4" data-saving="4" data-distance="12">
+      <div class="deal-card" data-type="free" data-open="true" data-rating="4.4" data-saving="4" data-distance="12" data-diets="pure veg">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#001a10,#004d2a);"></div>
           <div class="deal-img-overlay"></div>
@@ -1573,7 +1580,7 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <div class="deal-card" data-type="combo" data-open="true" data-rating="4.6" data-saving="3" data-distance="10">
+      <div class="deal-card" data-type="combo" data-open="true" data-rating="4.6" data-saving="3" data-distance="10" data-diets="pure veg jain ok">
         <div class="deal-img">
           <div class="deal-img-inner" style="background: url('https://images.unsplash.com/photo-1630383249896-483b1cc5d59b?w=400&q=80&fit=crop') center/cover, linear-gradient(135deg,#0a1a00,#2a4a00);"></div>
           <div class="deal-img-overlay"></div>
@@ -1834,7 +1841,20 @@ img { max-width: 100%; display: block; }
     });
   }
 
-  /* Chip clicks */
+  /* Diet chip clicks */
+  let activeDiet = null;
+  document.querySelectorAll('.filter-chip[data-diet]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const diet = chip.dataset.diet;
+      activeDiet = activeDiet === diet ? null : diet;
+      document.querySelectorAll('.filter-chip[data-diet]').forEach(c =>
+        c.classList.toggle('active', c.dataset.diet === activeDiet)
+      );
+      render();
+    });
+  });
+
+  /* Deal type chip clicks */
   document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
     chip.addEventListener('click', () => {
       state.filter = chip.dataset.filter;
@@ -1877,16 +1897,23 @@ img { max-width: 100%; display: block; }
     let total   = 0;
 
     cards.forEach(card => {
-      const type = (card.dataset.type || '').toLowerCase();
-      const open = card.dataset.open  === 'true';
-      let show   = true;
-      if (state.filter === 'open'     && !open)               show = false;
-      if (state.filter === 'pct'      && type !== 'pct')      show = false;
-      if (state.filter === 'free'     && type !== 'free')     show = false;
-      if (state.filter === 'fixed'    && type !== 'fixed')    show = false;
-      if (state.filter === 'combo'    && type !== 'combo')    show = false;
-      if (state.filter === 'happy'    && type !== 'happy')    show = false;
+      const type  = (card.dataset.type  || '').toLowerCase();
+      const diets = (card.dataset.diets || '').toLowerCase();
+      const open  = card.dataset.open === 'true';
+      let show = true;
+
+      // Diet filter
+      if (activeDiet && !diets.includes(activeDiet)) show = false;
+
+      // Deal type filter
+      if (state.filter === 'open'     && !open)          show = false;
+      if (state.filter === 'pct'      && type !== 'pct') show = false;
+      if (state.filter === 'free'     && type !== 'free') show = false;
+      if (state.filter === 'fixed'    && type !== 'fixed') show = false;
+      if (state.filter === 'combo'    && type !== 'combo') show = false;
+      if (state.filter === 'happy'    && type !== 'happy') show = false;
       if (state.filter === 'festival' && type !== 'festival') show = false;
+
       card.style.display = show ? '' : 'none';
       if (show) total++;
     });
