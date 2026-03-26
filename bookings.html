@@ -39,6 +39,7 @@ html, body {
 }
 a { text-decoration: none; color: inherit; }
 .wrap { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+.wrap-narrow { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 
 /* =============================================
    NAV
@@ -47,13 +48,21 @@ a { text-decoration: none; color: inherit; }
 .nav {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
+  background: var(--nav);
+  border-bottom: 1px solid rgba(242,85,28,.2);
+}
+.nav-top {
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 14px 24px;
-  background: var(--nav);
-  border-bottom: 1px solid rgba(242,85,28,.2);
+}
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
 }
 .brand {
   font-family: var(--font-serif);
@@ -206,7 +215,8 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 32px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 0;
-  max-width: 860px;
+  max-width: 760px;
+  width: 100%;
 }
 .tab-btn {
   display: inline-flex;
@@ -257,7 +267,8 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   flex-direction: column;
   gap: 14px;
-  max-width: 860px;
+  max-width: 760px;
+  width: 100%;
 }
 
 .booking-card {
@@ -592,6 +603,36 @@ a { text-decoration: none; color: inherit; }
    ============================================= */
 
 @media (max-width: 760px) {
+  /* Mobile nav — 2 rows */
+  .nav-top {
+    flex-wrap: wrap;
+    padding: 10px 16px 0;
+    gap: 8px;
+  }
+  .nav-tabs {
+    order: 99;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 0;
+    margin-top: 2px;
+  }
+  .nav-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px 2px;
+    font-size: 11px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-link.active { border-bottom-color: var(--accent); }
+  .nav-spacer { flex: 1; }
+  .brand { font-size: 20px; }
+  .nav-btn.ghost { padding: 6px 10px; font-size: 12px; }
+  .nav-btn.primary { padding: 6px 10px; font-size: 12px; }
+  .nav-city { font-size: 12px; padding: 6px 10px; }
+
   .nav-links { display: none; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
   .page-header-inner { flex-direction: column; align-items: flex-start; }
@@ -606,20 +647,19 @@ a { text-decoration: none; color: inherit; }
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="index.html" class="brand">Indeats<span class="brand-dot">•</span></a>
-  <div class="nav-links">
-    <a href="index.html"    class="nav-link">Discover</a>
-    <a href="deals.html"    class="nav-link">Deals</a>
-    <a href="events.html"   class="nav-link">Events</a>
-    <a href="bookings.html" class="nav-link active">My Bookings</a>
+  <div class="nav-top">
+    <a class="brand" href="index.html">Indeats<span class="brand-dot">·</span></a>
+    <div class="nav-tabs">
+      <a class="nav-link" href="index.html">Discover</a>
+      <a class="nav-link" href="deals.html">Deals</a>
+      <a class="nav-link" href="events.html">Events</a>
+      <a class="nav-link active" href="bookings.html">My Bookings</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-city">Fremont ▾</a>
+    <a class="nav-btn ghost" href="bookings.html">Sign In</a>
+    <a class="nav-btn primary" href="bookings.html">Get Started</a>
   </div>
-  <div class="nav-spacer"></div>
-  <div class="nav-city">
-    <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1C3.79 1 2 2.79 2 5c0 3 4 8 4 8s4-5 4-8c0-2.21-1.79-4-4-4z" stroke="rgba(255,255,255,.6)" stroke-width="1.4"/><circle cx="6" cy="5" r="1.5" stroke="rgba(255,255,255,.6)" stroke-width="1.4"/></svg>
-    Fremont
-  </div>
-  <a href="bookings.html" class="nav-btn ghost">Sign In</a>
-  <a href="bookings.html" class="nav-btn primary">Get Started</a>
 </nav>
 
 <!-- PAGE HEADER -->
@@ -652,7 +692,7 @@ a { text-decoration: none; color: inherit; }
 
 <!-- PAGE BODY -->
 <section class="page-body">
-  <div class="wrap">
+  <div class="wrap-narrow">
 
     <!-- TAB BAR -->
     <div class="tab-bar">
