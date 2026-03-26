@@ -55,13 +55,21 @@ img { max-width: 100%; display: block; }
 .nav {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
+  background: var(--nav);
+  border-bottom: 1px solid rgba(242,85,28,.2);
+}
+.nav-top {
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 14px 24px;
-  background: var(--nav);
-  border-bottom: 1px solid rgba(242,85,28,.2);
+}
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
 }
 .brand {
   font-family: var(--font-serif);
@@ -71,7 +79,7 @@ img { max-width: 100%; display: block; }
   margin-right: 8px;
 }
 .brand-dot { color: #ad7f2d; }
-.nav-links { display: flex; gap: 28px; align-items: center; }
+
 .nav-link {
   color: rgba(255,255,255,.65);
   font-weight: 600;
@@ -82,6 +90,7 @@ img { max-width: 100%; display: block; }
 }
 .nav-link.active { color: #fff; border-bottom-color: var(--accent); }
 .nav-spacer { flex: 1; }
+.nav-row1 { display: flex; align-items: center; gap: 20px; flex: 1; }
 .nav-city {
   border: 1px solid rgba(255,255,255,.12);
   background: rgba(255,255,255,.04);
@@ -776,8 +785,35 @@ img { max-width: 100%; display: block; }
 .mobile-back { display: none; }
 
 @media (max-width: 760px) {
-  .nav { flex-wrap: wrap; padding: 12px 16px; }
-  .nav-links { order: 3; width: 100%; justify-content: center; gap: 20px; }
+  /* Mobile nav — 2 rows */
+  .nav-top {
+    flex-wrap: wrap;
+    padding: 10px 16px 0;
+    gap: 8px;
+  }
+  .nav-tabs {
+    order: 99;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 0;
+    margin-top: 2px;
+  }
+  .nav-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px 2px;
+    font-size: 11px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-link.active { border-bottom-color: var(--accent); }
+  .nav-spacer { flex: 1; }
+  .brand { font-size: 20px; }
+  .nav-btn.ghost { padding: 6px 10px; font-size: 12px; }
+  .nav-btn.primary { padding: 6px 10px; font-size: 12px; }
+  .nav-city { font-size: 12px; padding: 6px 10px; }
   .hero-title { font-size: 40px; }
   .hero-search { flex-direction: column; border-radius: 16px; }
   .hero-search .city-label { border-right: none; border-bottom: 1px solid #eee; justify-content: center; }
@@ -894,17 +930,20 @@ img { max-width: 100%; display: block; }
 
 <!-- NAV -->
 <nav class="nav">
-  <a class="brand" href="index.html">Indeats<span class="brand-dot">·</span></a>
-  <div class="nav-links">
-    <a class="nav-link active" href="index.html">Discover</a>
-    <a class="nav-link" href="deals.html">Deals</a>
-    <a class="nav-link" href="events.html">Events</a>
-    <a class="nav-link" href="bookings.html">My Bookings</a>
+  <!-- Row 1: logo + tabs + actions (desktop) / logo + actions (mobile row1) -->
+  <div class="nav-top">
+    <a class="brand" href="index.html">Indeats<span class="brand-dot">·</span></a>
+    <div class="nav-tabs">
+      <a class="nav-link active" href="index.html">Discover</a>
+      <a class="nav-link" href="deals.html">Deals</a>
+      <a class="nav-link" href="events.html">Events</a>
+      <a class="nav-link" href="bookings.html">My Bookings</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-city">Fremont ▾</a>
+    <a class="nav-btn ghost" href="bookings.html">Sign In</a>
+    <a class="nav-btn primary" href="bookings.html">Get Started</a>
   </div>
-  <div class="nav-spacer"></div>
-  <a class="nav-city">Fremont ▾</a>
-  <a class="nav-btn ghost" href="bookings.html">Sign In</a>
-  <a class="nav-btn primary" href="bookings.html">Get Started</a>
 </nav>
 
 <!-- HERO -->
