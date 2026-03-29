@@ -207,18 +207,16 @@
     const cRow = document.getElementById('c-row');
     if (!rRow && !tRow && !cRow) return;
 
-    injectShimmerCSS();
-
-    // Show skeletons while loading
-    [rRow, tRow, cRow].forEach(row => {
-      if (!row) return;
-      row.innerHTML = [1,2,3,4].map(() => buildSkeletonCard('restaurant-card')).join('');
-    });
+    // Save hardcoded HTML as fallback BEFORE touching anything
+    const fallback = {
+      r: rRow ? rRow.innerHTML : '',
+      t: tRow ? tRow.innerHTML : '',
+      c: cRow ? cRow.innerHTML : ''
+    };
 
     fetchRestaurants().then(restaurants => {
       window._indeatsRestaurants = restaurants;
 
-      // Also try to pre-load deals for badge display
       return fetchDeals().then(deals => {
         window._indeatsDeals = deals;
         return restaurants;
@@ -226,14 +224,8 @@
 
     }).then(restaurants => {
 
-      if (!restaurants || !restaurants.length) {
-        // No live partners yet — keep original hardcoded HTML (already in DOM)
-        // Restore from the page's data-fallback attributes
-        [rRow, tRow, cRow].forEach(row => {
-          if (row) row.innerHTML = row.dataset.fallback || '<p style="padding:24px;color:#7a6e60;font-size:14px;">Be the first restaurant on Indeats in your city!</p>';
-        });
-        return;
-      }
+      // No live partners yet — keep hardcoded demo cards exactly as-is
+      if (!restaurants || !restaurants.length) return;
 
       // Split by type
       const byType = { restaurant: [], truck: [], cloud: [] };
@@ -244,30 +236,23 @@
         else byType.restaurant.push(r);
       });
 
-      // If a section has no live data, don't wipe it — fall back to skeleton→empty state
-      function renderRow(row, items, fallbackType) {
-        if (!row) return;
-        if (items.length) {
-          row.innerHTML = items.map(r => buildRestaurantCard(r)).join('');
-        } else {
-          row.innerHTML = `<div style="padding:24px 8px;color:#7a6e60;font-size:14px;font-style:italic;min-width:260px;">
-            Live partners coming soon — <a href="https://partners.indeats.app" style="color:var(--accent);font-weight:700;">become the first</a>
-          </div>`;
-        }
+      // Only replace a row if there's real live data for it; otherwise keep demo cards
+      function renderRow(row, items) {
+        if (!row || !items.length) return;
+        row.innerHTML = items.map(r => buildRestaurantCard(r)).join('');
       }
 
-      renderRow(rRow, byType.restaurant, 'restaurant-card');
-      renderRow(tRow, byType.truck,      'truck-card');
-      renderRow(cRow, byType.cloud,      'cloud-card');
+      renderRow(rRow, byType.restaurant);
+      renderRow(tRow, byType.truck);
+      renderRow(cRow, byType.cloud);
 
-      // Re-fire existing filter logic if present
       if (typeof window._indeatsReapplyFilters === 'function') {
         window._indeatsReapplyFilters();
       }
 
     }).catch(err => {
       console.warn('[Indeats] Could not load restaurant data:', err);
-      // Silently keep skeleton placeholders — don't break the page
+      // On any error, hardcoded demo cards remain untouched
     });
   }
 
@@ -279,8 +264,6 @@
     const gridWeek   = document.getElementById('grid-week');
     const gridAlways = document.getElementById('grid-always');
     if (!gridEnding && !gridWeek && !gridAlways) return;
-
-    injectShimmerCSS();
 
     fetchDeals().then(deals => {
       if (!deals || !deals.length) return; // keep hardcoded cards
