@@ -1378,8 +1378,6 @@ img { max-width: 100%; display: block; }
       card.classList.toggle('hidden', !(cardMatchesDiet(card) && cardMatchesQuick(card)));
     });
   }
-  // Expose so supabase-data.js can re-run filters after rendering live cards
-  window._indeatsReapplyFilters = applyAllFilters;
 
   // ── Scroll arrows ───────────────────────────────────────────────
   function wireRow(rowId, prevId, nextId) {
@@ -1450,7 +1448,6 @@ img { max-width: 100%; display: block; }
 })();
 </script>
 
-<script src="supabase-data.js"></script>
 <script src="indeats-patches.js"></script>
 <script src="indeats-ai.js"></script>
 </body>

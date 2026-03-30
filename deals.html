@@ -1987,9 +1987,6 @@ img { max-width: 100%; display: block; }
     render();
   };
 
-  // Expose so supabase-data.js can re-run filters after rendering live deals
-  window._dealsApplyFilter = render;
-
   render();
 })();
 
@@ -2056,7 +2053,7 @@ img { max-width: 100%; display: block; }
   </div>
 </footer>
 
-<script src="supabase-data.js"></script>
 <script src="indeats-patches.js"></script>
 <script src="indeats-ai.js"></script>
+</body>
 </html>
