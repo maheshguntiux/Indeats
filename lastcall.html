@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indeats — Last Call</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Colors */
+  --bg:       #f6f1ea;
+  --surface:  #ffffff;
+  --text:     #171717;
+  --muted:    #7a6e60;
+  --line:     #e6d8c8;
+  --nav:      #071827;
+  --accent:   #f2551c;
+  --accent2:  #ff6a3d;
+
+  /* Card */
+  --card-radius: 18px;
+  --card-shadow: 0 4px 20px rgba(17,24,39,.07);
+  --card-shadow-hover: 0 12px 36px rgba(17,24,39,.13);
+
+  /* Typography */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); background: var(--bg); color: var(--text); }
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--nav);
+  border-bottom: 1px solid rgba(242,85,28,.2);
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+}
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
+}
+.brand {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 8px;
+}
+.brand-dot { color: #ad7f2d; }
+
+.nav-link {
+  color: rgba(255,255,255,.65);
+  font-weight: 600;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: color .15s;
+}
+.nav-link.active { color: #fff; border-bottom-color: var(--accent); }
+.nav-spacer { flex: 1; }
+.nav-row1 { display: flex; align-items: center; gap: 20px; flex: 1; }
+.nav-city {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  height: 38px;
+  border-radius: 10px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  gap: 6px;
+}
+.nav-btn {
+  height: 38px;
+  border-radius: 10px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+.nav-btn.ghost {
+  border: 1px solid rgba(255,255,255,.12);
+  background: transparent;
+  color: rgba(255,255,255,.8);
+}
+.nav-btn.primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+
+.nav-lastcall { color: var(--accent) !important; }
+.nav-new-badge {
+  background: var(--accent); color: #fff;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 6px; border-radius: 10px;
+  margin-left: 4px; vertical-align: middle;
+  letter-spacing: 0.5px; display: inline-block;
+}
+
+/* HERO */
+.hero {
+  background: #071827;
+  padding: 90px 40px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(242,85,28,0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(242,85,28,0.12);
+  border: 1px solid rgba(242,85,28,0.25);
+  color: #f2551c;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 20px;
+  margin-bottom: 32px; position: relative; z-index: 1;
+}
+.hero-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #f2551c;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 700; color: #fff;
+  line-height: 1.05; letter-spacing: -2px;
+  margin-bottom: 24px;
+  position: relative; z-index: 1;
+}
+.hero h1 em { color: #f2551c; font-style: italic; }
+.hero p {
+  color: rgba(255,255,255,0.6);
+  font-size: 18px; font-weight: 300;
+  max-width: 520px; margin: 0 auto 48px;
+  line-height: 1.65; position: relative; z-index: 1;
+}
+.notify-wrap { position: relative; z-index: 1; width: 100%; max-width: 460px; }
+.notify-form {
+  display: flex; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.notify-input {
+  flex: 1; padding: 16px 20px;
+  font-family: var(--font-sans); font-size: 15px;
+  border: none; outline: none;
+  background: rgba(255,255,255,0.96); color: #171717;
+}
+.notify-input::placeholder { color: #9ca3af; }
+.notify-btn {
+  background: #f2551c; color: #fff;
+  border: none; padding: 16px 24px;
+  font-family: var(--font-sans); font-size: 14px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: background 0.2s;
+}
+.notify-btn:hover { background: #ff6a3d; }
+.notify-success {
+  display: none;
+  background: rgba(22,163,74,0.12);
+  border: 1px solid rgba(22,163,74,0.25);
+  color: #4ade80; padding: 14px 24px; border-radius: 12px;
+  font-size: 14px; font-weight: 500; text-align: center;
+}
+.notify-sub { color: rgba(255,255,255,0.3); font-size: 12px; margin-top: 12px; position: relative; z-index: 1; }
+
+/* HOW IT WORKS */
+.section { padding: 72px 40px; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #f2551c; margin-bottom: 10px; }
+.section-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1px; color: var(--text); margin-bottom: 48px; }
+.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.how-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 28px; }
+.how-num {
+  width: 40px; height: 40px; background: #071827; color: #fff;
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 20px;
+}
+.how-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.how-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* PREVIEW */
+.preview-section { background: #071827; padding: 72px 40px; }
+.preview-inner { max-width: 1100px; margin: 0 auto; }
+.preview-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1px; color: #fff; margin-bottom: 48px; }
+.preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.preview-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+.preview-img {
+  height: 160px;
+  background: linear-gradient(135deg, rgba(242,85,28,0.2) 0%, rgba(7,24,39,0.9) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.coming-soon-pill {
+  background: rgba(242,85,28,0.2); border: 1px solid rgba(242,85,28,0.3);
+  color: #f2551c; font-size: 11px; font-weight: 700;
+  padding: 6px 16px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase;
+}
+.preview-body { padding: 18px 20px; }
+.preview-name { color: rgba(255,255,255,0.9); font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.preview-desc { color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 14px; }
+.preview-meta { display: flex; align-items: center; justify-content: space-between; }
+.preview-price { color: #f2551c; font-size: 16px; font-weight: 700; }
+.preview-price s { color: rgba(255,255,255,0.25); font-size: 12px; font-weight: 400; margin-left: 6px; }
+.preview-time { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+/* CTA */
+.cta-band { background: #f2551c; padding: 64px 40px; text-align: center; }
+.cta-band h2 { font-family: var(--font-serif); font-size: clamp(24px, 4vw, 42px); font-weight: 700; color: #fff; letter-spacing: -1px; margin-bottom: 12px; }
+.cta-band p { color: rgba(255,255,255,0.85); font-size: 16px; margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.cta-link {
+  background: #fff; color: #f2551c; border: none;
+  padding: 16px 40px; border-radius: 10px;
+  font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.cta-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+/* FOOTER */
+.footer { background: #071827; padding: 48px 40px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.footer-brand span { color: #f2551c; }
+.footer-tagline { color: rgba(255,255,255,0.35); font-size: 13px; line-height: 1.6; }
+.footer-col-title { color: rgba(255,255,255,0.4); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.footer-link { display: block; color: rgba(255,255,255,0.45); font-size: 13px; text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+.footer-link:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; color: rgba(255,255,255,0.25); font-size: 12px; max-width: 1100px; margin: 0 auto; }
+
+
+@media (max-width: 760px) {
+  /* Mobile nav — 2 rows */
+  .nav-top {
+    flex-wrap: wrap;
+    padding: 10px 16px 0;
+    gap: 8px;
+  }
+  .nav-tabs {
+    order: 99;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 0;
+    margin-top: 2px;
+  }
+  .nav-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px 2px;
+    font-size: 11px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-link.active { border-bottom-color: var(--accent); }
+  .nav-spacer { flex: 1; }
+  .brand { font-size: 20px; }
+  .hero { padding: 56px 20px 52px; }
+  .section { padding: 48px 20px; }
+  .how-grid { grid-template-columns: 1fr; }
+  .preview-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .notify-form { flex-direction: column; }
+  .notify-input { border-radius: 10px 10px 0 0; }
+  .notify-btn { border-radius: 0 0 10px 10px; padding: 14px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-top">
+    <a class="brand" href="index.html">Indeats<span class="brand-dot">·</span></a>
+    <div class="nav-tabs">
+      <a class="nav-link" href="index.html">Discover</a>
+      <a class="nav-link" href="deals.html">Deals</a>
+      <a class="nav-link" href="events.html">Events</a>
+      <a class="nav-link nav-lastcall active" href="lastcall.html">Last Call <span class="nav-new-badge">New</span></a>
+      <a class="nav-link" href="bookings.html">My Bookings</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-city">Fremont ▾</a>
+    <a class="nav-btn ghost" href="bookings.html">Sign In</a>
+    <a class="nav-btn primary" href="bookings.html">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Great food.<br><em>Last call price.</em></h1>
+  <p>Tonight's best Indian food, at last call prices — before the kitchen closes.</p>
+  <div class="notify-wrap">
+    <div class="notify-form" id="notify-form">
+      <input class="notify-input" id="notify-email" type="email" placeholder="Enter your email to get early access">
+      <button class="notify-btn" onclick="submitNotify()">Notify Me</button>
+    </div>
+    <div class="notify-success" id="notify-success">
+      You're on the list. We'll notify you the moment Last Call goes live in Fremont.
+    </div>
+  </div>
+</section>
+
+<div class="section">
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Simple. Fast. No waste.</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">1</div>
+      <h3>Restaurant posts surplus</h3>
+      <p>Each evening after 7 PM, partner restaurants post surplus meals at 50–70% off. Limited bags, first come first served.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">2</div>
+      <h3>You claim a bag</h3>
+      <p>Browse tonight's Last Call listings near you. Claim a bag in one tap — no coupon codes, no fine print, auto-applied.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">3</div>
+      <h3>Pick up before closing</h3>
+      <p>Show your confirmation at the restaurant during the pickup window — usually 9 PM to close. Enjoy the meal.</p>
+    </div>
+  </div>
+</div>
+
+<div class="preview-section">
+  <div class="preview-inner">
+    <div class="section-label" style="color:#f2551c">Coming Soon</div>
+    <div class="preview-title">Tonight's Last Call — preview</div>
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div class="preview-img"><span class="coming-soon-pill">Coming Soon</span></div>
+        <div class="preview-body">
+          <div class="preview-name">Charminar</div>
+          <div class="preview-desc">Biryani + sides surplus bag · 2–3 portions</div>
+          <div class="preview-meta">
+            <div class="preview-price">$7.99 <s>$24</s></div>
+            <div class="preview-time">Pickup 9–10 PM</div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img"><span class="coming-soon-pill">Coming Soon</span></div>
+        <div class="preview-body">
+          <div class="preview-name">Naga's Kitchen</div>
+          <div class="preview-desc">South Indian thali surplus · 1–2 portions</div>
+          <div class="preview-meta">
+            <div class="preview-price">$5.99 <s>$18</s></div>
+            <div class="preview-time">Pickup 8:30–9:30 PM</div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img"><span class="coming-soon-pill">Coming Soon</span></div>
+        <div class="preview-body">
+          <div class="preview-name">Mylapore</div>
+          <div class="preview-desc">Dosa + sambar + chutney surplus bag</div>
+          <div class="preview-meta">
+            <div class="preview-price">$4.99 <s>$14</s></div>
+            <div class="preview-time">Pickup 9–10 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Are you a restaurant owner?</h2>
+  <p>Join Indeats and be one of the first to offer Last Call when it launches. Recover revenue from your end-of-day surplus meals.</p>
+  <a class="cta-link" href="https://partners.indeats.app" target="_blank">Enroll Your Restaurant</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Indeats<span>·</span></div>
+      <div class="footer-tagline">Halal, Veg, Jain — your kind of Indian food. Deals auto-applied. No fine print.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Discover</div>
+      <a class="footer-link" href="index.html">Fremont</a>
+      <a class="footer-link" href="index.html">San Jose</a>
+      <a class="footer-link" href="index.html">Sunnyvale</a>
+      <a class="footer-link" href="index.html">Artesia</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Cuisine</div>
+      <a class="footer-link" href="index.html">Hyderabadi</a>
+      <a class="footer-link" href="index.html">South Indian</a>
+      <a class="footer-link" href="index.html">Gujarati</a>
+      <a class="footer-link" href="index.html">Kongu Nadu</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a class="footer-link" href="#">About</a>
+      <a class="footer-link" href="https://partners.indeats.app" target="_blank">For Restaurants</a>
+      <a class="footer-link" href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Indeats Inc. · Fremont, CA · Privacy · Terms</div>
+</footer>
+
+<script>
+function submitNotify() {
+  const email = document.getElementById('notify-email').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('notify-email').style.outline = '2px solid #f2551c';
+    return;
+  }
+  document.getElementById('notify-form').style.display = 'none';
+  document.getElementById('notify-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
