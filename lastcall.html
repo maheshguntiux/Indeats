@@ -251,32 +251,14 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 
 
 @media (max-width: 760px) {
-  /* Mobile nav — 2 rows */
-  .nav-top {
-    flex-wrap: wrap;
-    padding: 10px 16px 0;
-    gap: 8px;
-  }
-  .nav-tabs {
-    order: 99;
-    width: 100%;
-    justify-content: space-around;
-    gap: 0;
-    border-top: 1px solid rgba(255,255,255,.08);
-    padding: 0;
-    margin-top: 2px;
-  }
-  .nav-link {
-    flex: 1;
-    text-align: center;
-    padding: 10px 2px;
-    font-size: 11px;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-  }
-  .nav-link.active { border-bottom-color: var(--accent); }
+  /* Mobile top bar — logo + city + sign in */
+  .nav-top { flex-wrap: nowrap; padding: 10px 16px; gap: 10px; }
+  .nav-tabs { display: none; }
   .nav-spacer { flex: 1; }
+  .nav-btn.ghost { display: inline-flex; padding: 6px 12px; font-size: 12px; }
+  .nav-btn.primary { display: none; }
   .brand { font-size: 20px; }
+  .nav-city { font-size: 12px; padding: 6px 10px; height: 34px; }
   .hero { padding: 56px 20px 52px; }
   .section { padding: 48px 20px; }
   .how-grid { grid-template-columns: 1fr; }

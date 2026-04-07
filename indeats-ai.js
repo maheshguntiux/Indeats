@@ -109,7 +109,7 @@ For all other responses:
   @media(max-width:767px){
     #ia-panel{bottom:0;left:0;right:0;height:${PANEL_H};border-radius:24px 24px 0 0;transform:translateY(100%);}
     #ia-panel.open{transform:translateY(0);}
-    #ia-fab{bottom:max(24px,env(safe-area-inset-bottom,24px) + 12px);right:20px;}
+    #ia-fab{bottom:calc(72px + max(16px,env(safe-area-inset-bottom,16px)));right:20px;}
   }
   @media(min-width:768px){
     #ia-panel{top:0;right:0;bottom:0;width:${PANEL_W};border-left:1px solid rgba(255,255,255,.07);transform:translateX(100%);}

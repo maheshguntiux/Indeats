@@ -866,14 +866,14 @@ img { max-width: 100%; display: block; }
 .mobile-back { display: none; }
 
 @media (max-width: 760px) {
-  /* Mobile top bar — logo + city only, no tabs */
+  /* Mobile top bar — logo + city + sign in */
   .nav-top {
     padding: 10px 16px;
     gap: 10px;
   }
   .nav-tabs { display: none; }
-  .nav-spacer { display: none; }
-  .nav-btn.ghost { display: none; }
+  .nav-spacer { flex: 1; }
+  .nav-btn.ghost { display: inline-flex; padding: 6px 12px; font-size: 12px; }
   .nav-btn.primary { display: none; }
   .brand { font-size: 20px; }
   .nav-city { font-size: 12px; padding: 6px 10px; height: 34px; }
