@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Indeats — Deals</title>
@@ -65,13 +66,29 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 .brand {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
   margin-right: 8px;
+  text-decoration: none;
+  line-height: 1;
 }
-.brand-dot { color: #ad7f2d; }
+.brand-ind {
+  font-family: 'Plus Jakarta Sans', var(--font-sans);
+  font-size: 24px;
+  font-weight: 800;
+  color: #f2551c;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.brand-eats {
+  font-family: 'Plus Jakarta Sans', var(--font-sans);
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-link {
   color: rgba(255,255,255,.65);
@@ -1195,7 +1212,7 @@ img { max-width: 100%; display: block; }
   .nav-spacer { flex: 1; }
   .nav-btn.ghost { display: inline-flex; padding: 6px 12px; font-size: 12px; }
   .nav-btn.primary { display: none; }
-  .brand { font-size: 20px; }
+  .brand-ind, .brand-eats { font-size: 20px; }
   .nav-city { font-size: 12px; padding: 6px 10px; height: 34px; }
 
   .truck-scroll-dots { display: flex; }
@@ -1457,7 +1474,7 @@ img { max-width: 100%; display: block; }
 <!-- NAV — Desktop: full top nav | Mobile: logo+city only -->
 <nav class="nav">
   <div class="nav-top">
-    <a class="brand" href="index.html">Indeats<span class="brand-dot">·</span></a>
+    <a class="brand" href="index.html"><span class="brand-ind">Ind</span><span class="brand-eats">Eats</span></a>
     <div class="nav-tabs">
       <a class="nav-link" href="index.html">Discover</a>
       <a class="nav-link" href="events.html">Events</a>
@@ -2276,7 +2293,7 @@ img { max-width: 100%; display: block; }
 <footer class="footer">
   <div class="wrap footer-top">
     <div>
-      <div class="footer-brand">Indeats</div>
+      <div class="footer-brand"><span style="font-weight:300">Ind</span><span style="font-weight:800">eats</span></div>
       <p class="footer-tagline">Halal, Veg, Jain — your kind of Indian food.<br>Deals auto-applied. No fine print.</p>
     </div>
     <div>
