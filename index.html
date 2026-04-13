@@ -652,6 +652,19 @@ img { max-width: 100%; display: block; }
 /* =============================================
    DISCOVER SECTION
    ============================================= */
+/* ── City picker ── */
+.city-opt {
+  display: flex; flex-direction: column; gap: 2px;
+  width: 100%; padding: 12px 14px; background: none;
+  border: none; border-radius: 10px; text-align: left;
+  cursor: pointer; transition: background .12s;
+}
+.city-opt:hover { background: #f6f1ea; }
+.city-opt.active { background: #fff3ee; }
+.city-opt-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; color: #041625; }
+.city-opt.active .city-opt-name { color: #f2551c; }
+.city-opt-region { font-size: 11px; color: #9a8e82; font-weight: 500; }
+
 .discover-section { margin-bottom: 40px; margin-top: 32px; }
 .disc-divider { height: 1px; background: var(--line); margin: 0 0 40px; }
 
@@ -1166,7 +1179,41 @@ img { max-width: 100%; display: block; }
       <a class="nav-link" href="bookings.html">My Bookings</a>
     </div>
     <div class="nav-spacer"></div>
-    <a class="nav-city">Fremont ▾</a>
+    <button class="nav-city" id="city-btn" onclick="openCityPicker()">
+      <span id="city-label">Fremont</span> ▾
+    </button>
+
+    <!-- City picker modal -->
+    <div id="city-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(4,22,37,.7);align-items:flex-start;justify-content:center;padding-top:72px;">
+      <div style="background:#fff;border-radius:18px;width:320px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+        <div style="background:#041625;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;color:#fff;">Choose your city</span>
+          <button onclick="closeCityPicker()" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;">&#x2715;</button>
+        </div>
+        <div style="padding:8px;">
+          <button class="city-opt" data-city="fremont" onclick="selectCity('fremont','Fremont')">
+            <span class="city-opt-name">Fremont</span><span class="city-opt-region">Bay Area · Alameda County</span>
+          </button>
+          <button class="city-opt" data-city="san jose" onclick="selectCity('san jose','San Jose')">
+            <span class="city-opt-name">San Jose</span><span class="city-opt-region">Bay Area · Santa Clara County</span>
+          </button>
+          <button class="city-opt" data-city="sunnyvale" onclick="selectCity('sunnyvale','Sunnyvale')">
+            <span class="city-opt-name">Sunnyvale</span><span class="city-opt-region">Bay Area · Santa Clara County</span>
+          </button>
+          <button class="city-opt" data-city="artesia" onclick="selectCity('artesia','Artesia')">
+            <span class="city-opt-name">Artesia</span><span class="city-opt-region">Southern California</span>
+          </button>
+          <button class="city-opt" data-city="all" onclick="selectCity('all','All Cities')">
+            <span class="city-opt-name">All Cities</span><span class="city-opt-region">Show restaurants everywhere</span>
+          </button>
+        </div>
+        <div style="padding:12px 16px;background:#f6f1ea;display:flex;align-items:center;gap:10px;border-top:1px solid #e6d8c8;">
+          <button onclick="detectLocation()" id="detect-btn" style="flex:1;background:#f2551c;color:#fff;border:none;padding:10px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">
+            Detect my location
+          </button>
+        </div>
+      </div>
+    </div>
     <a class="nav-btn ghost" href="bookings.html">Sign In</a>
     <a class="nav-btn primary" href="bookings.html">Get Started</a>
   </div>
@@ -1776,6 +1823,136 @@ img { max-width: 100%; display: block; }
   });
 
 })();
+  /* ═══════════════════════════════════════
+     LOCATION & CITY FILTER
+  ═══════════════════════════════════════ */
+  const CITY_COORDS = {
+    'fremont':   { lat: 37.5485, lon: -121.9886 },
+    'san jose':  { lat: 37.3382, lon: -121.8863 },
+    'sunnyvale': { lat: 37.3688, lon: -122.0363 },
+    'santa clara': { lat: 37.3541, lon: -121.9552 },
+    'palo alto': { lat: 37.4419, lon: -122.1430 },
+    'artesia':   { lat: 33.8658, lon: -118.0831 },
+  };
+
+  function cityDistance(lat1, lon1, lat2, lon2) {
+    const R = 3959; // miles
+    const dLat = (lat2-lat1) * Math.PI/180;
+    const dLon = (lon2-lon1) * Math.PI/180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function nearestCity(lat, lon) {
+    let best = 'fremont', bestDist = Infinity;
+    for (const [city, coords] of Object.entries(CITY_COORDS)) {
+      const d = cityDistance(lat, lon, coords.lat, coords.lon);
+      if (d < bestDist) { bestDist = d; best = city; }
+    }
+    return bestDist < 40 ? best : null; // within 40 miles
+  }
+
+  function applyCity(cityKey) {
+    const cards = document.querySelectorAll('.disc-card[data-city]');
+    if (cityKey === 'all') {
+      cards.forEach(c => c.closest('.disc-card-wrap') ? c.closest('.disc-card-wrap').style.display = '' : c.style.display = '');
+      cards.forEach(c => c.style.display = '');
+    } else {
+      cards.forEach(c => {
+        const show = c.dataset.city === cityKey;
+        c.style.display = show ? '' : 'none';
+      });
+    }
+    // Update active state on city options
+    document.querySelectorAll('.city-opt').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.city === cityKey);
+    });
+  }
+
+  function selectCity(cityKey, cityLabel) {
+    localStorage.setItem('indeats_city', cityKey);
+    localStorage.setItem('indeats_city_label', cityLabel);
+    document.getElementById('city-label').textContent = cityLabel;
+    applyCity(cityKey);
+    closeCityPicker();
+  }
+
+  function openCityPicker() {
+    const modal = document.getElementById('city-modal');
+    modal.style.display = 'flex';
+    // Mark current city as active
+    const current = localStorage.getItem('indeats_city') || 'fremont';
+    document.querySelectorAll('.city-opt').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.city === current);
+    });
+  }
+
+  function closeCityPicker() {
+    document.getElementById('city-modal').style.display = 'none';
+  }
+
+  // Close modal on backdrop click
+  document.getElementById('city-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeCityPicker();
+  });
+
+  function detectLocation() {
+    const btn = document.getElementById('detect-btn');
+    btn.textContent = 'Detecting...';
+    btn.disabled = true;
+
+    if (!navigator.geolocation) {
+      btn.textContent = 'Not supported';
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const city = nearestCity(pos.coords.latitude, pos.coords.longitude);
+        if (city) {
+          const label = city.split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+          selectCity(city, label);
+          btn.textContent = 'Location set!';
+        } else {
+          btn.textContent = 'Not in our cities yet';
+          setTimeout(() => { btn.textContent = 'Detect my location'; btn.disabled = false; }, 2000);
+        }
+      },
+      () => {
+        btn.textContent = 'Permission denied';
+        setTimeout(() => { btn.textContent = 'Detect my location'; btn.disabled = false; }, 2000);
+      },
+      { timeout: 8000 }
+    );
+  }
+
+  // Init on load — restore saved city or auto-detect
+  (function initCity() {
+    const saved = localStorage.getItem('indeats_city');
+    const savedLabel = localStorage.getItem('indeats_city_label');
+    if (saved) {
+      document.getElementById('city-label').textContent = savedLabel || 'Fremont';
+      applyCity(saved);
+    } else {
+      // Try silent auto-detect (no prompt — only if permission already granted)
+      if (navigator.permissions) {
+        navigator.permissions.query({ name: 'geolocation' }).then(result => {
+          if (result.state === 'granted') {
+            navigator.geolocation.getCurrentPosition(pos => {
+              const city = nearestCity(pos.coords.latitude, pos.coords.longitude);
+              if (city) {
+                const label = city.split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+                document.getElementById('city-label').textContent = label;
+                localStorage.setItem('indeats_city', city);
+                localStorage.setItem('indeats_city_label', label);
+                applyCity(city);
+              }
+            });
+          }
+        });
+      }
+    }
+  })();
+
 </script>
 
 <script src="supabase-data.js"></script>
