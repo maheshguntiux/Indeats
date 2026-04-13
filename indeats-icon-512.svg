@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="115" fill="#f2551c"/>
+  <text
+    x="256"
+    y="320"
+    font-family="'Plus Jakarta Sans', Arial Black, sans-serif"
+    font-weight="800"
+    font-size="240"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="-5">Ind</text>
+</svg>
